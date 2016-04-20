@@ -5,10 +5,10 @@ import java.util.NoSuchElementException;
 
 
 public class LinkedStack<Item> implements Iterable<Item> {
-    private int N;                // size of the stack
-    private Node<Item> first;     // top of stack
+    private int N;                // tamanho da pilha
+    private Node<Item> first;     // primeira posicao da pilha
 
-    //class node
+    //criar a classe node
     private static class Node<Item> {
         private Item item;
         private Node<Item> next;

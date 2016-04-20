@@ -2,6 +2,7 @@ package Main;
 
 public class MedMinMax {
 	
+	// função para calcular a media dos tempos
 	public static Double meanTimes(Double[] tempo, int repetir) {
 		double count = 0.0;
 
@@ -12,6 +13,7 @@ public class MedMinMax {
 		return (count / repetir);
 	}
 
+	// função para calcular a mediana dos tempos
 	public static Double medianTimes(Double[] tempo) {
 
 		int middle = tempo.length / 2;
@@ -22,6 +24,7 @@ public class MedMinMax {
 		return (tempo[middle - 1] + tempo[middle]) / 2.0;
 	}
 
+	//função para calcular o minimo dos tempos
 	public static Double minimeTimes(final Double[] tempo) {
 
 		double min=tempo[0];
@@ -34,6 +37,7 @@ public class MedMinMax {
 		return min;
 	}
 
+	// funcao para calcular o maximo dos tempos
 	public static Double maximeTimes(final Double[] tempo) {
 
 		double max=tempo[0];
@@ -46,6 +50,7 @@ public class MedMinMax {
 		return max;
 	}
 
+	// função para calcular o desvio padrão
 	public static double standardDeviation(final Double[] tempo) {  
         double standardDeviation;
         double media= medianTimes(tempo);
@@ -55,12 +60,12 @@ public class MedMinMax {
         double[] listOfDifferences=new double[tempo.length];
         double[] squares=new double[tempo.length];
         
-      //preenche o array "listofDifferences" com o valor da subtrac�‹o entre os tempos calculados e o tempo mŽdio(media)
+      //preenche o array "listofDifferences" com o valor da subtraccao entre os tempos calculados e a media do tempo
         for(int i=0;i<tempo.length;i++){
         	listOfDifferences[i]=tempo[i]-media;        	
         }
         
-        //preenche o array "squares" com os valores que foram calculados no array interior mas ao quadrado
+        //preenche o array "squares" com os valores que foram calculados no array interior ao quadrado
         
         for(int i=0;i<tempo.length;i++){
         	squares[i]=listOfDifferences[i]*listOfDifferences[i];
@@ -75,7 +80,7 @@ public class MedMinMax {
         //Divide a soma calculada anteriormente pelo tamanho do array values -1
         result= sum/(tempo.length-1);
         
-        //desvio padrao Ž a raiz quadrada desse valor
+        //desvio padrao elevado a raiz quadrada desse valor
         standardDeviation=Math.sqrt(result);
 		
 		return standardDeviation;

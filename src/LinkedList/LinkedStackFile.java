@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import Main.MedMinMax;
+import Main.MedMinMax; // para utilizar os metodos desta classe
 import edu.princeton.cs.introcs.In;
 
 public class LinkedStackFile {
@@ -21,10 +21,9 @@ public class LinkedStackFile {
 	// Variavel para os ciclos
 	static int count = 0;
 
-	// Variaveis para a média, sum, maximo e minimo
+	// Variaveis para a média, mediana, maximo, minimo e desvio padrao
 	static double media_push;
 	static double media_pop;
-	static double sum;
 	static double maximo_push;
 	static double maximo_pop;
 	static double minimo_push;
@@ -34,12 +33,12 @@ public class LinkedStackFile {
 	static double desvio_pop;
 	static double desvio_push;
 	
-	// cria uma cadeia ligada numbers
+	// criação de uma nova cadeia ligada, numbers
 	static LinkedStack<String> numbers = new LinkedStack<String>();
 
 	public static void main(String[] args) throws IOException {
 		
-		// Ciclo referente a cada Item do FileSize
+		//Ciclo que analisa cada posicao do array ou seja cada Item do FileSize
 		for (int Item : FileSize) {
 
 			// variavel que diz localizacao dos ficheiros txt, o Item é referente a cada nº do FileSize
@@ -58,9 +57,7 @@ public class LinkedStackFile {
 
 				// variavel com o nº de repetições, onde assegura que os resultados sejam testados varias vezes para verificar a sua veracidade
 				int repetir = 10;
-				//DUNNO
-				//DUNNO
-				//DUNNO
+				
 				Double[] tempo = new Double[repetir];
 				
 				out.println("-----------------------------------");
@@ -128,18 +125,22 @@ public class LinkedStackFile {
 					
 				}
 				
+				//vai chamar o metodo (maximeTimes) que se encontra no pacote Main e passa a variavel tempo 
 				maximo_pop=MedMinMax.maximeTimes(tempo);
 				out.println("\nTempo maximo de remoção: " + maximo_pop + " ns");//imprime na consola
 				file.println("Tempo maximo de remoção: " + maximo_pop + "ns");//imprime no exel
 				
+				//vai chamar o metodo (minimeTimes) que se encontra no pacote Main e passa a variavel tempo 
 				minimo_pop=MedMinMax.minimeTimes(tempo);
 				out.println("Tempo minimo de remoção: " + minimo_pop + " ns");//imprime na consola
 				file.println("Tempo minimo de remoção: " + minimo_pop + "ns");//imprime no exel
 				
+				//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo e a variavel repetir 
 				media_pop=MedMinMax.meanTimes(tempo, repetir);
 				out.println("Tempo medio de remoção: " + media_pop + " ns");
 				file.println("Tempo medio de remoção: " + media_pop + "ns");//imprime no exel
 				
+				//vai chamar o metodo (medianTimes) que se encontra no pacote Main e passa a variavel tempo 
 				mediana_pop=MedMinMax.medianTimes(tempo);
 				out.println("Mediana de remoção: " + mediana_pop + " ns");
 				file.println("Mediana de remoção: " + mediana_pop + "ns");//imprime no exel
@@ -149,7 +150,7 @@ public class LinkedStackFile {
 				out.println("Mediana de inserção: " + desvio_pop + " ns");
 				file.println("Mediana de inserção: " + desvio_pop + "ns");//imprime no exel
 				
-				//vai chamar o metodo (medianTimes) que se encontra no pacote Main e passa a variavel tempo 
+				//vai chamar o metodo (standardDeviation) que se encontra no pacote Main e passa a variavel tempo 
 				desvio_pop=MedMinMax.standardDeviation(tempo);
 				out.println("Desvio padrão: " + desvio_pop + " ns\n");
 				file.println("Desvio padrão: " + desvio_pop + "ns");//imprime no exel
@@ -160,7 +161,7 @@ public class LinkedStackFile {
 
 	}
 
-	
+	// Metodo para apagar o numero da Linked List
 	public static void apaga() {
 		LinkedStack<String> numbers = new LinkedStack<String>();
 		

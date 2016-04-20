@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-import Main.MedMinMax;
+import Main.MedMinMax; // para utilizar os metodos desta classe
 import edu.princeton.cs.introcs.In;
 
 public class ResizingArrayFile {
@@ -21,10 +21,9 @@ public class ResizingArrayFile {
 	//Variavel para os ciclos 
 	static int count = 0;
 	
-	//Variaveis para a média, maximo e minimo
+	//Variaveis para a média, maximo ,minimo, desvio padrao e mediana.
 	static double media_push;
 	static double media_pop;
-	static double sum;
 	static double maximo_push;
 	static double maximo_pop;
 	static double minimo_push;
@@ -39,7 +38,7 @@ public class ResizingArrayFile {
 
 	public static void main(String[] args) throws FileNotFoundException {
 
-		//Ciclo referente a cada Item do FileSize
+		//Ciclo que analisa cada posicao do array ou seja cada Item do FileSize
 		for (int Item : FileSize) {
 						
 			// variavel que diz localizacao dos ficheiros txt, o Item é referente a cada nº do FileSize
@@ -55,7 +54,7 @@ public class ResizingArrayFile {
 				@SuppressWarnings("deprecation")
 				String[] textFiles = In.readStrings(FilePath); //vai ler todo o conteúdo dos ficheiro 
 			
-				// repetições
+				// variavel que guarda as  repetições
 				int repetir = 10;
 				Double[] tempo = new Double[repetir];
 				
@@ -75,16 +74,10 @@ public class ResizingArrayFile {
 					
 					}
 					estimatedTime = System.nanoTime() - starTime; // Tempo Final guardado em variavel
-					//out.println("Demora a inserir: " + estimatedTime + " ns");
 					
 					//guarda o tempo de cada execução, para cada repetição
 					tempo[i] = (double) (estimatedTime);
-					
-					
-					//retorna nº de aumentos que foram feitos na pilha number
-					//out.println("Número de aumentos: " + numbers.getNumberOfIncreases()); 
-					
-					
+									
 				}
 				//vai chamar o metodo (maximeTimes) que se encontra no pacote Main e passa a variavel tempo 
 				maximo_push=MedMinMax.maximeTimes(tempo);
@@ -96,7 +89,7 @@ public class ResizingArrayFile {
 				out.println("Tempo minimo de inserção: " + minimo_push + " ns");//imprime na consola
 				file.println("Tempo minimo de inserção: " + minimo_push + "ns");//imprime no exel
 				
-				//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo 
+				//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo e a variavel repetir
 				media_push=MedMinMax.meanTimes(tempo, repetir);
 				out.println("Tempo medio de inserção: " + media_push + " ns");
 				file.println("Tempo medio de inserção: " + media_push + "ns");//imprime no exel
@@ -144,7 +137,7 @@ public class ResizingArrayFile {
 				out.println("Tempo minimo de remoção: " + minimo_pop + " ns");
 				file.println("Tempo minimo de remoção: " + minimo_pop + "ns");//imprime no exel
 				
-				//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo 
+				//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo e a variavel repetir
 				media_pop=MedMinMax.meanTimes(tempo, repetir);
 				out.println("Tempo medio de remoção: " + media_pop + " ns");
 				file.println("Tempo medio de remoção: " + media_pop + "ns");//imprime no exel
@@ -154,7 +147,7 @@ public class ResizingArrayFile {
 				out.println("Mediana de remoção: " + mediana_pop + " ns");
 				file.println("Mediana de remoção: " + mediana_pop + "ns");//imprime no exel
 				
-				//vai chamar o metodo (medianTimes) que se encontra no pacote Main e passa a variavel tempo 
+				//vai chamar o metodo (standardDeviation) que se encontra no pacote Main e passa a variavel tempo 
 				desvio_pop=MedMinMax.standardDeviation(tempo);
 				out.println("Desvio padrão: " + desvio_pop + " ns");
 				file.println("Desvio padrão: " + desvio_pop + "ns");//imprime no exel
@@ -165,17 +158,17 @@ public class ResizingArrayFile {
 
 	}
 	
+	// Metodo para apagar o numero do Array
 	public static void apagaNumero(){
 		int repetir = 5;
 		Double[] tempo = new Double[repetir];
 		
-		// Def o caminho do ficheiro e a palavra que queremos apagar
+		// Define o caminho do ficheiro e a palavra que queremos apagar
 		String singlefile = "data/sorted_512.txt";
-		String searchingText = "0.2073884211515022"; //Meio
+		String searchingText = "0.2073884211515022"; // Variavel que guarda a string correspondente do ficheiro
 
 		@SuppressWarnings("deprecation")
-		String[] textFile = In.readStrings(singlefile);// vai analisar o
-														// ficheir
+		String[] textFile = In.readStrings(singlefile);// vai ler todas as strings do ficheiro
 		// inserir na pilha para depois apagar, caso contrario da stack underflow
 			for (int i = 0; i != textFile.length; i++) {
 				numbers.push(textFile[i]);
@@ -230,7 +223,7 @@ public class ResizingArrayFile {
 		ResizingArrayStack<String> number = new ResizingArrayStack<String>();
 
 		for (int i = 0; i != ResizingNumbers[counter]; i++){
-			number.push("0.2073884211515022"); //valor que vai ser inserido na pilha, n vezes dependendo do ciclo
+			number.push("0.2073884211515022"); //valor que vai ser inserido na pilha, i vezes dependendo do ciclo
 		}
 		
 		starTime = System.nanoTime(); 

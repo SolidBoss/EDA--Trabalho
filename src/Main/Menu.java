@@ -47,8 +47,7 @@ public class Menu {
 				
 			}
 			
-		}
-		while (opcao != 6);{System.exit(0);}
+		}while (opcao != 6);{System.exit(0);}
 	
 	}
 }
