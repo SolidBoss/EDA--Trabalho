@@ -50,7 +50,7 @@ public class LinkedStackFile {
 			if (FileExists == true) {
 
 				// Cria novo ficheiro exel com o nome LinkedList e o nº do item, na directoria pretendida
-				PrintWriter file = new PrintWriter("/Users/H2O/Desktop/Linked/" + "LinkList" + "_" + Item + ".csv");
+				PrintWriter file = new PrintWriter("data/" + "LinkList" + "_" + Item + ".csv");
 
 				// vai ler todo o  conteúdo dos ficheiro
 				@SuppressWarnings("deprecation")

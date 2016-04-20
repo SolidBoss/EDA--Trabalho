@@ -50,7 +50,7 @@ public class ResizingArrayFile {
 			if (fileExists == true) {
 				
 				// Cria novo ficheiro exel com o nome LinkedList e o nº do item, na directoria pretendida
-				PrintWriter file = new PrintWriter("/Users/H2O/Desktop/ResizingArray/" + "ResizingArray" + "_" + Item + ".csv");
+				PrintWriter file = new PrintWriter("data/" + "ResizingArray" + "_" + Item + ".csv");
 				
 				@SuppressWarnings("deprecation")
 				String[] textFiles = In.readStrings(FilePath); //vai ler todo o conteúdo dos ficheiro 
