@@ -51,3 +51,20 @@ public class Menu {
 	
 	}
 }
+
+/*
+ * Este projeto foi concebido utilizando as seguintes fontes como recurso para
+ * implementação do código:
+ * 
+ * Tipos abstratos de dados: 
+ * - http://www.e-reading.club/bookreader.php/138175/Abstract_Data_Types_in_Java.pdf
+ *
+ * Tipos estruturas de dados:
+ * - https://pt.wikipedia.org/wiki/Estrutura_de_dados
+ *
+ * Código utilizado e adaptado de: 
+ * - Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley
+ *   Professional, 2011, ISBN 0-321-57351-X. http://algs4.cs.princeton.edu
+ * - Código disponibilizado pelo professor Manuel Menezes Sequeira
+ * - http://www.java2s.com/
+ */
