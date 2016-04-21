@@ -145,11 +145,6 @@ public class LinkedStackFile {
 				out.println("Mediana de remoção: " + mediana_pop + " ns");
 				file.println("Mediana de remoção: " + mediana_pop + "ns");//imprime no exel
 				
-				//vai chamar o metodo (medianTimes) que se encontra no pacote Main e passa a variavel tempo 
-				desvio_pop=MedMinMax.standardDeviation(tempo);
-				out.println("Mediana de inserção: " + desvio_pop + " ns");
-				file.println("Mediana de inserção: " + desvio_pop + "ns");//imprime no exel
-				
 				//vai chamar o metodo (standardDeviation) que se encontra no pacote Main e passa a variavel tempo 
 				desvio_pop=MedMinMax.standardDeviation(tempo);
 				out.println("Desvio padrão: " + desvio_pop + " ns\n");
@@ -211,5 +206,11 @@ public class LinkedStackFile {
 		
 		minimo_pop=MedMinMax.minimeTimes(tempo);
 		out.println("Tempo minimo de remoção: " + minimo_pop + " ns");
+		
+		mediana_pop=MedMinMax.medianTimes(tempo);
+		out.println("Mediana: " + mediana_pop + " ns");
+		
+		desvio_pop=MedMinMax.standardDeviation(tempo);
+		out.println("Desvio padrão: " + desvio_pop + " ns\n");
 	}
 }

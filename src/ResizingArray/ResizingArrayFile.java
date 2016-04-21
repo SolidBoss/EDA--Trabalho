@@ -205,6 +205,12 @@ public class ResizingArrayFile {
 		
 		minimo_pop=MedMinMax.minimeTimes(tempo);
 		out.println("Tempo minimo de remoção: " + minimo_pop + " ns");
+		
+		mediana_pop=MedMinMax.medianTimes(tempo);
+		out.println("Mediana: " + mediana_pop + " ns");
+		
+		desvio_pop=MedMinMax.standardDeviation(tempo);
+		out.println("Desvio padrão: " + desvio_pop + " ns\n");
 	}
 	
 	public static void Resizing(){
