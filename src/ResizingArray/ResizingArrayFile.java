@@ -74,6 +74,7 @@ public class ResizingArrayFile {
 					
 					}
 					estimatedTime = System.nanoTime() - starTime; // Tempo Final guardado em variavel
+					//out.println("Demora a inserir: " + estimatedTime + " ns");
 					
 					//guarda o tempo de cada execução, para cada repetição
 					tempo[i] = (double) (estimatedTime);
@@ -89,8 +90,8 @@ public class ResizingArrayFile {
 				out.println("Tempo minimo de inserção: " + minimo_push + " ns");//imprime na consola
 				file.println("Tempo minimo de inserção: " + minimo_push + "ns");//imprime no exel
 				
-				//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo e a variavel repetir
-				media_push=MedMinMax.meanTimes(tempo, repetir);
+				//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo
+				media_push=MedMinMax.meanTimes(tempo);
 				out.println("Tempo medio de inserção: " + media_push + " ns");
 				file.println("Tempo medio de inserção: " + media_push + "ns");//imprime no exel
 				
@@ -99,7 +100,7 @@ public class ResizingArrayFile {
 				out.println("Mediana de inserção: " + mediana_push + " ns");
 				file.println("Mediana de inserção: " + mediana_push + "ns");//imprime no exel
 				
-				//vai chamar o metodo (medianTimes) que se encontra no pacote Main e passa a variavel tempo 
+				//vai chamar o metodo (standartDeviation) que se encontra no pacote Main e passa a variavel tempo 
 				desvio_push=MedMinMax.standardDeviation(tempo);
 				out.println("Desvio padrão: " + desvio_push + " ns\n");
 				file.println("Desvio padrão: " + desvio_push + "ns");//imprime no exel
@@ -112,18 +113,13 @@ public class ResizingArrayFile {
 				// Ciclo para Remoção(pop) da pilha
 				starTime = System.nanoTime();
 				for (count = 0; count != textFiles.length; count++){
-					numbers.pop().contentEquals(textFiles[count]);
+					numbers.pop().equals(textFiles[count]);
 				}
 				estimatedTime = (System.nanoTime() - starTime);// Tempo Final guardado em variavel
 				//out.println("Demora a apagar: " + estimatedTime + " ns");
 				
 				//guarda o tempo de cada execução, para cada repetição
 				tempo[i] = (double) (estimatedTime);
-				
-				
-				//retorna o nº de numero de diminuições feitas
-				//out.println("Número de decrementos: " + numbers.getNumberOfDecreases()); 
-				
 				
 				}				
 				
@@ -137,8 +133,8 @@ public class ResizingArrayFile {
 				out.println("Tempo minimo de remoção: " + minimo_pop + " ns");
 				file.println("Tempo minimo de remoção: " + minimo_pop + "ns");//imprime no exel
 				
-				//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo e a variavel repetir
-				media_pop=MedMinMax.meanTimes(tempo, repetir);
+				//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo
+				media_pop=MedMinMax.meanTimes(tempo);
 				out.println("Tempo medio de remoção: " + media_pop + " ns");
 				file.println("Tempo medio de remoção: " + media_pop + "ns");//imprime no exel
 				
@@ -181,7 +177,7 @@ public class ResizingArrayFile {
 												// nanosegundos
 			// inserir na pilha para depois apagar, caso contrario da static
 			// underflowfor (count = 0; count != textFile.length; count++) {
-			if (numbers.pop().contentEquals(searchingText)) // ao percorrer os
+			if (numbers.pop().equals(searchingText)) // ao percorrer os
 															// ficheiro,
 															// verifica se
 															// existe o nº que
@@ -197,7 +193,7 @@ public class ResizingArrayFile {
 			tempo[y] = (double) (estimatedTime);
 			
 		}
-		media_pop=MedMinMax.meanTimes(tempo, repetir);
+		media_pop=MedMinMax.meanTimes(tempo);
 		out.println("Tempo medio de remoção: " + media_pop + " ns");
 		
 		maximo_pop=MedMinMax.maximeTimes(tempo);

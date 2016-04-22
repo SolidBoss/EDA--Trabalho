@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 
 
 public class LinkedStack<Item> implements Iterable<Item> {
-    private int N;                // tamanho da pilha
+    private int size;                // tamanho da pilha
     private Node<Item> first;     // primeira posicao da pilha
 
     //criar a classe node
@@ -17,7 +17,7 @@ public class LinkedStack<Item> implements Iterable<Item> {
     //inicializa uma pilha vazia
     public LinkedStack() {
         first = null;
-        N = 0;
+        size = 0;
     }
 
     //verifica se a pilha esta vazia. Se estiver mostra true, caso contrario false
@@ -27,7 +27,7 @@ public class LinkedStack<Item> implements Iterable<Item> {
 
     //Devolve o nº de items na pilha
     public int size() {
-        return N;
+        return size;
     }
     
     //Adiciona item a pilha
@@ -36,7 +36,7 @@ public class LinkedStack<Item> implements Iterable<Item> {
         first = new Node<Item>();
         first.item = item;
         first.next = oldfirst;
-        N++;
+        size++;
     }
 
     //Remove o item da pilha
@@ -44,7 +44,7 @@ public class LinkedStack<Item> implements Iterable<Item> {
         if (isEmpty()) throw new NoSuchElementException("Stack underflow");
         Item item = first.item;       
         first = first.next;          
-        N--;
+        size--;
         return item;                  
     }
 
@@ -56,10 +56,10 @@ public class LinkedStack<Item> implements Iterable<Item> {
 
     // Retorna a representação da pilha na ordem LIFO
     public String toString() {
-        StringBuilder s = new StringBuilder();
+        StringBuilder string = new StringBuilder();
         for (Item item : this)
-            s.append(item + " ");
-        return s.toString();
+            string.append(item + " ");
+        return string.toString();
     }
        
     // Retorna um iterador para esta pilha que percorre pela ordem LIFO
@@ -74,8 +74,13 @@ public class LinkedStack<Item> implements Iterable<Item> {
         public ListIterator(Node<Item> first) {
             current = first;
         }
-        public boolean hasNext()  { return current != null;                     }
-        public void remove()      { throw new UnsupportedOperationException();  }
+        public boolean hasNext(){ 
+        	return current != null;
+        }
+        
+        public void remove(){
+        	throw new UnsupportedOperationException();
+        }
 
         public Item next() {
             if (!hasNext()) throw new NoSuchElementException();

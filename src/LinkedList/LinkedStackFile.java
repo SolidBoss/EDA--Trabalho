@@ -90,7 +90,7 @@ public class LinkedStackFile {
 				file.println("Tempo minimo de inserção: " + minimo_push + "ns");//imprime no exel
 				
 				//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo 
-				media_push=MedMinMax.meanTimes(tempo, repetir);
+				media_push=MedMinMax.meanTimes(tempo);
 				out.println("Tempo medio de inserção: " + media_push + " ns");
 				file.println("Tempo medio de inserção: " + media_push + "ns");//imprime no exel
 				
@@ -99,7 +99,7 @@ public class LinkedStackFile {
 				out.println("Mediana de inserção: " + mediana_push + " ns");
 				file.println("Mediana de inserção: " + mediana_push + "ns");//imprime no exel
 				
-				//vai chamar o metodo (medianTimes) que se encontra no pacote Main e passa a variavel tempo 
+				//vai chamar o metodo (standartDeviation) que se encontra no pacote Main e passa a variavel tempo 
 				desvio_push=MedMinMax.standardDeviation(tempo);
 				out.println("Desvio padrão: " + desvio_push + " ns");
 				file.println("Desvio padrão: " + desvio_push + "ns");//imprime no exel
@@ -109,7 +109,7 @@ public class LinkedStackFile {
 					// Ciclo para Remoção(push) da pilha
 					starTime = System.nanoTime();
 					for (int count = 0; count != textFiles.length; count++) {
-						numbers.pop().contentEquals(textFiles[count]);// vai
+						numbers.pop().equals(textFiles[count]);// vai
 																		// apagar
 																		// todos
 																		// os
@@ -135,8 +135,8 @@ public class LinkedStackFile {
 				out.println("Tempo minimo de remoção: " + minimo_pop + " ns");//imprime na consola
 				file.println("Tempo minimo de remoção: " + minimo_pop + "ns");//imprime no exel
 				
-				//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo e a variavel repetir 
-				media_pop=MedMinMax.meanTimes(tempo, repetir);
+				//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo
+				media_pop=MedMinMax.meanTimes(tempo);
 				out.println("Tempo medio de remoção: " + media_pop + " ns");
 				file.println("Tempo medio de remoção: " + media_pop + "ns");//imprime no exel
 				
@@ -182,7 +182,7 @@ public class LinkedStackFile {
 												// nanosegundos
 			// inserir na pilha para depois apagar, caso contrario da static
 			// underflowfor (count = 0; count != textFile.length; count++) {
-			if (numbers.pop().contentEquals(searchingText)) // ao percorrer os
+			if (numbers.pop().equals(searchingText)) // ao percorrer os
 															// ficheiro,
 															// verifica se
 															// existe o nº que
@@ -198,7 +198,7 @@ public class LinkedStackFile {
 			tempo[y] = (double) (estimatedTime);
 			
 		}
-		media_pop=MedMinMax.meanTimes(tempo, repetir);
+		media_pop=MedMinMax.meanTimes(tempo);
 		out.println("Tempo medio de remoção: " + media_pop + " ns");
 		
 		maximo_pop=MedMinMax.maximeTimes(tempo);
