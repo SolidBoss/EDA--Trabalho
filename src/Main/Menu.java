@@ -5,7 +5,6 @@ import static java.lang.System.out;
 import java.io.IOException;
 import java.util.Scanner;
 
-import ResizingArray.ResizingArrayFile;
 
 public class Menu {
 	// le input do teclado
@@ -37,13 +36,13 @@ public class Menu {
 				LinkedList.LinkedStackFile.apaga();
 			}
 			else if(opcao==3){
-				ResizingArrayFile.main(args);
+				ResizingArray.ResizingArrayFile.main(args);
 			}
 			else if(opcao==4){
-				ResizingArrayFile.apagaNumero();
+				ResizingArray.ResizingArrayFile.apagaNumero();
 			}
 			else if(opcao==5){
-				ResizingArrayFile.Resizing();
+				ResizingArray.ResizingArrayFile.Resizing();
 				
 			}
 			
