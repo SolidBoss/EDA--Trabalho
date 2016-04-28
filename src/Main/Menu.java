@@ -11,7 +11,7 @@ public class Menu {
 		static Scanner inputData; 
 		
 	static int runMenu() { //Menu
-		out.println("\nOperações da Pilha: " );
+		out.println("\nOperações da Pilha: ");
 		out.println("LinkedList " );
 		out.println("1 - Medir tempo de inserção e remoção dados na pilha");
 		out.println("2 - Apagar Numero na Pilha");
@@ -19,7 +19,10 @@ public class Menu {
 		out.println("3 - Medir tempo de inserção e remoção dados na pilha");
 		out.println("4 - Apagar Numero na Pilha");
 		out.println("5 - Verificar acrescimos e decrementos na pilha");
-		out.println("6 - Terminar");
+		out.println("Merge Sort");
+		out.println("6 - Medir tempo de ordenação para ficheiros sorted, partially sorted e shuffled");
+		out.println("7 - Verificar comparações, acesso ao array");
+		out.println("10 - Sair");
 		return inputData.nextInt(); // Retorna o input do teclado
 	}
 	
@@ -43,10 +46,15 @@ public class Menu {
 			}
 			else if(opcao==5){
 				ResizingArray.ResizingArrayFile.Resizing();
-				
+			}
+			else if(opcao==6){
+				MergeSort.MergeSortFile.main(args);
+			}
+			else if(opcao==7){
+				MergeSort.MergeSortFile.verifica();
 			}
 			
-		}while (opcao != 6);{System.exit(0);}
+		}while (opcao != 10);{System.exit(0);}
 	
 	}
 }

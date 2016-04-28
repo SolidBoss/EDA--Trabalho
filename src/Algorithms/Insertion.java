@@ -7,6 +7,7 @@ public class Insertion {
 	private static int comparacoes;
 	private static int acessos;
 	private static int trocas;
+	//jhj
 	
 	public static void sort(final Comparable[] valores){
 		comparacoes = 0;
