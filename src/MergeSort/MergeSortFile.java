@@ -4,6 +4,7 @@ import static java.lang.System.out;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import Main.MedMinMax;
 import edu.princeton.cs.introcs.In;
@@ -30,11 +31,13 @@ public class MergeSortFile {
 
 		for (int Item : FileSize) {
 			
+			PrintWriter file = new PrintWriter("data/" + "MergeSort" + "_" + Item + ".csv");
+			
 			for (String Type : FileType) {
 				String FilePath = "data/" + Type + "_" + Item + ".txt";
 
 				boolean FileExists = new File(FilePath).isFile();
-
+				
 				if (FileExists == true) {
 					long estimatedTime = 0;
 
@@ -70,18 +73,25 @@ public class MergeSortFile {
 
 					maximo_push = MedMinMax.maximeTimes(tempo);
 					out.println("Tempo maximo de inserção: " + maximo_push + " ns");
-
+					file.println("Tempo maximo de inserção: " + maximo_push + "ns");
+					
 					minimo_push = MedMinMax.minimeTimes(tempo);
 					out.println("Tempo minimo de inserção: " + minimo_push + " ns");
-
+					file.println("Tempo minimo de inserção: " + minimo_push + "ns");
+					
 					media_push = MedMinMax.meanTimes(tempo);
 					out.println("Tempo medio de inserção: " + media_push + " ns");
-
+					file.println("Tempo medio de inserção: " + media_push + "ns");
+					
 					mediana_push = MedMinMax.medianTimes(tempo);
 					out.println("Mediana de inserção: " + mediana_push + " ns");
-
+					file.println("Mediana de inserção: " + mediana_push + "ns");
+					
 					desvio_push = MedMinMax.standardDeviation(tempo);
 					out.println("Desvio padrão: " + desvio_push + " ns");
+					file.println("Desvio padrão: " + desvio_push + "ns");
+					
+					file.close();
 				}
 			}
 		}

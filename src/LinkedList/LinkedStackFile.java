@@ -45,11 +45,11 @@ public class LinkedStackFile {
 			String FilePath = "data/sorted_" + Item + ".txt";
 			boolean FileExists = new File(FilePath).isFile();
 
+			// Cria novo ficheiro exel com o nome LinkedList e o nº do item, na directoria pretendida
+			PrintWriter file = new PrintWriter("data/" + "LinkList" + "_" + Item + ".csv");
+			
 			// Caso o ficheiro exista são feitas as operações de inserção e remoção da pilha
 			if (FileExists == true) {
-
-				// Cria novo ficheiro exel com o nome LinkedList e o nº do item, na directoria pretendida
-				PrintWriter file = new PrintWriter("data/" + "LinkList" + "_" + Item + ".csv");
 
 				// vai ler todo o  conteúdo dos ficheiro
 				@SuppressWarnings("deprecation")

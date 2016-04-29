@@ -54,6 +54,7 @@ public class Menu {
 				MergeSort.MergeSortFile.verifica();
 			}
 			
+			
 		}while (opcao != 10);{System.exit(0);}
 	
 	}
