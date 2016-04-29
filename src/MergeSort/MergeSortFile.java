@@ -44,8 +44,7 @@ public class MergeSortFile {
 					@SuppressWarnings("deprecation")
 					String[] textFiles = In.readStrings(FilePath);
 
-					int repetir = 10;
-					Double[] tempo = new Double[repetir];
+				
 					if (Type == "sorted") {
 						out.println("-----------------------------------");
 						out.println("Sorted");
@@ -63,6 +62,8 @@ public class MergeSortFile {
 						out.println("-----------------------------------");
 					}
 
+					int repetir = 10;
+					Double[] tempo = new Double[repetir];
 					for (int i = 0; i != repetir; i++) {
 						long starTime = System.nanoTime();
 						Merge.sort(textFiles);

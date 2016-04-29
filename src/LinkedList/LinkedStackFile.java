@@ -54,16 +54,15 @@ public class LinkedStackFile {
 				// vai ler todo o  conteúdo dos ficheiro
 				@SuppressWarnings("deprecation")
 				String[] textFiles = In.readStrings(FilePath);
-
-				// variavel com o nº de repetições, onde assegura que os resultados sejam testados varias vezes para verificar a sua veracidade
-				int repetir = 10;
-				
-				Double[] tempo = new Double[repetir];
 				
 				out.println("-----------------------------------");
 				out.println("Numero de Itens " + Item);
 				out.println("-----------------------------------");
 
+				// variavel com o nº de repetições, onde assegura que os resultados sejam testados varias vezes para verificar a sua veracidade
+				int repetir = 10;
+				Double[] tempo = new Double[repetir];
+				
 				// Ciclo for vai realizar o nº de repetições que queremos
 				for (int i = 0; i != repetir; i++) {
 					// Ciclo para Inserção(push) na pilha
