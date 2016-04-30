@@ -1,6 +1,9 @@
 package Main;
 
 import static java.lang.System.out;
+import LinkedList.LinkedStackFile;
+import ResizingArray.ResizingArrayFile;
+import MergeSort.MergeSortFile;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -21,7 +24,10 @@ public class Menu {
 		out.println("5 - Verificar acrescimos e decrementos na pilha");
 		out.println("Merge Sort");
 		out.println("6 - Medir tempo de ordenação para ficheiros sorted, partially sorted e shuffled");
-		out.println("7 - Verificar comparações, acesso ao array");
+		out.println("7 - Verificar comparações e acessos ao array");
+		out.println("Insertion Sort");
+		out.println("8 - Medir tempo de ordenação para ficheiros sorted, partially sorted e shuffled");
+		out.println("9 - Verificar comparações e acessos ao array");
 		out.println("10 - Sair");
 		return inputData.nextInt(); // Retorna o input do teclado
 	}
@@ -33,25 +39,25 @@ public class Menu {
 		do {
 			opcao = runMenu();
 			if (opcao == 1) {
-				LinkedList.LinkedStackFile.main(args);
+				LinkedStackFile.main(args);
 			}
 			else if(opcao==2){
-				LinkedList.LinkedStackFile.apaga();
+				LinkedStackFile.apaga();
 			}
 			else if(opcao==3){
-				ResizingArray.ResizingArrayFile.main(args);
+				ResizingArrayFile.main(args);
 			}
 			else if(opcao==4){
-				ResizingArray.ResizingArrayFile.apagaNumero();
+				ResizingArrayFile.apagaNumero();
 			}
 			else if(opcao==5){
-				ResizingArray.ResizingArrayFile.Resizing();
+				ResizingArrayFile.Resizing();
 			}
 			else if(opcao==6){
-				MergeSort.MergeSortFile.main(args);
+				MergeSortFile.main(args);
 			}
 			else if(opcao==7){
-				MergeSort.MergeSortFile.verifica();
+				MergeSortFile.verifica();
 			}
 			
 			
