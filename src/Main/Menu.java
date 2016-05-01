@@ -4,6 +4,8 @@ import static java.lang.System.out;
 import LinkedList.LinkedStackFile;
 import ResizingArray.ResizingArrayFile;
 import MergeSort.MergeSortFile;
+import InsertionSort.InsertionSortFile;
+import InsertionSort.InstrumentedInsertion;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -59,7 +61,12 @@ public class Menu {
 			else if(opcao==7){
 				MergeSortFile.verifica();
 			}
-			
+			else if(opcao==8){
+				InsertionSortFile.main(args);
+			}
+			else if(opcao==9){
+				InstrumentedInsertion.main(args);
+			}
 			
 		}while (opcao != 10);{System.exit(0);}
 	

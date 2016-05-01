@@ -11,16 +11,10 @@ import edu.princeton.cs.introcs.In;
 
 public class MergeSortFile {
 	
-	// Variaveis para a média, mediana, maximo, minimo e desvio padrao
 		static double media_push;
-		static double media_pop;
 		static double maximo_push;
-		static double maximo_pop;
 		static double minimo_push;
-		static double minimo_pop;
 		static double mediana_push;
-		static double mediana_pop;
-		static double desvio_pop;
 		static double desvio_push;
 		
 		static int[] FileSize = { 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072,
