@@ -27,10 +27,11 @@ public class Menu {
 		out.println("Merge Sort");
 		out.println("6 - Medir tempo de ordenação para ficheiros sorted, partially sorted e shuffled");
 		out.println("7 - Verificar comparações e acessos ao array");
+		out.println("8 - BottomUpMerge");
 		out.println("Insertion Sort");
-		out.println("8 - Medir tempo de ordenação para ficheiros sorted, partially sorted e shuffled");
-		out.println("9 - Verificar comparações e acessos ao array");
-		out.println("10 - Sair");
+		out.println("9 - Medir tempo de ordenação para ficheiros sorted, partially sorted e shuffled");
+		out.println("10 - Verificar comparações e acessos ao array");
+		out.println("11 - Sair");
 		return inputData.nextInt(); // Retorna o input do teclado
 	}
 	
@@ -62,13 +63,16 @@ public class Menu {
 				MergeSortFile.verifica();
 			}
 			else if(opcao==8){
-				InsertionSortFile.main(args);
+				MergeSortFile.BottomUpMerge();
 			}
 			else if(opcao==9){
+				InsertionSortFile.main(args);
+			}
+			else if(opcao==10){
 				InstrumentedInsertion.main(args);
 			}
 			
-		}while (opcao != 10);{System.exit(0);}
+		}while (opcao != 11);{System.exit(0);}
 	
 	}
 }
