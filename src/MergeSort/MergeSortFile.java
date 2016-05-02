@@ -5,7 +5,11 @@ import static java.lang.System.out;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Scanner;
 
+import LinkedList.LinkedStackFile;
+
+import java.util.Scanner;
 import Main.MedMinMax;
 import edu.princeton.cs.introcs.In;
 
@@ -17,28 +21,29 @@ public class MergeSortFile {
 		static double mediana;
 		static double desvio;
 		
-		static int[] FileSize = { 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072,
-				262144, 524288, 1048576 };
+		static int[] FileSize = { 2, 4, 8, 16, 32};
 		static String[] FileType = { "sorted", "partially_sorted", "shuffled" };
 		
 	public static void main(String[] args) throws IOException {
 
-		for (int Item : FileSize) {
+		for (String Type : FileType) {
 			
-			PrintWriter file = new PrintWriter("data/" + "MergeSort" + "_" + Item + ".csv");
+			for (int Item : FileSize) {
 			
-			for (String Type : FileType) {
+				PrintWriter file = new PrintWriter("data/" + "MergeSort" + "_" + FileType + "_"+ Item + ".csv");
+				
 				String FilePath = "data/" + Type + "_" + Item + ".txt";
 
 				boolean FileExists = new File(FilePath).isFile();
 				
 				if (FileExists == true) {
+					
 					long estimatedTime = 0;
 
 					@SuppressWarnings("deprecation")
 					String[] textFiles = In.readStrings(FilePath);
-
-				
+					
+					
 					if (Type == "sorted") {
 						out.println("-----------------------------------");
 						out.println("Sorted");
