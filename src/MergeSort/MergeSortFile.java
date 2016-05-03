@@ -81,23 +81,23 @@ public class MergeSortFile {
 
 					//vai chamar o metodo (maximeTimes) que se encontra no pacote Main e passa a variavel tempo 
 					maximo = MedMinMax.maximeTimes(tempo);
-					out.println("Tempo maximo de inserção: " + maximo + " ns");//imprime na consola
-					file.println("Tempo maximo de inserção: " + maximo + "ns");//imprime no exel
+					out.println("Tempo maximo de ordenação: " + maximo + " ns");//imprime na consola
+					file.println("Tempo maximo de ordenação: " + maximo + "ns");//imprime no exel
 
 					//vai chamar o metodo (minimeTimes) que se encontra no pacote Main e passa a variavel tempo 
 					minimo = MedMinMax.minimeTimes(tempo);
-					out.println("Tempo minimo de inserção: " + minimo + " ns");//imprime na consola
-					file.println("Tempo minimo de inserção: " + minimo + "ns");//imprime no exel
+					out.println("Tempo minimo de ordenação: " + minimo + " ns");//imprime na consola
+					file.println("Tempo minimo de ordenação: " + minimo + "ns");//imprime no exel
 
 					//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo 
 					media = MedMinMax.meanTimes(tempo);
-					out.println("Tempo medio de inserção: " + media + " ns");//imprime na consola
-					file.println("Tempo medio de inserção: " + media + "ns");//imprime no exel
+					out.println("Tempo medio de ordenação: " + media + " ns");//imprime na consola
+					file.println("Tempo medio de ordenação: " + media + "ns");//imprime no exel
 
 					//vai chamar o metodo (medianTimes) que se encontra no pacote Main e passa a variavel tempo 
 					mediana = MedMinMax.medianTimes(tempo);
-					out.println("Mediana de inserção: " + mediana + " ns");//imprime na consola
-					file.println("Mediana de inserção: " + mediana + "ns");//imprime no exel
+					out.println("Mediana de ordenação: " + mediana + " ns");//imprime na consola
+					file.println("Mediana de ordenação: " + mediana + "ns");//imprime no exel
 
 					//vai chamar o metodo (standartDeviation) que se encontra no pacote Main e passa a variavel tempo 
 					desvio = MedMinMax.standardDeviation(tempo);
@@ -217,19 +217,19 @@ public class MergeSortFile {
 
 					//vai chamar o metodo (maximeTimes) que se encontra no pacote Main e passa a variavel tempo 
 					maximo = MedMinMax.maximeTimes(tempo);
-					out.println("Tempo maximo de inserção: " + maximo + " ns");//imprime na consola
+					out.println("Tempo maximo de ordenação: " + maximo + " ns");//imprime na consola
 
 					//vai chamar o metodo (minimeTimes) que se encontra no pacote Main e passa a variavel tempo 
 					minimo = MedMinMax.minimeTimes(tempo);
-					out.println("Tempo minimo de inserção: " + minimo + " ns");//imprime na consola
+					out.println("Tempo minimo de ordenação: " + minimo + " ns");//imprime na consola
 
 					//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo 
 					media = MedMinMax.meanTimes(tempo);
-					out.println("Tempo medio de inserção: " + media + " ns");//imprime na consola
+					out.println("Tempo medio de ordenação: " + media + " ns");//imprime na consola
 
 					//vai chamar o metodo (medianTimes) que se encontra no pacote Main e passa a variavel tempo 
 					mediana = MedMinMax.medianTimes(tempo);
-					out.println("Mediana de inserção: " + mediana + " ns");//imprime na consola
+					out.println("Mediana de ordenação: " + mediana + " ns");//imprime na consola
 
 					//vai chamar o metodo (standartDeviation) que se encontra no pacote Main e passa a variavel tempo 
 					desvio = MedMinMax.standardDeviation(tempo);
