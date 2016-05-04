@@ -1,10 +1,12 @@
 package MergeSort;
 
+import static java.lang.System.in;
 import static java.lang.System.out;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Scanner;
 import Main.MedMinMax;
 import edu.princeton.cs.introcs.In;
 
@@ -26,6 +28,10 @@ public class MergeSortFile {
 
 	public static void main(String[] args) throws IOException {
 
+		// variavel com o nº de repetições, onde assegura que os resultados sejam testados varias vezes para verificar a sua veracidade
+		@SuppressWarnings("resource")
+		final Scanner input = new Scanner(in);
+		
 		//Ciclo para percorrer cada tipo de ficheiro
 		for (String Type : FileType) {
 
@@ -70,12 +76,15 @@ public class MergeSortFile {
 					// variavel com o nº de repetições, onde assegura que os resultados sejam testados varias vezes para verificar a sua veracidade
 					int repetir = 10;
 					Double[] tempo = new Double[repetir];
+					
 					// Ciclo for vai realizar o nº de repetições que queremos
 					for (int i = 0; i != repetir; i++) {
 						long starTime = System.nanoTime();// Variavel que vai iniciar a medição em nanosegundos
 						Merge.sort(textFiles);//Através da classe merge, vai ordenar todos os items de cada ficheiro
 						estimatedTime = System.nanoTime() - starTime;// Tempo final guardado em variavel
 						//guarda o tempo de cada execução, para cada repetição
+						//out.println("Tempo de ordenação da " + (i+1) + "º experiênçia: " + estimatedTime + " ns");
+						
 						tempo[i] = (double) (estimatedTime);
 					}
 
