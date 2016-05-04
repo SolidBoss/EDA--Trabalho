@@ -10,7 +10,7 @@ public class LinkedStack<Item> implements Iterable<Item> {
 
     //criar a classe node
     private static class Node<Item> { //
-        private Item item;
+        private Item item;//
         private Node<Item> next;
     }
 
