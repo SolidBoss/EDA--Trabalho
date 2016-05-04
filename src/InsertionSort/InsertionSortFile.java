@@ -44,7 +44,6 @@ public class InsertionSortFile {
 				if (FileExists == true) {
 					
 					if (numberOfItem <= 65536){
-					
 						long estimatedTime = 0;
 						
 						@SuppressWarnings("deprecation")
@@ -98,8 +97,8 @@ public class InsertionSortFile {
 						file.println("Desvio médio de ordenação: " + desvio + " ns");
 					
 						file.close();
-					}
-				}
+					
+				}}
 			}
 		}
 	}	
