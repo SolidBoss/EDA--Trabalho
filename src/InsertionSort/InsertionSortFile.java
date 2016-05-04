@@ -28,11 +28,11 @@ public class InsertionSortFile {
 		@SuppressWarnings("resource")
 		final Scanner input = new Scanner(in);
 
-        out.print("Quantas experiênçias?: ");
-
+        out.print("Quantas experiênçias?(numero inteiro): ");
+        
         int repetir = input.nextInt();
         Double[] tempo = new Double[repetir];
-
+        
 		for (String orderType : OrderType) {
 			
 			for (int numberOfItem : FileSize) {
@@ -43,7 +43,12 @@ public class InsertionSortFile {
 
 				if (FileExists == true) {
 					
+<<<<<<< HEAD
 					if (numberOfItem <= 65536){
+=======
+					if (!(orderType == "shuffled") || (numberOfItem < 65536)){
+					
+>>>>>>> origin/1-entrega
 						long estimatedTime = 0;
 						
 						@SuppressWarnings("deprecation")
