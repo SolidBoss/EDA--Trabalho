@@ -20,7 +20,7 @@ public final class Merge {
                 values) : "Array should be increasing after sorting.";
     }
 
-    private static <Item extends Comparable<? super Item>> void sort(
+    public static <Item extends Comparable<? super Item>> void sort(
             final Item[] values, final Item[] auxiliary, final int first,
             final int last) {
         if (last <= first)
