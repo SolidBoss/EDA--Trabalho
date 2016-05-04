@@ -43,7 +43,7 @@ public class InsertionSortFile {
 
 				if (FileExists == true) {
 					
-					if (numberOfItem < 65536){
+					if (numberOfItem <= 65536){
 					
 						long estimatedTime = 0;
 						
@@ -72,7 +72,7 @@ public class InsertionSortFile {
 							Insertion.sort(textFiles);
 							estimatedTime = System.nanoTime() - startTime;
 							tempo[i] = (double) (estimatedTime);
-							out.println("Tempo de ordenação da " + (i+1) + "º experiênçia: " + estimatedTime + " ns");
+							//out.println("Tempo de ordenação da " + (i+1) + "º experiênçia: " + estimatedTime + " ns");
 					
 						}	
 				
