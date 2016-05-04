@@ -13,7 +13,7 @@ import edu.princeton.cs.introcs.In;
 
 public class InsertionSortFile {
 	
-	static double media;
+	static double media; //
 	static double maximo;
 	static double minimo;
 	static double mediana;
