@@ -116,6 +116,15 @@ public final class InstrumentedMerge {
         return numberOfArrayReads + numberOfArrayWrites;
     }
     
+    public static int[] getCountData() {
+		int[] data = new int[3];
+		
+		data[0] = numberOfComparisons;
+		data[1] = numberOfArrayReads;
+		data[2] = numberOfArrayWrites;
+		
+		return data;	
+	}
 }
 
 /*
