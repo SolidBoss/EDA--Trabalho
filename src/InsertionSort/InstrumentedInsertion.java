@@ -19,9 +19,9 @@ public class InstrumentedInsertion {
 			for (int numberOfItem : FileSize) {
 				int[] data = {0, 0, 0};
 				data = runCountTest(orderType, numberOfItem);
-				out.println("Comparações: "+data[0]);
-				out.println("Acessos a array: "+data[1]);
-				out.println("Trocas: "+data[2]);
+				out.println("Número de comparações: "+data[0]);
+				out.println("Número de Acessos a array: "+data[1]);
+				out.println("Número de Trocas: "+data[2]);
 			}
 		}
 	}
