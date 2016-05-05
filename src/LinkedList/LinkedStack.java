@@ -9,8 +9,8 @@ public class LinkedStack<Item> implements Iterable<Item> {
     private Node<Item> first;     // primeira posicao da pilha
 
     //criar a classe node
-    private static class Node<Item> {
-        private Item item;
+    private static class Node<Item> { //
+        private Item item;//
         private Node<Item> next;
     }
 

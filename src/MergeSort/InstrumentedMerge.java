@@ -14,6 +14,9 @@ public final class InstrumentedMerge {
 
     public static <Item extends Comparable<? super Item>> void sort(
             final Item[] values) {
+    	numberOfComparisons = 0;
+    	numberOfArrayReads = 0;
+    	numberOfArrayWrites = 0;
         @SuppressWarnings("unchecked")
         final Item[] auxiliary = (Item[]) Array.newInstance(values.getClass()
                 .getComponentType(), values.length);
