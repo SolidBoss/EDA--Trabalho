@@ -43,12 +43,9 @@ public class InsertionSortFile {
 
 				if (FileExists == true) {
 					
-<<<<<<< HEAD
-					if (numberOfItem <= 65536){
-=======
+
 					if (!(orderType == "shuffled") || (numberOfItem < 65536)){
 					
->>>>>>> origin/1-entrega
 						long estimatedTime = 0;
 						
 						@SuppressWarnings("deprecation")
