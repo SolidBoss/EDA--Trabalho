@@ -80,6 +80,7 @@ public class InsertionSortFile {
 							Insertion.sort(textFiles);// Iniciar a ordenação de inserção com os valores do textFiles
 							estimatedTime = System.nanoTime() - startTime;// Tempo Final guardado em variavel
 							tempo[i] = (double) (estimatedTime);//guarda o tempo de cada execução, para cada repetição
+							//mostra o tempo de cada execução, para cada repetição
 							//out.println("Tempo de ordenação da " + (i+1) + "º experiênçia: " + estimatedTime + " ns");
 					
 						}	

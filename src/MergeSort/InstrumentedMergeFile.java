@@ -1,15 +1,12 @@
 package MergeSort;
 
 import static java.lang.System.out;
-
 import java.io.File;
 import java.io.IOException;
-
 import edu.princeton.cs.introcs.In;
 
 //classe para ver o nº de comparações, nº de acessos ao array, nº de leituras e o nº de escritas
 public class InstrumentedMergeFile {
-
 	
 	// Contém o número dos ficheiros que vão ser analizados
 		static int[] FileSize = { 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072,

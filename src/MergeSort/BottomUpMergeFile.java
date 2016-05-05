@@ -1,9 +1,11 @@
 package MergeSort;
 
+import static java.lang.System.in;
 import static java.lang.System.out;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
 
 import Main.MedMinMax;
 import edu.princeton.cs.introcs.In;
@@ -25,6 +27,16 @@ public class BottomUpMergeFile {
 		static String[] FileType = { "sorted", "partially_sorted", "shuffled" };
 		
 	public static void main(String[] args) throws IOException {
+		
+		@SuppressWarnings("resource")
+		final Scanner input = new Scanner(in);
+
+        out.print("Quantas experiênçias?(numero inteiro): ");
+        
+        int repetir = input.nextInt(); //guarda input do numero de experiencias
+        Double[] tempo = new Double[repetir]; //cria array tempo com o numero de posições indicadas no input
+        
+		
 	//Ciclo para percorrer cada tipo de ficheiro
 			for (String Type : FileType) {
 
@@ -61,9 +73,6 @@ public class BottomUpMergeFile {
 							out.println("-----------------------------------");
 						}
 
-						// variavel com o nº de repetições, onde assegura que os resultados sejam testados varias vezes para verificar a sua veracidade
-						int repetir = 10;
-						Double[] tempo = new Double[repetir];
 						// Ciclo for vai realizar o nº de repetições que queremos
 						for (int i = 0; i != repetir; i++) {
 							long starTime = System.nanoTime(); // Variavel que vai iniciar a medição em nanosegundos

@@ -1,10 +1,13 @@
 package MergeSort;
 
+import static java.lang.System.in;
 import static java.lang.System.out;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Scanner;
+
 import Main.MedMinMax;
 import edu.princeton.cs.introcs.In;
 
@@ -26,6 +29,14 @@ public class MergeSortFile {
 
 	public static void main(String[] args) throws IOException {
 
+		@SuppressWarnings("resource")
+		final Scanner input = new Scanner(in);
+
+        out.print("Quantas experiênçias?(numero inteiro): ");
+        
+        int repetir = input.nextInt(); //guarda input do numero de experiencias
+        Double[] tempo = new Double[repetir]; //cria array tempo com o numero de posições indicadas no input
+        
 		//Ciclo para percorrer cada tipo de ficheiro
 		for (String Type : FileType) {
 
@@ -64,9 +75,6 @@ public class MergeSortFile {
 						out.println("-----------------------------------");
 					}
 
-					// variavel com o nº de repetições, onde assegura que os resultados sejam testados varias vezes para verificar a sua veracidade
-					int repetir = 10;
-					Double[] tempo = new Double[repetir];
 					
 					// Variavel para medir o tempo
 					long estimatedTime = 0;
@@ -76,7 +84,7 @@ public class MergeSortFile {
 						long starTime = System.nanoTime();// Variavel que vai iniciar a medição em nanosegundos
 						Merge.sort(textFiles);//Através da classe merge, vai ordenar todos os items de cada ficheiro
 						estimatedTime = System.nanoTime() - starTime;// Tempo final guardado em variavel
-						//guarda o tempo de cada execução, para cada repetição
+						//mostra o tempo de cada execução, para cada repetição
 						//out.println("Tempo de ordenação da " + (i+1) + "º experiênçia: " + estimatedTime + " ns");
 						
 						tempo[i] = (double) (estimatedTime);
