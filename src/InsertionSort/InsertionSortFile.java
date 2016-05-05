@@ -111,8 +111,8 @@ public class InsertionSortFile {
 						file.println("Desvio médio de ordenação: " + desvio + " ns");//imprime no exel
 					
 						file.close();
-					
-				}}
+					}
+				}
 			}
 		}
 	}	
