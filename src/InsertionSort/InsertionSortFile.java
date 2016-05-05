@@ -13,7 +13,7 @@ import edu.princeton.cs.introcs.In;
 
 public class InsertionSortFile {
 	
-	static double media; //
+	static double media;
 	static double maximo;
 	static double minimo;
 	static double mediana;
@@ -30,19 +30,26 @@ public class InsertionSortFile {
 
         out.print("Quantas experiênçias?(numero inteiro): ");
         
-        int repetir = input.nextInt();
-        Double[] tempo = new Double[repetir];
+        int repetir = input.nextInt(); //guarda input do numero de experiencias
+        Double[] tempo = new Double[repetir]; //cria array tempo com o numero de posições indicadas no input
         
+        //Ciclo que analisa cada posicao do array ou seja cada orderType do OrderType
 		for (String orderType : OrderType) {
 			
+			//Ciclo que analisa cada posicao do array ou seja cada numberOfItem do FileSize
 			for (int numberOfItem : FileSize) {
 				
+				// Cria novo ficheiro exel com o nome InsertionSort,orderType e o nº do item, na directoria pretendida
 				PrintWriter file = new PrintWriter("data/" + "InsertionSort" + "_" + orderType + "_" + numberOfItem + ".csv");
+				
+				// variavel que diz localizacao do ficheiro txt,o orderType é referente a cada tipo de ordem e o numberOfItem é referente a cada nº do FileSize
 				String FilePath = "data/" + orderType + "_" + numberOfItem + ".txt";
 				boolean FileExists = new File(FilePath).isFile();
 
+				// Caso o ficheiro exista, é feito a operação de ordenação de inserção e calculos da media,mediana,max,min e desvio padrao
 				if (FileExists == true) {
 					
+					// Apenas não é feito a operação de ordenação quando o orderType é shuffled e numberOfItem < 65536
 					if (!(orderType == "shuffled") || (numberOfItem < 65536)){
 					
 						long estimatedTime = 0;
