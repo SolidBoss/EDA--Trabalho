@@ -92,17 +92,17 @@ public class ResizingArrayFile {
 				
 				//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo
 				media_push=MedMinMax.meanTimes(tempo);
-				out.println("Tempo medio de inserção: " + media_push + " ns");
+				out.println("Tempo medio de inserção: " + media_push + " ns");//imprime na consola
 				file.println("Tempo medio de inserção: " + media_push + "ns");//imprime no exel
 				
 				//vai chamar o metodo (medianTimes) que se encontra no pacote Main e passa a variavel tempo 
 				mediana_push=MedMinMax.medianTimes(tempo);
-				out.println("Mediana de inserção: " + mediana_push + " ns");
+				out.println("Mediana de inserção: " + mediana_push + " ns");//imprime na consola
 				file.println("Mediana de inserção: " + mediana_push + "ns");//imprime no exel
 				
 				//vai chamar o metodo (standartDeviation) que se encontra no pacote Main e passa a variavel tempo 
 				desvio_push=MedMinMax.standardDeviation(tempo);
-				out.println("Desvio padrão: " + desvio_push + " ns\n");
+				out.println("Desvio padrão: " + desvio_push + " ns\n");//imprime na consola
 				file.println("Desvio padrão: " + desvio_push + "ns");//imprime no exel
 				
 													//Apagar
@@ -125,27 +125,27 @@ public class ResizingArrayFile {
 				
 				//vai chamar o metodo (maximeTimes) que se encontra no pacote Main e passa a variavel tempo 
 				maximo_pop=MedMinMax.maximeTimes(tempo);
-				out.println("\nTempo maximo de remoção: " + maximo_pop + " ns");
+				out.println("\nTempo maximo de remoção: " + maximo_pop + " ns");//imprime na consola
 				file.println("Tempo maximo de remoção: " + maximo_pop + "ns");//imprime no exel
 				
 				//vai chamar o metodo (minimeTimes) que se encontra no pacote Main e passa a variavel tempo 
 				minimo_pop=MedMinMax.minimeTimes(tempo);
-				out.println("Tempo minimo de remoção: " + minimo_pop + " ns");
+				out.println("Tempo minimo de remoção: " + minimo_pop + " ns");//imprime na consola
 				file.println("Tempo minimo de remoção: " + minimo_pop + "ns");//imprime no exel
 				
 				//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo
 				media_pop=MedMinMax.meanTimes(tempo);
-				out.println("Tempo medio de remoção: " + media_pop + " ns");
+				out.println("Tempo medio de remoção: " + media_pop + " ns");//imprime na consola
 				file.println("Tempo medio de remoção: " + media_pop + "ns");//imprime no exel
 				
 				//vai chamar o metodo (medianTimes) que se encontra no pacote Main e passa a variavel tempo 
 				mediana_pop=MedMinMax.medianTimes(tempo);
-				out.println("Mediana de remoção: " + mediana_pop + " ns");
+				out.println("Mediana de remoção: " + mediana_pop + " ns");//imprime na consola
 				file.println("Mediana de remoção: " + mediana_pop + "ns");//imprime no exel
 				
 				//vai chamar o metodo (standardDeviation) que se encontra no pacote Main e passa a variavel tempo 
 				desvio_pop=MedMinMax.standardDeviation(tempo);
-				out.println("Desvio padrão: " + desvio_pop + " ns");
+				out.println("Desvio padrão: " + desvio_pop + " ns");//imprime na consola
 				file.println("Desvio padrão: " + desvio_pop + "ns");//imprime no exel
 				
 				file.close();

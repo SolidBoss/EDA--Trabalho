@@ -49,17 +49,13 @@ public class InsertionSortFile {
 				// Caso o ficheiro exista, é feito a operação de ordenação de inserção e calculos da media,mediana,max,min e desvio padrao
 				if (FileExists == true) {
 					
-<<<<<<< HEAD
 					// Apenas não é feito a operação de ordenação quando o orderType é shuffled e numberOfItem < 65536
-=======
-
->>>>>>> origin/1-entrega
 					if (!(orderType == "shuffled") || (numberOfItem < 65536)){
 					
 						long estimatedTime = 0;
 						
 						@SuppressWarnings("deprecation")
-						String[] textFiles = In.readStrings(FilePath);
+						String[] textFiles = In.readStrings(FilePath); //vai ler todo o conteúdo dos ficheiro 
 						
 						if (orderType == "sorted") {
 							out.println("-----------------------------------");
@@ -78,35 +74,41 @@ public class InsertionSortFile {
 							out.println("-----------------------------------");
 						}	
 					
+						//Ciclo for vai realizar o nº de repetições que queremos
 						for (int i = 0; i != repetir; i++) {
-							long startTime = System.nanoTime();
-							Insertion.sort(textFiles);
-							estimatedTime = System.nanoTime() - startTime;
-							tempo[i] = (double) (estimatedTime);
+							long startTime = System.nanoTime();// Iniciar a medição em nanosegundos
+							Insertion.sort(textFiles);// Iniciar a ordenação de inserção com os valores do textFiles
+							estimatedTime = System.nanoTime() - startTime;// Tempo Final guardado em variavel
+							tempo[i] = (double) (estimatedTime);//guarda o tempo de cada execução, para cada repetição
 							//out.println("Tempo de ordenação da " + (i+1) + "º experiênçia: " + estimatedTime + " ns");
 					
 						}	
 				
 						out.println("-----------------------------------");
+						//vai chamar o metodo (maximeTimes) que se encontra no pacote Main e passa a variavel tempo 
 						maximo = MedMinMax.maximeTimes(tempo);
-						out.println("Tempo maximo de ordenação: " + maximo + " ns");
-						file.println("Tempo maximo de ordenação: " + maximo + " ns");
+						out.println("Tempo maximo de ordenação: " + maximo + " ns");//imprime na consola
+						file.println("Tempo maximo de ordenação: " + maximo + " ns");//imprime no exel
 					
+						//vai chamar o metodo (minimeTimes) que se encontra no pacote Main e passa a variavel tempo 
 						minimo = MedMinMax.minimeTimes(tempo);
-						out.println("Tempo minimo de ordenação: " + minimo + " ns");
-						file.println("Tempo minimo de ordenação: " + minimo + " ns");
+						out.println("Tempo minimo de ordenação: " + minimo + " ns");//imprime na consola
+						file.println("Tempo minimo de ordenação: " + minimo + " ns");//imprime no exel
 					
+						//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo
 						media = MedMinMax.meanTimes(tempo);
-						out.println("Tempo medio de ordenação: " + media + " ns");
-						file.println("Tempo medio de ordenação: " + media + " ns");
+						out.println("Tempo medio de ordenação: " + media + " ns");//imprime na consola
+						file.println("Tempo medio de ordenação: " + media + " ns");//imprime no exel
 					
+						//vai chamar o metodo (medianTimes) que se encontra no pacote Main e passa a variavel tempo 
 						mediana = MedMinMax.medianTimes(tempo);
-						out.println("Mediana de ordenação: " + mediana + " ns");
-						file.println("Mediana de ordenação: " + mediana + " ns");
+						out.println("Mediana de ordenação: " + mediana + " ns");//imprime na consola
+						file.println("Mediana de ordenação: " + mediana + " ns");//imprime no exel
 					
+						//vai chamar o metodo (standartDeviation) que se encontra no pacote Main e passa a variavel tempo 
 						desvio = MedMinMax.standardDeviation(tempo);
-						out.println("Desvio médio de ordenação: " + desvio + " ns");
-						file.println("Desvio médio de ordenação: " + desvio + " ns");
+						out.println("Desvio médio de ordenação: " + desvio + " ns");//imprime na consola
+						file.println("Desvio médio de ordenação: " + desvio + " ns");//imprime no exel
 					
 						file.close();
 					
