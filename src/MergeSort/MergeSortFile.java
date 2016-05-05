@@ -108,6 +108,7 @@ public class MergeSortFile {
 					file.println("Desvio padrão: " + desvio + "ns");//imprime no exel
 
 					file.close();
+					
 				}
 			}
 		}
