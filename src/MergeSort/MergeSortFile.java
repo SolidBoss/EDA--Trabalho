@@ -1,12 +1,10 @@
 package MergeSort;
 
-import static java.lang.System.in;
 import static java.lang.System.out;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Scanner;
 import Main.MedMinMax;
 import edu.princeton.cs.introcs.In;
 
@@ -28,10 +26,6 @@ public class MergeSortFile {
 
 	public static void main(String[] args) throws IOException {
 
-		// variavel com o nº de repetições, onde assegura que os resultados sejam testados varias vezes para verificar a sua veracidade
-		@SuppressWarnings("resource")
-		final Scanner input = new Scanner(in);
-		
 		//Ciclo para percorrer cada tipo de ficheiro
 		for (String Type : FileType) {
 
