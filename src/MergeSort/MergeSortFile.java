@@ -41,10 +41,7 @@ public class MergeSortFile {
 
 				// Caso o ficheiro exista são feitas as operações de ordenação
 				if (FileExists == true) {
-
-					// Variavel para medir o tempo
-					long estimatedTime = 0;
-
+					
 					// vai ler todo o conteúdo dos ficheiros
 					@SuppressWarnings("deprecation")
 					String[] textFiles = In.readStrings(FilePath);
@@ -71,7 +68,10 @@ public class MergeSortFile {
 					int repetir = 10;
 					Double[] tempo = new Double[repetir];
 					
-					// Ciclo for vai realizar o nº de repetições que queremos
+					// Variavel para medir o tempo
+					long estimatedTime = 0;
+					
+					// Ciclo for vai realizar o nº de repetições 
 					for (int i = 0; i != repetir; i++) {
 						long starTime = System.nanoTime();// Variavel que vai iniciar a medição em nanosegundos
 						Merge.sort(textFiles);//Através da classe merge, vai ordenar todos os items de cada ficheiro
@@ -107,7 +107,7 @@ public class MergeSortFile {
 					out.println("Desvio padrão: " + desvio + " ns");//imprime na consola
 					file.println("Desvio padrão: " + desvio + "ns");//imprime no exel
 
-					file.close();
+					
 				}
 			}
 		}
@@ -162,82 +162,6 @@ public class MergeSortFile {
 					out.println("Número de leitura dos Array: " + InstrumentedMerge.getNumberOfArrayReads());
 					//vai aceder ao metodo getNumberOfArrayWrites() da classe InstrumentedMerge e retorna o nº de escritas feitas no merge, do textFiles em causa  
 					out.println("Número de escritas no Array: " + InstrumentedMerge.getNumberOfArrayWrites());
-				}
-			}
-		}
-	}
-
-	//
-	public static void BottomUpMerge() {
-		
-		//Ciclo para percorrer cada tipo de ficheiro
-		for (String Type : FileType) {
-
-			//Ciclo que analisa cada posicao do array ou seja cada Item do FileSize, dentro de cada tipo de ficheiro
-			for (int Item : FileSize) {
-
-				// variavel que diz localizacao dos ficheiros txt, o Item é referente a cada nº do FileSize
-				String FilePath = "data/" + Type + "_" + Item + ".txt";
-				boolean FileExists = new File(FilePath).isFile();
-
-				// Caso o ficheiro exista são feitas as operações de ordenação
-				if (FileExists == true) {
-					long estimatedTime = 0;
-
-					// vai ler todo o conteúdo dos ficheiros
-					@SuppressWarnings("deprecation")
-					String[] textFiles = In.readStrings(FilePath);
-
-					//Ciclo que apenas serve para imprimir na consola o tipo de ficheiro que esta a ser analisado
-					if (Type == "sorted") {
-						out.println("-----------------------------------");
-						out.println("Sorted");
-						out.println("Numero de Itens " + Item);
-						out.println("-----------------------------------");
-					} else if (Type == "partially_sorted") {
-						out.println("-----------------------------------");
-						out.println("Partially Sorted ");
-						out.println("Numero de Itens " + Item);
-						out.println("-----------------------------------");
-					} else {
-						out.println("-----------------------------------");
-						out.println("Shuffled");
-						out.println("Numero de Itens " + Item);
-						out.println("-----------------------------------");
-					}
-
-					// variavel com o nº de repetições, onde assegura que os resultados sejam testados varias vezes para verificar a sua veracidade
-					int repetir = 10;
-					Double[] tempo = new Double[repetir];
-					// Ciclo for vai realizar o nº de repetições que queremos
-					for (int i = 0; i != repetir; i++) {
-						long starTime = System.nanoTime(); // Variavel que vai iniciar a medição em nanosegundos
-						BottomUpMerge.sort(textFiles); //Através da classe BottomUpMerge, vai ordenar todos os items de cada ficheiro
-						estimatedTime = System.nanoTime() - starTime;// Tempo final guardado em variavel
-						//guarda o tempo de cada execução, para cada repetição
-						tempo[i] = (double) (estimatedTime);
-					}
-
-					//vai chamar o metodo (maximeTimes) que se encontra no pacote Main e passa a variavel tempo 
-					maximo = MedMinMax.maximeTimes(tempo);
-					out.println("Tempo maximo de ordenação: " + maximo + " ns");//imprime na consola
-
-					//vai chamar o metodo (minimeTimes) que se encontra no pacote Main e passa a variavel tempo 
-					minimo = MedMinMax.minimeTimes(tempo);
-					out.println("Tempo minimo de ordenação: " + minimo + " ns");//imprime na consola
-
-					//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo 
-					media = MedMinMax.meanTimes(tempo);
-					out.println("Tempo medio de ordenação: " + media + " ns");//imprime na consola
-
-					//vai chamar o metodo (medianTimes) que se encontra no pacote Main e passa a variavel tempo 
-					mediana = MedMinMax.medianTimes(tempo);
-					out.println("Mediana de ordenação: " + mediana + " ns");//imprime na consola
-
-					//vai chamar o metodo (standartDeviation) que se encontra no pacote Main e passa a variavel tempo 
-					desvio = MedMinMax.standardDeviation(tempo);
-					out.println("Desvio padrão: " + desvio + " ns");//imprime na consola
-
 				}
 			}
 		}
