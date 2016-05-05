@@ -4,6 +4,7 @@ import static java.lang.System.out;
 import LinkedList.LinkedStackFile;
 import ResizingArray.ResizingArrayFile;
 import MergeSort.BottomUpMergeFile;
+import MergeSort.InstrumentedMergeFile;
 import MergeSort.MergeSortFile;
 import InsertionSort.InsertionSortFile;
 import InsertionSort.InstrumentedInsertion;
@@ -61,7 +62,7 @@ public class Menu {
 				MergeSortFile.main(args);
 			}
 			else if(opcao==7){
-				MergeSortFile.verifica();
+				InstrumentedMergeFile.main(args);;
 			}
 			else if(opcao==8){
 				BottomUpMergeFile.main(args);
