@@ -1,8 +1,7 @@
 package Main;
 
 import static java.lang.System.out;
-import LinkedList.LinkedStackFile;
-import ResizingArray.ResizingArrayFile;
+
 import MergeSort.BottomUpMergeFile;
 import MergeSort.InstrumentedMergeFile;
 import MergeSort.MergeSortFile;
@@ -43,22 +42,7 @@ public class Menu {
 
 		do {
 			opcao = runMenu();
-			if (opcao == 1) {
-				LinkedStackFile.main(args);
-			}
-			else if(opcao==2){
-				LinkedStackFile.apaga();
-			}
-			else if(opcao==3){
-				ResizingArrayFile.main(args);
-			}
-			else if(opcao==4){
-				ResizingArrayFile.apagaNumero();
-			}
-			else if(opcao==5){
-				ResizingArrayFile.Resizing();
-			}
-			else if(opcao==6){
+			if(opcao==6){
 				MergeSortFile.main(args);
 			}
 			else if(opcao==7){
