@@ -45,24 +45,25 @@ public class LinkedStackFile {
 			String FilePath = "data/sorted_" + Item + ".txt";
 			boolean FileExists = new File(FilePath).isFile();
 
-			// Cria novo ficheiro exel com o nome LinkedList e o nº do item, na directoria pretendida
-			PrintWriter file = new PrintWriter("data/" + "LinkList" + "_" + Item + ".csv");
-			
 			// Caso o ficheiro exista são feitas as operações de inserção e remoção da pilha
 			if (FileExists == true) {
+
+				// Cria novo ficheiro exel com o nome LinkedList e o nº do item, na directoria pretendida
+				PrintWriter file = new PrintWriter("data/" + "LinkList" + "_" + Item + ".csv");
 
 				// vai ler todo o  conteúdo dos ficheiro
 				@SuppressWarnings("deprecation")
 				String[] textFiles = In.readStrings(FilePath);
+
+				// variavel com o nº de repetições, onde assegura que os resultados sejam testados varias vezes para verificar a sua veracidade
+				int repetir = 10;
+				
+				Double[] tempo = new Double[repetir];
 				
 				out.println("-----------------------------------");
 				out.println("Numero de Itens " + Item);
 				out.println("-----------------------------------");
 
-				// variavel com o nº de repetições, onde assegura que os resultados sejam testados varias vezes para verificar a sua veracidade
-				int repetir = 10;
-				Double[] tempo = new Double[repetir];
-				
 				// Ciclo for vai realizar o nº de repetições que queremos
 				for (int i = 0; i != repetir; i++) {
 					// Ciclo para Inserção(push) na pilha
@@ -180,7 +181,7 @@ public class LinkedStackFile {
 			long startTime = System.nanoTime();// Iniciar a medição em
 												// nanosegundos
 			// inserir na pilha para depois apagar, caso contrario da static
-			// underflowfor (count = 0; count != textFile.length; count++) {
+			// underflowfor
 			if (numbers.pop().equals(searchingText)) // ao percorrer os
 															// ficheiro,
 															// verifica se

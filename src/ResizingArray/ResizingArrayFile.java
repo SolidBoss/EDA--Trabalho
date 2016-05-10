@@ -48,7 +48,7 @@ public class ResizingArrayFile {
 			// Caso o ficheiro exista, são feitas as operações de inserção e remoção no Array
 			if (fileExists == true) {
 				
-				// Cria novo ficheiro exel com o nome LinkedList e o nº do item, na directoria pretendida
+				// Cria novo ficheiro exel com o nome ResizingArray e o nº do item, na directoria pretendida
 				PrintWriter file = new PrintWriter("data/" + "ResizingArray" + "_" + Item + ".csv");
 				
 				@SuppressWarnings("deprecation")
@@ -74,7 +74,7 @@ public class ResizingArrayFile {
 					
 					}
 					estimatedTime = System.nanoTime() - starTime; // Tempo Final guardado em variavel
-					//out.println("Demora a inserir: " + estimatedTime + " ns");
+					out.println("Demora a inserir: " + estimatedTime + " ns");//imprime no ciclo para conseguirmos ter a noção de quanto demorou cada inserção
 					
 					//guarda o tempo de cada execução, para cada repetição
 					tempo[i] = (double) (estimatedTime);
@@ -113,10 +113,10 @@ public class ResizingArrayFile {
 				// Ciclo para Remoção(pop) da pilha
 				starTime = System.nanoTime();
 				for (count = 0; count != textFiles.length; count++){
-					numbers.pop().equals(textFiles[count]);
+					numbers.pop().equals(textFiles[count]);//remove da pilha
 				}
 				estimatedTime = (System.nanoTime() - starTime);// Tempo Final guardado em variavel
-				//out.println("Demora a apagar: " + estimatedTime + " ns");
+				out.println("Demora a apagar: " + estimatedTime + " ns");
 				
 				//guarda o tempo de cada execução, para cada repetição
 				tempo[i] = (double) (estimatedTime);
@@ -176,7 +176,7 @@ public class ResizingArrayFile {
 			long startTime = System.nanoTime();// Iniciar a medição em
 												// nanosegundos
 			// inserir na pilha para depois apagar, caso contrario da static
-			// underflowfor (count = 0; count != textFile.length; count++) {
+			// underflowfor 
 			if (numbers.pop().equals(searchingText)) // ao percorrer os
 															// ficheiro,
 															// verifica se
