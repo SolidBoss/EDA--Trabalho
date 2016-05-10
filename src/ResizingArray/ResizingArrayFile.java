@@ -74,7 +74,7 @@ public class ResizingArrayFile {
 					
 					}
 					estimatedTime = System.nanoTime() - starTime; // Tempo Final guardado em variavel
-					out.println("Demora a inserir: " + estimatedTime + " ns");//imprime no ciclo para conseguirmos ter a noção de quanto demorou cada inserção
+					//out.println("Demora a inserir: " + estimatedTime + " ns");//imprime no ciclo para conseguirmos ter a noção de quanto demorou cada inserção
 					
 					//guarda o tempo de cada execução, para cada repetição
 					tempo[i] = (double) (estimatedTime);

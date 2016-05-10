@@ -44,7 +44,6 @@ public class LinkedStackVersao2 {
 					numbers.push("LinkStack");
 					estimatedTime = System.nanoTime() - starTime;
 				}
-				
 				tempo[a] = (double) (estimatedTime);
 			}
 			
@@ -78,8 +77,8 @@ public class LinkedStackVersao2 {
 				starTime = System.nanoTime();
 				for (int i = 0; i != Item; i++) {
 					numbers.pop();
+					estimatedTime = System.nanoTime() - starTime;
 				}
-				
 				tempo[a] = (double) (estimatedTime);
 			}
 			
