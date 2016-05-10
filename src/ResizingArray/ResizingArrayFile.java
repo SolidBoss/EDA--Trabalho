@@ -154,61 +154,6 @@ public class ResizingArrayFile {
 
 	}
 	
-	// Metodo para apagar o numero do Array
-	public static void apagaNumero(){
-		int repetir = 5;
-		Double[] tempo = new Double[repetir];
-		
-		// Define o caminho do ficheiro e a palavra que queremos apagar
-		String singlefile = "data/sorted_512.txt";
-		String searchingText = "0.2073884211515022"; // Variavel que guarda a string correspondente do ficheiro
-
-		@SuppressWarnings("deprecation")
-		String[] textFile = In.readStrings(singlefile);// vai ler todas as strings do ficheiro
-		// inserir na pilha para depois apagar, caso contrario da stack underflow
-			for (int i = 0; i != textFile.length; i++) {
-				numbers.push(textFile[i]);
-		}
-
-		out.println("Item que vai ser apagado: " + searchingText);
-		// Ciclo for vai realizar o nº de repetições que queremos
-		for (int y = 0; y != repetir; y++) {
-			long startTime = System.nanoTime();// Iniciar a medição em
-												// nanosegundos
-			// inserir na pilha para depois apagar, caso contrario da static
-			// underflowfor 
-			if (numbers.pop().equals(searchingText)) // ao percorrer os
-															// ficheiro,
-															// verifica se
-															// existe o nº que
-															// procuramos
-				out.println("Está na " + count + " posição");
-
-			estimatedTime = System.nanoTime() - startTime;// Tempo Final
-															// guardado na
-															// variavel
-			out.println("Operação demorou " + estimatedTime + " ns");
-			
-			//guarda o tempo de cada execução, para cada repetição
-			tempo[y] = (double) (estimatedTime);
-			
-		}
-		media_pop=MedMinMax.meanTimes(tempo);
-		out.println("Tempo medio de remoção: " + media_pop + " ns");
-		
-		maximo_pop=MedMinMax.maximeTimes(tempo);
-		out.println("Tempo maximo de remoção: " + maximo_pop + " ns");
-		
-		minimo_pop=MedMinMax.minimeTimes(tempo);
-		out.println("Tempo minimo de remoção: " + minimo_pop + " ns");
-		
-		mediana_pop=MedMinMax.medianTimes(tempo);
-		out.println("Mediana: " + mediana_pop + " ns");
-		
-		desvio_pop=MedMinMax.standardDeviation(tempo);
-		out.println("Desvio padrão: " + desvio_pop + " ns\n");
-	}
-	
 	public static void Resizing(){
 	out.println("--------------------------------------");
 	out.println("Resizing Array");
@@ -231,7 +176,7 @@ public class ResizingArrayFile {
 		starTime = System.nanoTime(); 
 		while (!number.isEmpty())
 			number.pop();
-			estimatedTime = System.nanoTime() - starTime;
+		estimatedTime = System.nanoTime() - starTime;
 		
 		out.println("Items:  " + ResizingNumbers[counter]);
 
