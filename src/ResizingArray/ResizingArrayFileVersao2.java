@@ -30,7 +30,7 @@ public class ResizingArrayFileVersao2 {
 			Double[] tempo = new Double[repetir];
 			long starTime = 0, estimatedTime = 0;
 			long end = (long) (starTime + (0.2*60*1000000000));
-			starTime = System.nanoTime();
+			
 				
 			out.println("-----------------------------------");
 			out.println("Numero de Itens " + Item);
@@ -39,6 +39,7 @@ public class ResizingArrayFileVersao2 {
 			do
 			{
 				for (int a = 0; a != repetir; a++) {
+					starTime = System.nanoTime();
 					for (int i = 0; i != Item; i++) {
 						numbers.push("ResizingArray");
 						estimatedTime = System.nanoTime() - starTime; // ?

@@ -153,8 +153,6 @@ public class LinkedStackVersao2 {
 			file1.println("Desvio padrão: " + desvio_pop + "ns");//imprime no exel
 			
 			file1.close();
-			
-			
 		}
 		
 	}
