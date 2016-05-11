@@ -69,7 +69,7 @@ public class SumExecutionTimeTester {
     // as many times as necessary to expend this budget. That is, each
     // experiment is repeated until the total time spent repeating it exceeds
     // the budget.
-    public static final double timeBudgetPerExperiment = 1.0 /* seconds */;
+    public static final double timeBudgetPerExperiment = 2.0 /* seconds */;
 
     // Small execution times are very "noisy", since the System.nanoTime()
     // method does not have sufficient precision to measure them. In some
@@ -85,7 +85,7 @@ public class SumExecutionTimeTester {
     // minimum
     // duration of a run to value which is clearly long enough for
     // System.nanoTime() to measure with acceptable accuracy.
-    public static final double minimumTimePerContiguousRepetitions = 1e-5 /* seconds */;
+    public static final double minimumTimePerContiguousRepetitions = 2e-5 /* seconds */;
 
     // A simple, inefficient way to calculate the median of the values in an
     // ArrayList:
