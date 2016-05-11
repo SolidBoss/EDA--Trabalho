@@ -26,23 +26,28 @@ public class ResizingArrayFileVersao2 {
 			PrintWriter file = new PrintWriter("data/" + "ResizingArrayInsert" + "_" + Item + ".csv");
 			ResizingArrayStack<String> numbers = new ResizingArrayStack<String>();
 
-			int repetir = 2;
+			int repetir = 10;
 			Double[] tempo = new Double[repetir];
+			long starTime = 0, estimatedTime = 0;
+			long end = (long) (starTime + (0.2*60*1000000000));
+			starTime = System.nanoTime();
 				
 			out.println("-----------------------------------");
 			out.println("Numero de Itens " + Item);
 			out.println("-----------------------------------");
 			
-			long starTime, estimatedTime = 0;
-											
-			for (int a = 0; a != repetir; a++) {
-				starTime = System.nanoTime();	// ?
-				for (int i = 0; i != Item; i++) {
-					numbers.push("ResizingArray");
-					estimatedTime = System.nanoTime() - starTime; // ?
-				}
-			tempo[a] = (double) (estimatedTime);						
-			}
+			do
+			{
+				for (int a = 0; a != repetir; a++) {
+					for (int i = 0; i != Item; i++) {
+						numbers.push("ResizingArray");
+						estimatedTime = System.nanoTime() - starTime; // ?
+						//out.println("Demora a inserir: " + estimatedTime + " ns" + " --- experiencia " + a);
+					}
+				tempo[a] = (double) (estimatedTime);						
+				}	
+			}while (System.nanoTime() < end);
+			
 			
 			maximo_push=MedMinMax.maximeTimes(tempo);
 			out.println("\nTempo maximo de inserção: " + maximo_push + " ns");//imprime na consola
