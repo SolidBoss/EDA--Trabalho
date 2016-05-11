@@ -57,7 +57,6 @@ public class LinkedStackFile {
 
 				// variavel com o nº de repetições, onde assegura que os resultados sejam testados varias vezes para verificar a sua veracidade
 				int repetir = 10;
-				
 				Double[] tempo = new Double[repetir];
 				
 				out.println("-----------------------------------");
@@ -91,12 +90,12 @@ public class LinkedStackFile {
 				
 				//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo 
 				media_push=MedMinMax.meanTimes(tempo);
-				out.println("Tempo medio de inserção: " + media_push + " ns");
+				out.println("Tempo medio de inserção: " + media_push + " ns");//imprime na consola
 				file.println("Tempo medio de inserção: " + media_push + "ns");//imprime no exel
 				
 				//vai chamar o metodo (medianTimes) que se encontra no pacote Main e passa a variavel tempo 
 				mediana_push=MedMinMax.medianTimes(tempo);
-				out.println("Mediana de inserção: " + mediana_push + " ns");
+				out.println("Mediana de inserção: " + mediana_push + " ns");//imprime na consola
 				file.println("Mediana de inserção: " + mediana_push + "ns");//imprime no exel
 				
 				//vai chamar o metodo (standartDeviation) que se encontra no pacote Main e passa a variavel tempo 

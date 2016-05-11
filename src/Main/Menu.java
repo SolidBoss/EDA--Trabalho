@@ -60,6 +60,8 @@ public class Menu {
 			
 		}while (opcao != 11);{System.exit(0);}
 	}
+	
+	
 }
 
 /*
@@ -68,9 +70,6 @@ public class Menu {
  * 
  * Tipos abstratos de dados: 
  * - http://www.e-reading.club/bookreader.php/138175/Abstract_Data_Types_in_Java.pdf
- *
- * Tipos estruturas de dados:
- * - https://pt.wikipedia.org/wiki/Estrutura_de_dados
  *
  * Código utilizado e adaptado de: 
  * - Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne, Addison-Wesley

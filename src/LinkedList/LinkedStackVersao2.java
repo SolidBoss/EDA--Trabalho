@@ -10,13 +10,10 @@ import Main.MedMinMax;
 
 public class LinkedStackVersao2 {
 	
-	// A time budget is established per experiment. Each experiment is repeated
-    // as many times as necessary to expend this budget. That is, each
-    // experiment is repeated until the total time spent repeating it exceeds
-    // the budget.
+	//Tempo estabelecido por experiencia
 	public static final double timeBudgetPerExperiment = 2.0;/* seconds */
 	
-	 // Small execution times are very "noisy", since the System.nanoTime()
+	// Small execution times are very "noisy", since the System.nanoTime()
     // method does not have sufficient precision to measure them. In some
     // systems, smaller execution times may even be measured as 0.0! Hence, in
     // many cases it is preferable to perform a run of contiguous repetitions of
@@ -30,17 +27,19 @@ public class LinkedStackVersao2 {
     // minimum
     // duration of a run to value which is clearly long enough for
     // System.nanoTime() to measure with acceptable accuracy.
+	
+	//
 	public static final double minimumTimePerContiguousRepetitions = 2e-5; /* seconds */
 			
-	// Used to store the results of the sums, so that the Java compiler does not
-	// optimize away our calls to sumFrom1To() (this variable is used when
-	// showing the experimental results, so we don't get warnings
-	// about unused variables):
+	//Guarda o resultado das somas para que o compilador do java não tenha que optimizar nenhuma das chamadas do sumFrom1To()
 	private static long sum;
 			
 	public static void main(String[] args) throws IOException {
 
-		int[] FileSize = {2, 4};
+		// Contém o número dos ficheiros que vão ser analizados
+		int[] FileSize = { 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288, 1048576 };
+		
+		// Variaveis para a média, mediana, maximo, minimo e desvio padrao
 		double media_push;
 		double media_pop;
 		double maximo_push;
@@ -51,66 +50,80 @@ public class LinkedStackVersao2 {
 		double mediana_pop;
 		double desvio_pop;
 		double desvio_push;
-		 // Warm up (this attempts to force the JIT compiler to do its work
-        // before the experiments actually begin):
+		
+		//Antes que a experiencia seja realizada, o WarmUp vai faxer o "aquecimento" do compilador JIT, para que seja evitado os "picos" de tempo iniciais   
+        for (int exponent = 0, limit = 1; exponent != 1000000; exponent++, limit *= 2)
+            performExperimentsFor(limit, true);
         
+        //Ciclo que analisa cada posicao do array ou seja cada Item do FileSize, dentro de cada tipo de ficheiro
 		for (int Item : FileSize) {
+			
+			// Cria novo ficheiro exel com o nome LinkedList e o nº do item, na directoria pretendida
 			PrintWriter file = new PrintWriter("data/" + "LinkListInsert" + "_" + Item + ".csv");
+			
+			// criação de uma nova cadeia ligada, numbers
 			LinkedStack<String> numbers = new LinkedStack<String>();
 
-			int repetir = 2;
+			// variavel com o nº de repetições, onde assegura que os resultados sejam testados varias vezes para verificar a sua veracidade
+			int repetir = 10;
 			Double[] tempo = new Double[repetir];
 			out.println("-----------------------------------");
 			out.println("Numero de Itens " + Item);
 			out.println("-----------------------------------");
-						
-			//Antes que a experiencia seja realizada, o WarmUp vai faxer o "aquecimento" do compilador JIT, para que seja evitado os "picos" de tempo iniciais   
-	        for (int exponent = 0, limit = 1; exponent != Item; exponent++, limit *= 2)
-	            performExperimentsFor(limit, true);
-	        
+				
+			// Verificar o tempo
 	        long starTime, estimatedTime = 0;
 	        
+	        // Ciclo for vai realizar o nº de repetições que queremos
+			// Ciclo para Inserção(push) na pilha
 			for (int a = 0; a != repetir; a++) {
+				starTime = System.nanoTime();// Iniciar a medição em nanosegundos
 				for (int exponent = 0; exponent != Item; exponent++) {
-					starTime = System.nanoTime();
-					numbers.push("LinkStack");
-					estimatedTime = System.nanoTime() - starTime;
+					numbers.push("LinkStack");//inserir na pilha numbers o valor "LinkStack" as 
+					estimatedTime = System.nanoTime() - starTime;// Tempo final guardado em variavel
 				}
+				//guarda o tempo de cada execução, para cada repetição
 				tempo[a] = (double) (estimatedTime);
-			}
+			}			
 			
+			//vai chamar o metodo (maximeTimes) que se encontra no pacote Main e passa a variavel tempo 
 			maximo_push=MedMinMax.maximeTimes(tempo);
 			out.println("\nTempo maximo de inserção: " + maximo_push + " ns");//imprime na consola
 			file.println("Tempo maximo de inserção: " + maximo_push + "ns");//imprime no exel
 			
+			//vai chamar o metodo (minimeTimes) que se encontra no pacote Main e passa a variavel tempo
 			minimo_push=MedMinMax.minimeTimes(tempo);
 			out.println("Tempo minimo de inserção: " + minimo_push + " ns");//imprime na consola
 			file.println("Tempo minimo de inserção: " + minimo_push + "ns");//imprime no exel
 			
+			//vai chamar o metodo (medianTimes) que se encontra no pacote Main e passa a variavel tempo
+			mediana_push=MedMinMax.medianTimes(tempo);
+			out.println("Mediana da inserção: " + mediana_push + " ns");//imprime na consola
+			file.println("Mediana da inserção: " + mediana_push + "ns");//imprime no exel
+			
+			//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo 
 			media_push=MedMinMax.meanTimes(tempo);
-			out.println("Tempo medio de inserção: " + media_push + " ns");
+			out.println("Tempo medio de inserção: " + media_push + " ns");//imprime na consola
 			file.println("Tempo medio de inserção: " + media_push + "ns");//imprime no exel
 			
-			mediana_push=MedMinMax.medianTimes(tempo);
-			out.println("Tempo medio de inserção: " + mediana_push + " ns");
-			file.println("Tempo medio de inserção: " + mediana_push + "ns");//imprime no exel
-			
+			//vai chamar o metodo (standartDeviation) que se encontra no pacote Main e passa a variavel tempo
 			desvio_push=MedMinMax.standardDeviation(tempo);
-			out.println("Desvio padrão: " + desvio_push + " ns");
+			out.println("Desvio padrão: " + desvio_push + " ns");//imprime na consola
 			file.println("Desvio padrão: " + desvio_push + "ns");//imprime no exel
 			
 			file.close();
 			
-			
+			// Cria novo ficheiro exel com o nome LinkedList e o nº do item que vamos apagar, na directoria pretendida
 			PrintWriter file1 = new PrintWriter("data/" + "LinkListDelete" + "_" + Item + ".csv");
 			
 			// Ciclo for vai realizar o nº de repetições que queremos
 			for (int a = 0; a != repetir; a++) {
+				starTime = System.nanoTime();// Iniciar a medição em nanosegundos
 				for (int exponent = 0; exponent != Item; exponent++) {
-					starTime = System.nanoTime();
-					numbers.pop();
-					estimatedTime = System.nanoTime() - starTime;
+					numbers.pop();//Apagar os items que estão na pilha numbers
+					estimatedTime = System.nanoTime() - starTime;// Tempo final guardado em variavel
 				}
+				//guarda o tempo de cada execução, para cada repetição
 				tempo[a] = (double) (estimatedTime);
 			}
 			
@@ -124,15 +137,15 @@ public class LinkedStackVersao2 {
 			out.println("Tempo minimo de remoção: " + minimo_pop + " ns");//imprime na consola
 			file1.println("Tempo minimo de remoção: " + minimo_pop + "ns");//imprime no exel
 			
-			//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo
-			media_pop=MedMinMax.meanTimes(tempo);
-			out.println("Tempo medio de remoção: " + media_pop + " ns");
-			file1.println("Tempo medio de remoção: " + media_pop + "ns");//imprime no exel
-			
 			//vai chamar o metodo (medianTimes) que se encontra no pacote Main e passa a variavel tempo 
 			mediana_pop=MedMinMax.medianTimes(tempo);
 			out.println("Mediana de remoção: " + mediana_pop + " ns");
 			file1.println("Mediana de remoção: " + mediana_pop + "ns");//imprime no exel
+			
+			//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo
+			media_pop=MedMinMax.meanTimes(tempo);
+			out.println("Tempo medio de remoção: " + media_pop + " ns");
+			file1.println("Tempo medio de remoção: " + media_pop + "ns");//imprime no exel
 			
 			//vai chamar o metodo (standardDeviation) que se encontra no pacote Main e passa a variavel tempo 
 			desvio_pop=MedMinMax.standardDeviation(tempo);
@@ -146,6 +159,39 @@ public class LinkedStackVersao2 {
 		
 	}
 	
+	// Performs experiments to obtain a sequence of estimates of the execution
+    // time of the method to calculate the sum of the integers from 1
+    // to a given limit. The number of experiments to performed is not fixed.
+    // Rather, a time budget is used and the experiments are repeated until the
+    // budged is spent. The sequence of the execution times obtained is then
+    // used to calculate the median execution time, which is a reasonably robust
+    // statistic. The results are shown, except if this is a warm up run.
+	
+	public static void performExperimentsFor(final int limit,
+	            final boolean isWarmup) {
+	        final ArrayList<Double> executionTimes = new ArrayList<Double>();
+	        long estimatedTime=0;
+	        long starTime = System.nanoTime();
+	        final int contiguousRepetitions = contiguousRepetitionsFor(limit);
+	        long repetitions = 0;
+	        do {
+	            executionTimes.add(executionTimeFor(limit, contiguousRepetitions));
+	            repetitions++;
+	            estimatedTime = System.nanoTime() - starTime;
+	        } while (estimatedTime < timeBudgetPerExperiment);
+
+	        final double median = medianOf(executionTimes);
+
+	        if (!isWarmup)
+	            out.println(
+	                    limit + "\t" + median + "\t" + repetitions + "\t" + sum);
+	        /*- 
+	        out.println("Sum from 1 to " + limit + " = " + sum + " [" + median
+	                + "s median time based on " + repetitions
+	                + " repetitions of " + contiguousRepetitions
+	                + " contiguous repetitions]");
+	        */
+	    }
 	 // Estimate the number of contiguous repetitions to perform for a given
     // limit of the numbers to sum in the experiment:
 	public static int contiguousRepetitionsFor(final int limit) {
@@ -166,13 +212,10 @@ public class LinkedStackVersao2 {
         return contiguousRepetitions;
     }
 	
-	public static long sumFrom1To(final int limit) {
-        long sum = 0;
-        for (int i = 1; i <= limit; i++)
-            sum += i;
-        return sum;
-    }
-	
+	// Performs a run of contiguous repetitions of an experiment to obtain the
+    // execution time of the method to calculate the sum of the integers from 1
+    // to a given limit. The number of contiguous experiments is also passed as
+    // argument.
 	 public static double executionTimeFor(final int limit,
 	            final int contiguousRepetitions) {
 	        long estimatedTime=0;
@@ -182,33 +225,17 @@ public class LinkedStackVersao2 {
 	        estimatedTime = System.nanoTime() - starTime;
 	        return estimatedTime / contiguousRepetitions;
 	    }
-	 
-	 public static void performExperimentsFor(final int limit,
-	            final boolean isWarmup) {
-	        final ArrayList<Double> executionTimes = new ArrayList<Double>();
-	        long estimatedTime=0;
-	        long starTime = System.nanoTime();
-	        final int contiguousRepetitions = contiguousRepetitionsFor(limit);
-	        long repetitions = 0;
-	        do {
-	            executionTimes.add(executionTimeFor(limit, contiguousRepetitions));
-	            repetitions++;
-	            estimatedTime = System.nanoTime() - starTime;
-	        } while (estimatedTime < timeBudgetPerExperiment);
-
-	        final double median = medianOf(executionTimes);
-
-	        if (!isWarmup)
-	            out.println(
-	                    limit + "\t" + median + "\t" + repetitions + "\t" + sum);
-	        /*-
-	        out.println("Sum from 1 to " + limit + " = " + sum + " [" + median
-	                + "s median time based on " + repetitions
-	                + " repetitions of " + contiguousRepetitions
-	                + " contiguous repetitions]");
-	        */
-	    }
-	 
+	
+	// The method whose execution times are wanted:
+	public static long sumFrom1To(final int limit) {
+        long sum = 0;
+        for (int i = 1; i <= limit; i++)
+            sum += i;
+        return sum;
+    }
+	
+	// A simple, inefficient way to calculate the median of the values in an
+    // ArrayList:
 	 public static double medianOf(final ArrayList<Double> values) {
 	        final int size = values.size();
 
