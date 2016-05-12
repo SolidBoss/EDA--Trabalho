@@ -6,6 +6,7 @@ import static java.lang.System.out;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import Main.MedMinMax;
@@ -26,7 +27,7 @@ public class MergeSortFile {
 	
 	// Contém o tipo de ficheiros que vão ser analizados
 	static String[] FileType = { "sorted", "partially_sorted", "shuffled" };
-
+	
 	public static void main(String[] args) throws IOException {
 
 		@SuppressWarnings("resource")
@@ -39,7 +40,7 @@ public class MergeSortFile {
         
 		//Ciclo para percorrer cada tipo de ficheiro
 		for (String Type : FileType) {
-
+			
 			//Ciclo que analisa cada posicao do array ou seja cada Item do FileSize, dentro de cada tipo de ficheiro
 			for (int Item : FileSize) {
 
@@ -121,4 +122,5 @@ public class MergeSortFile {
 			}
 		}
 	}
+
 }

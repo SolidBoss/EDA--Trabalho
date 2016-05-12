@@ -13,21 +13,6 @@ public class LinkedStackVersao2 {
 	//Tempo estabelecido por experiencia
 	public static final double timeBudgetPerExperiment = 2.0;/* seconds */
 	
-	// Small execution times are very "noisy", since the System.nanoTime()
-    // method does not have sufficient precision to measure them. In some
-    // systems, smaller execution times may even be measured as 0.0! Hence, in
-    // many cases it is preferable to perform a run of contiguous repetitions of
-    // an experiment, instead of a single experiment. The total
-    // execution time of that run of contiguous repetitions is measured. Then,
-    // the execution time of a single experiment is estimated as the average
-    // execution time, that is, the total execution time of the contiguous
-    // repetitions divided by the number of contiguous repetitions of the
-    // experiment performed. Instead of using always the same number of
-    // contiguous repetitions, however, it is preferable to establish the
-    // minimum
-    // duration of a run to value which is clearly long enough for
-    // System.nanoTime() to measure with acceptable accuracy.
-	
 	//
 	public static final double minimumTimePerContiguousRepetitions = 2e-5; /* seconds */
 			
@@ -61,8 +46,6 @@ public class LinkedStackVersao2 {
 			// Cria novo ficheiro exel com o nome LinkedList e o nº do item, na directoria pretendida
 			PrintWriter file = new PrintWriter("data/" + "LinkListInsert" + "_" + Item + ".csv");
 			
-			// criação de uma nova cadeia ligada, numbers
-			LinkedStack<String> numbers = new LinkedStack<String>();
 
 			// variavel com o nº de repetições, onde assegura que os resultados sejam testados varias vezes para verificar a sua veracidade
 			int repetir = 10;
@@ -71,6 +54,9 @@ public class LinkedStackVersao2 {
 			out.println("Numero de Itens " + Item);
 			out.println("-----------------------------------");
 				
+			// criação de uma nova cadeia ligada, numbers
+			LinkedStack<String> numbers = new LinkedStack<String>();
+						
 			// Verificar o tempo
 	        long starTime, estimatedTime = 0;
 	        
@@ -79,9 +65,10 @@ public class LinkedStackVersao2 {
 			for (int a = 0; a != repetir; a++) {
 				starTime = System.nanoTime();// Iniciar a medição em nanosegundos
 				for (int exponent = 0; exponent != Item; exponent++) {
-					numbers.push("LinkStack");//inserir na pilha numbers o valor "LinkStack" as 
+					numbers.push("LinkStack");//inserir na pilha numbers o valor "LinkStack" as 					
 					estimatedTime = System.nanoTime() - starTime;// Tempo final guardado em variavel
 				}
+				
 				//guarda o tempo de cada execução, para cada repetição
 				tempo[a] = (double) (estimatedTime);
 			}			
