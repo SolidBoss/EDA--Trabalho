@@ -13,22 +13,16 @@ public class LinkedStackVersao2 {
 	//Tempo estabelecido por experiencia
 	public static final double timeBudgetPerExperiment = 2.0;/* seconds */
 	
-	// Small execution times are very "noisy", since the System.nanoTime()
-    // method does not have sufficient precision to measure them. In some
-    // systems, smaller execution times may even be measured as 0.0! Hence, in
-    // many cases it is preferable to perform a run of contiguous repetitions of
-    // an experiment, instead of a single experiment. The total
-    // execution time of that run of contiguous repetitions is measured. Then,
-    // the execution time of a single experiment is estimated as the average
-    // execution time, that is, the total execution time of the contiguous
-    // repetitions divided by the number of contiguous repetitions of the
-    // experiment performed. Instead of using always the same number of
-    // contiguous repetitions, however, it is preferable to establish the
-    // minimum
-    // duration of a run to value which is clearly long enough for
-    // System.nanoTime() to measure with acceptable accuracy.
+	/* 
+	As execuções de tempos mais curtos são as mais incertas, uma vez que o metodo System.nanoTime() não possui precisão suficiente para medir tais tempos. 
+	Em alguns sistemas, curtos tempos de execução podem até ser medidos com valores iguais a 0. Consequentemente, em muitos casos é preferivel realizar uma
+	série de continuas repeticoes de uma experiência, em vez de uma unica experiencia. O tempo total de execucao de uma série de continuas repeticoes é medida.
+	Então, o tempo de execucao de uma unica experiencia é estimada como a média de tempo de execução, isto é, o total de tempos de execuções de uma série de
+	continuas repeticoes a dividir pelo numero de continuas repeticoes da experiencia realizada. Em vez de usar sempre o mesmo numero de continuas repeticoes,
+	é preferivel estabelecer o minimo de duração de uma execução para valorizar qual é claramente o suficientemente longo para o System.nanoTime() medir com
+	precisão aceitavel.
+	*/
 	
-	//
 	public static final double minimumTimePerContiguousRepetitions = 2e-5; /* seconds */
 			
 	//Guarda o resultado das somas para que o compilador do java não tenha que optimizar nenhuma das chamadas do sumFrom1To()
@@ -157,13 +151,15 @@ public class LinkedStackVersao2 {
 		
 	}
 	
-	// Performs experiments to obtain a sequence of estimates of the execution
-    // time of the method to calculate the sum of the integers from 1
-    // to a given limit. The number of experiments to performed is not fixed.
-    // Rather, a time budget is used and the experiments are repeated until the
-    // budged is spent. The sequence of the execution times obtained is then
-    // used to calculate the median execution time, which is a reasonably robust
-    // statistic. The results are shown, except if this is a warm up run.
+	/* 
+	Performa experiencias para obter a sequencia de estimativa do tempo de execução do metodo, para calcular a soma dos numeros inteiros desde 1 até a um limite
+	dado. O numero de experiencias a realizar não é fixo. Em vez disso, um orçamento de tempo é utilizado e as experiencias são repetidas até o orçamento esgotar. A
+	sequencia dos tempos de execução obtida é usada para calcular a média do tempo de execução, que é uma estatística razoavelmente robusta. Os resultados são
+	apresentados, excepto se for uma execução de aquecimento.Performa experiencias para obter a sequencia de estimativa do tempo de execução do metodo, para calcular a soma dos numeros inteiros desde 1 até a um limite
+	dado. O numero de experiencias a realizar não é fixo. Em vez disso, um orçamento de tempo é utilizado e as experiencias são repetidas até o orçamento esgotar. A
+	sequencia dos tempos de execução obtida é usada para calcular a média do tempo de execução, que é uma estatística razoavelmente robusta. Os resultados são
+	apresentados, excepto se for uma execução de aquecimento.
+	*/
 	
 	public static void performExperimentsFor(final int limit,
 	            final boolean isWarmup) {
@@ -190,8 +186,9 @@ public class LinkedStackVersao2 {
 	                + " contiguous repetitions]");
 	        */
 	    }
-	 // Estimate the number of contiguous repetitions to perform for a given
-    // limit of the numbers to sum in the experiment:
+	
+	// Faz a estimativa do numero de continuas repeticoes a realizar 
+	// para um dado limite de numeros a somar na experiencia
 	public static int contiguousRepetitionsFor(final int limit) {
         int contiguousRepetitions = 0;
         long estimatedTime=0;
@@ -202,18 +199,18 @@ public class LinkedStackVersao2 {
             estimatedTime = System.nanoTime() - starTime;
         } while (estimatedTime < minimumTimePerContiguousRepetitions);
 
-        // The loop stops when the minimum time per contiguous repetitions is
-        // reached. For longer experiments, this will mostly turn out to be one,
-        // which is what we would expect, since contiguous repetitions are
-        // useful only for small execution times.
+		// O ciclo termina quando o tempo minimo por repetições continuas é alcançado. 
+		// Para experiências maiores, isto na maioria das vezes será 1, sendo o que 
+		// pretendemos, uma vez que repetições continuas são uteis apenas 
+		// para pequenos tempos de execução.
 
         return contiguousRepetitions;
     }
 	
-	// Performs a run of contiguous repetitions of an experiment to obtain the
-    // execution time of the method to calculate the sum of the integers from 1
-    // to a given limit. The number of contiguous experiments is also passed as
-    // argument.
+	// Performa a execução de repetições continuas de uma experiencia para obter o tempo 
+	// de execução do metodo parara calcular a soma dos numeros inteiros desde 1 até a um 
+	// dado limite. O numero de repetições continuas é tambem passado como argumento.
+	   
 	 public static double executionTimeFor(final int limit,
 	            final int contiguousRepetitions) {
 	        long estimatedTime=0;
@@ -224,7 +221,7 @@ public class LinkedStackVersao2 {
 	        return estimatedTime / contiguousRepetitions;
 	    }
 	
-	// The method whose execution times are wanted:
+	// O método para qual os tempos de execução são procurados
 	public static long sumFrom1To(final int limit) {
         long sum = 0;
         for (int i = 1; i <= limit; i++)
@@ -232,8 +229,7 @@ public class LinkedStackVersao2 {
         return sum;
     }
 	
-	// A simple, inefficient way to calculate the median of the values in an
-    // ArrayList:
+	// Forma simples e ineficiente para calcular a média dos valores dentro de uma ArrayList
 	 public static double medianOf(final ArrayList<Double> values) {
 	        final int size = values.size();
 

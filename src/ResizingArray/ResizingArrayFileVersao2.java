@@ -3,14 +3,19 @@ package ResizingArray;
 import static java.lang.System.out;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import Main.MedMinMax; // para utilizar os metodos desta classe
 
 public class ResizingArrayFileVersao2 {
 	
+	public static final double timeBudgetPerExperiment = 2.0;/* seconds */
+	public static final double minimumTimePerContiguousRepetitions = 2e-5; /* seconds */
+	private static long sum;
+	
 	public static void main(String[] args) throws FileNotFoundException {
 		
-		int[] FileSize = { 2, 4};
+		int[] FileSize = { 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288, 1048576 };
 		double media_push;
 		double media_pop;
 		double maximo_push;
@@ -22,7 +27,11 @@ public class ResizingArrayFileVersao2 {
 		double desvio_pop;
 		double desvio_push;
 		
+		for (int exponent = 0, limit = 1; exponent != 1000000; exponent++, limit *= 2)
+            performExperimentsFor(limit, true);
+		
 		for (int Item : FileSize) {
+			
 			PrintWriter file = new PrintWriter("data/" + "ResizingArrayInsert" + "_" + Item + ".csv");
 			ResizingArrayStack<String> numbers = new ResizingArrayStack<String>();
 
@@ -147,4 +156,74 @@ public class ResizingArrayFileVersao2 {
 			out.println("--------------------------------------");	
 		}
 	}
+	
+	public static void performExperimentsFor(final int limit,final boolean isWarmup) {
+        final ArrayList<Double> executionTimes = new ArrayList<Double>();
+        long estimatedTime=0;
+        long starTime = System.nanoTime();
+        final int contiguousRepetitions = contiguousRepetitionsFor(limit);
+        long repetitions = 0;
+        do {
+            executionTimes.add(executionTimeFor(limit, contiguousRepetitions));
+            repetitions++;
+            estimatedTime = System.nanoTime() - starTime;
+        } while (estimatedTime < timeBudgetPerExperiment);
+
+        final double median = medianOf(executionTimes);
+
+        if (!isWarmup)
+            out.println(
+                    limit + "\t" + median + "\t" + repetitions + "\t" + sum);
+        /*- 
+        out.println("Sum from 1 to " + limit + " = " + sum + " [" + median
+                + "s median time based on " + repetitions
+                + " repetitions of " + contiguousRepetitions
+                + " contiguous repetitions]");
+        */
+    }
+	
+	public static int contiguousRepetitionsFor(final int limit) {
+        int contiguousRepetitions = 0;
+        long estimatedTime=0;
+        long starTime = System.nanoTime();
+		do {
+            sum = sumFrom1To(limit);
+            contiguousRepetitions++;
+            estimatedTime = System.nanoTime() - starTime;
+        } while (estimatedTime < minimumTimePerContiguousRepetitions);
+
+        // The loop stops when the minimum time per contiguous repetitions is
+        // reached. For longer experiments, this will mostly turn out to be one,
+        // which is what we would expect, since contiguous repetitions are
+        // useful only for small execution times.
+
+        return contiguousRepetitions;
+    }
+	
+	public static double executionTimeFor(final int limit,final int contiguousRepetitions) {
+        long estimatedTime=0;
+        long starTime = System.nanoTime();
+        for (int i = 0; i != contiguousRepetitions; i++)
+            sum = sumFrom1To(limit);
+        estimatedTime = System.nanoTime() - starTime;
+        return estimatedTime / contiguousRepetitions;
+    }
+	
+	public static double medianOf(final ArrayList<Double> values) {
+        final int size = values.size();
+
+        values.sort(null);
+
+        if (size % 2 == 0)
+            return (values.get(size / 2 - 1) + values.get(size / 2)) / 2.0;
+        else
+            return values.get(size / 2);
+    }
+	
+	public static long sumFrom1To(final int limit) {
+        long sum = 0;
+        for (int i = 1; i <= limit; i++)
+            sum += i;
+        return sum;
+    }
 }
