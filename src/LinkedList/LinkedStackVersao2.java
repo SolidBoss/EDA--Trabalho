@@ -4,8 +4,6 @@ import static java.lang.System.out;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-
 import Main.MedMinMax;
 
 public class LinkedStackVersao2 {

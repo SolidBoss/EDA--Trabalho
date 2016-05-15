@@ -1,18 +1,11 @@
 package Main;
 
-import static java.lang.System.in;
-import static java.lang.System.out;
 
+import static java.lang.System.out;
 import MergeSort.BottomUpMergeFile;
-import MergeSort.InstrumentedMergeFile;
-import MergeSort.Merge;
-import MergeSort.MergeSortFile;
-import edu.princeton.cs.introcs.In;
 import InsertionSort.InsertionSortFile;
 import InsertionSort.InstrumentedInsertion;
 import LinkedList.LinkedStack;
-
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;

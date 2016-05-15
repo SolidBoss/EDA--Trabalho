@@ -2,11 +2,9 @@ package MergeSort;
 
 import static java.lang.System.in;
 import static java.lang.System.out;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import Main.MedMinMax;
