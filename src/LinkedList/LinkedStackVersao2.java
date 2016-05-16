@@ -27,11 +27,15 @@ public class LinkedStackVersao2 {
 		double desvio_push;
 
 		//Antes que a experiencia seja realizada, o WarmUp vai faxer o "aquecimento" do compilador JIT, para que seja evitado os "picos" dos tempo iniciais   
-		for (int Item : FileSize){
+		for (@SuppressWarnings("unused") 
+		int Item : FileSize){
 			LinkedStack<String> numbers = new LinkedStack<String>();
 			numbers.push("LinkedStack");
-			numbers.pop();			
+			numbers.pop();
+			//Apenas para conferir se a pilha esta vazia
+			//out.println(numbers.isEmpty());
     	}
+		
 		
 		// Ciclo que analisa cada posicao do array ou seja cada Item do
 		// FileSize, dentro de cada tipo de ficheiro
@@ -145,6 +149,7 @@ public class LinkedStackVersao2 {
 			file1.println("Desvio padrão: " + desvio_pop + "ns");// imprime no exel
 
 			file1.close();
+			
 		}
 	}
 }
