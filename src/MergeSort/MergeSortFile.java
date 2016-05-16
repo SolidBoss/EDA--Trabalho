@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+import LinkedList.LinkedStack;
 import Main.MedMinMax;
 import edu.princeton.cs.introcs.In;
 
@@ -35,6 +36,18 @@ public class MergeSortFile {
         
         int repetir = input.nextInt(); //guarda input do numero de experiencias
         Double[] tempo = new Double[repetir]; //cria array tempo com o numero de posições indicadas no input
+        
+      //Antes que a experiencia seja realizada, o WarmUp vai faxer o "aquecimento" do compilador JIT, para que seja evitado os "picos" dos tempo iniciais   
+        for (String Type : FileType) {	
+        	for (int Item : FileSize){
+        		String FilePath = "data/" + Type + "_" + Item + ".txt";
+				boolean FileExists = new File(FilePath).isFile();
+				if (FileExists == true) {
+					String[] textFiles = In.readStrings(FilePath);
+					Merge.sort(textFiles);
+					}
+          	}
+        }
         
 		//Ciclo para percorrer cada tipo de ficheiro
 		for (String Type : FileType) {

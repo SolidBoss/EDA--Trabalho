@@ -26,6 +26,13 @@ public class LinkedStackVersao2 {
 		double desvio_pop;
 		double desvio_push;
 
+		//Antes que a experiencia seja realizada, o WarmUp vai faxer o "aquecimento" do compilador JIT, para que seja evitado os "picos" dos tempo iniciais   
+		for (int Item : FileSize){
+			LinkedStack<String> numbers = new LinkedStack<String>();
+			numbers.push("LinkedStack");
+			numbers.pop();			
+    	}
+		
 		// Ciclo que analisa cada posicao do array ou seja cada Item do
 		// FileSize, dentro de cada tipo de ficheiro
 		for (int Item : FileSize){
