@@ -37,7 +37,7 @@ public class MergeSortFile {
         int repetir = input.nextInt(); //guarda input do numero de experiencias
         Double[] tempo = new Double[repetir]; //cria array tempo com o numero de posições indicadas no input
         
-      //Antes que a experiencia seja realizada, o WarmUp vai faxer o "aquecimento" do compilador JIT, para que seja evitado os "picos" dos tempo iniciais   
+        //Antes que a experiencia seja realizada, o WarmUp vai faxer o "aquecimento" do compilador JIT, para que seja evitado os "picos" dos tempo iniciais   
         for (String Type : FileType) {	
         	for (int Item : FileSize){
         		String FilePath = "data/" + Type + "_" + Item + ".txt";
