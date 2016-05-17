@@ -153,26 +153,34 @@ public class ResizingArrayFileVersao2 {
 			int repetir = 2;
 		
 			@SuppressWarnings("unused")
-			long starTime, estimatedTime = 0;
+			long startTimePush = System.nanoTime(); // Iniciar a medição em nanosegundos
 			
 			for (int a = 0; a != repetir; a++) {
+				
+				out.println("Experiencia: " + (a+1));
+				
 				for (int i = 0; i != ResizingNumbers[counter]; i++){
 					number.push("0.2073884211515022"); //valor que vai ser inserido na pilha, i vezes dependendo do ciclo
 					}
+				long estimatedTime = System.nanoTime() - startTimePush;// Medimos o tempo
+				out.println("Tempo total inserindo " + ResizingNumbers[counter] + " ficheiro(s) na pilha: " + estimatedTime);
+				
+				long startTimePop = System.nanoTime(); // Iniciar a medição em nanosegundos
+				
+				while (!number.isEmpty())
+					number.pop();
+				
+				long estimatedTimePop = System.nanoTime() - startTimePop;// Medimos  o tempo
+				out.println("Tempo total retirando " + ResizingNumbers[counter] + " ficheiro(s) da pilha: " + estimatedTimePop);
 			}
-		
-			starTime = System.nanoTime(); 
-			while (!number.isEmpty())
-				number.pop();
-			estimatedTime = System.nanoTime() - starTime;
-		
+			
 			out.println("Items:  " + ResizingNumbers[counter]);
 
 			//retorna nº de aumentos que foram feitos na pilha number
-			out.println("Número de aumentos: " + number.getNumberOfIncreases()); 
+			out.println("Número de aumentos do array: " + number.getNumberOfIncreases()); 
 		
 			//retorna o nº de numero de diminuições feitas
-			out.println("Número de decrementos: " + number.getNumberOfDecreases()); 
+			out.println("Número de decrementos do array: " + number.getNumberOfDecreases()); 
 		
 			out.println("--------------------------------------");	
 		}
