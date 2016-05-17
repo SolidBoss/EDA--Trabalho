@@ -6,9 +6,12 @@ import java.util.NoSuchElementException;
 
 public class ResizingArrayStack<Item> implements Iterable<Item>{
 
+	private static final int initialCapacity = 1;
+    private static final int capacityGrowthFactor = 2;
+    
 	private int size = 0;
 	@SuppressWarnings("unchecked")
-	private Item[] items = (Item[])new Object[1];
+	private Item[] items = (Item[])new Object[initialCapacity];
 	private int numberOfIncreases = 0;
 	private int numberOfDecreases = 0;
 
@@ -26,7 +29,7 @@ public class ResizingArrayStack<Item> implements Iterable<Item>{
 	//Adiciona items e aumenta tamanho da pilha
 	public void push(final Item newItem) {
 		if (size == items.length){ //neste caso temos que criar uma nova pilha 
-			resizeTo(2 * items.length); //com o dobro do tamanho da existente 
+			resizeTo(items.length * capacityGrowthFactor); //com o dobro do tamanho da existente 
 			numberOfIncreases++;//contador para os incrementos que acontece na pilha
 		}
 		items[size] = newItem;
@@ -42,8 +45,8 @@ public class ResizingArrayStack<Item> implements Iterable<Item>{
 		items[size] = null;
 
 		//Remove espaço não utilizado da pilha 
-		if(size !=0 && size == items.length / 4){ // caso o tamanho seja 1/4 da capacidade da pilha 
-			resizeTo(items.length /2);//diminuimos o tamanho da pilha 
+		if(size !=0 && size == items.length / (capacityGrowthFactor * capacityGrowthFactor)){ // caso o tamanho seja 1/4 da capacidade da pilha 
+			resizeTo(items.length / capacityGrowthFactor);//diminuimos o tamanho da pilha 
 			numberOfDecreases++;//contador quando é decrementado que acontece na pilha
 		}
 		return item;
