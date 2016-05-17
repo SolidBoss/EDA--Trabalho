@@ -23,9 +23,10 @@ public class MergeSortFile {
 	// Contém o número dos ficheiros que vão ser analizados
 	static int[] FileSize = { 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072,
 			262144, 524288, 1048576 };
+	static int[] FileSizeWarm = { 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096};
 	
 	// Contém o tipo de ficheiros que vão ser analizados
-	static String[] FileType = { "sorted", "partially_sorted", "shuffled" };
+	static String[] OrderType = { "sorted", "partially_sorted", "shuffled" };
 	
 	public static void main(String[] args) throws IOException {
 
@@ -38,8 +39,8 @@ public class MergeSortFile {
         Double[] tempo = new Double[repetir]; //cria array tempo com o numero de posições indicadas no input
         
         //Antes que a experiencia seja realizada, o WarmUp vai faxer o "aquecimento" do compilador JIT, para que seja evitado os "picos" dos tempo iniciais   
-        for (String Type : FileType) {	
-        	for (int Item : FileSize){
+        for (String Type : OrderType) {	
+        	for (int Item : FileSizeWarm){
         		String FilePath = "data/" + Type + "_" + Item + ".txt";
 				boolean FileExists = new File(FilePath).isFile();
 				if (FileExists == true) {
@@ -50,13 +51,13 @@ public class MergeSortFile {
         }
         
 		//Ciclo para percorrer cada tipo de ficheiro
-		for (String Type : FileType) {
+		for (String Type : OrderType) {
 			
 			//Ciclo que analisa cada posicao do array ou seja cada Item do FileSize, dentro de cada tipo de ficheiro
 			for (int Item : FileSize) {
 
 				// Cria novo ficheiro exel com o nome LinkedList e o nº do item, na directoria pretendida
-				PrintWriter file = new PrintWriter("data/" + "MergeSort" + "_" + FileType + "_" + Item + ".csv");
+				PrintWriter file = new PrintWriter("data/" + "MergeSort" + "_" + OrderType + "_" + Item + ".csv");
 
 				// variavel que diz localizacao dos ficheiros txt, o Item é referente a cada nº do FileSize
 				String FilePath = "data/" + Type + "_" + Item + ".txt";

@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 import Main.MedMinMax;
+import MergeSort.Merge;
 import edu.princeton.cs.introcs.In;
 
 public class InsertionSortFile {
@@ -21,6 +22,7 @@ public class InsertionSortFile {
 	
 	static int[] FileSize = { 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072,
 			262144, 524288, 1048576 };
+	static int[] FileSizeWarm = { 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096};
 	static String[] OrderType = { "sorted", "partially_sorted", "shuffled" };
 	
 	public static void main(String[] args) throws IOException {
@@ -32,6 +34,18 @@ public class InsertionSortFile {
         
         int repetir = input.nextInt(); //guarda input do numero de experiencias
         Double[] tempo = new Double[repetir]; //cria array tempo com o numero de posições indicadas no input
+        
+      //Antes que a experiencia seja realizada, o WarmUp vai faxer o "aquecimento" do compilador JIT, para que seja evitado os "picos" dos tempo iniciais   
+        for (String Type : OrderType) {	
+        	for (int Item : FileSizeWarm){
+        		String FilePath = "data/" + Type + "_" + Item + ".txt";
+				boolean FileExists = new File(FilePath).isFile();
+				if (FileExists == true) {
+					String[] textFiles = In.readStrings(FilePath);
+					Insertion.sort(textFiles);
+					}
+          	}
+        }
         
         //Ciclo que analisa cada posicao do array ou seja cada orderType do OrderType
 		for (String orderType : OrderType) {
@@ -50,7 +64,7 @@ public class InsertionSortFile {
 				if (FileExists == true) {
 					
 					// Apenas não é feito a operação de ordenação quando o orderType é shuffled e numberOfItem < 65536
-					if (!(orderType == "shuffled") || (numberOfItem < 65536)){
+					if (!(orderType == "shuffled") || (numberOfItem <= 65536)){
 					
 						long estimatedTime = 0;
 						
