@@ -5,6 +5,7 @@ import static java.lang.System.out;
 import java.io.IOException;
 import java.io.PrintWriter;
 import Main.MedMinMax;
+import ResizingArray.ResizingArrayStack;
 
 public class LinkedStackVersao2 {
 
@@ -47,117 +48,87 @@ public class LinkedStackVersao2 {
 
 			// variavel com o nº de repetições, onde assegura que os resultados
 			// sejam testados varias vezes para verificar a sua veracidade
-			int repetir = 10;
-			Double[] tempo = new Double[repetir];
+			int repetitions = 10;
+			Double[] timeTotalPush = new Double[repetitions];
+			Double[] timeTotalPop = new Double[repetitions];
+			
 			out.println("-----------------------------------");
 			out.println("Numero de Itens " + Item);
 			out.println("-----------------------------------");
-
-			// Verificar o tempo
-			long starTime, estimatedTime = 0;
 			
-			// Ciclo for vai realizar o nº de repetições que queremos
-			// Ciclo para Inserção(push) na pilha
-			for (int a = 0; a != repetir; a++) {
-				// criação de uma nova cadeia ligada, numbers
+			long starTimePush, estimatedTimePush =0;
+			for (int a = 0; a != repetitions; a++) {
+				// criação de uma nova pilha, numbers
 				LinkedStack<String> numbers = new LinkedStack<String>();
-				
-				starTime = System.nanoTime();// Iniciar a medição em nanosegundos
-				for (int count = 0; count != Item; count++) {
-					numbers.push("LinkedStack");// inserir na pilha numbers o valor "LinkStack" as
-				}
-				estimatedTime = System.nanoTime() - starTime;// Tempo final guardado em variavel
-				//out.println("Demora a inserir: " + estimatedTime + " ns");
-				// guarda o tempo de cada execução, para cada repetição
-				tempo[a] = (double) (estimatedTime);
-			}
-
+				starTimePush = System.nanoTime();// Iniciar a medição em nanosegundos
+				for (int i = 0; i != Item; i++) {
+					numbers.push("LinkedStack");//inserir na pilha numbers o valor "LinkedStack"
+				}	
+				estimatedTimePush = System.nanoTime() - starTimePush;// Tempo final de cada repetição guardado em variavel	
+				timeTotalPush[a] = (double) (estimatedTimePush);//guarda o tempo de cada repetição numa posição do array	
 			
-			// vai chamar o metodo (maximeTimes) que se encontra no pacote Main
-			// e passa a variavel tempo
-			maximo_push = MedMinMax.maximeTimes(tempo);
-			out.println("\nTempo maximo de inserção: " + maximo_push + " ns");// imprime na consola
-			file.println("Tempo maximo de inserção: " + maximo_push + "ns");// imprime no exel
-
-			// vai chamar o metodo (minimeTimes) que se encontra no pacote Main
-			// e passa a variavel tempo
-			minimo_push = MedMinMax.minimeTimes(tempo);
-			out.println("Tempo minimo de inserção: " + minimo_push + " ns");// imprime na consola
-			file.println("Tempo minimo de inserção: " + minimo_push + "ns");// imprime no exel
-
-			// vai chamar o metodo (medianTimes) que se encontra no pacote Main
-			// e passa a variavel tempo
-			mediana_push = MedMinMax.medianTimes(tempo);
-			out.println("Mediana da inserção: " + mediana_push + " ns");// imprime na consola
-			file.println("Mediana da inserção: " + mediana_push + "ns");// imprime no exel
-
-			// vai chamar o metodo (meanTimes) que se encontra no pacote Main e
-			// passa a variavel tempo
-			media_push = MedMinMax.meanTimes(tempo);
-			out.println("Tempo medio de inserção: " + media_push + " ns");// imprime na consola
-			file.println("Tempo medio de inserção: " + media_push + "ns");// imprime no exel
-
-			// vai chamar o metodo (standartDeviation) que se encontra no pacote
-			// Main e passa a variavel tempo
-			desvio_push = MedMinMax.standardDeviation(tempo);
-			out.println("Desvio padrão: " + desvio_push + " ns");// imprime na consola
-			file.println("Desvio padrão: " + desvio_push + "ns");// imprime no exel
-
+			long startTimePop = System.nanoTime(); // Iniciar a medição em nanosegundos
+			while (!numbers.isEmpty())
+				numbers.pop();
+			long estimatedTimePop = System.nanoTime() - startTimePop;// Medimos  o tempo
+			timeTotalPop[a] = (double) (estimatedTimePop);
+			}
+			
+			//vai chamar o metodo (maximeTimes) que se encontra no pacote Main e passa a variavel tempo 
+			maximo_push=MedMinMax.maximeTimes(timeTotalPush);
+			out.println("\nTempo maximo de inserção: " + maximo_push + " ns");//imprime na consola
+			file.println("Tempo maximo de inserção: " + maximo_push + "ns");//imprime no exel
+			
+			//vai chamar o metodo (minimeTimes) que se encontra no pacote Main e passa a variavel tempo 
+			minimo_push=MedMinMax.minimeTimes(timeTotalPush);
+			out.println("Tempo minimo de inserção: " + minimo_push + " ns");//imprime na consola
+			file.println("Tempo minimo de inserção: " + minimo_push + "ns");//imprime no exel
+			
+			//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo
+			media_push=MedMinMax.meanTimes(timeTotalPush);
+			out.println("Tempo medio de inserção: " + media_push + " ns");//imprime na consola
+			file.println("Tempo medio de inserção: " + media_push + "ns");//imprime no exel
+			
+			//vai chamar o metodo (medianTimes) que se encontra no pacote Main e passa a variavel tempo 
+			mediana_push=MedMinMax.medianTimes(timeTotalPush);
+			out.println("Mediana de inserção: " + mediana_push + " ns");//imprime na consola
+			file.println("Mediana de inserção: " + mediana_push + "ns");//imprime no exel
+			
+			//vai chamar o metodo (standartDeviation) que se encontra no pacote Main e passa a variavel tempo 
+			desvio_push=MedMinMax.standardDeviation(timeTotalPush);
+			out.println("Desvio padrão: " + desvio_push + " ns\n");//imprime na consola
+			file.println("Desvio padrão: " + desvio_push + "ns");//imprime no exel
+			
 			file.close();
-
 			
-			// Cria novo ficheiro exel com o nome LinkedList e o nº do item que
-			// vamos apagar, na directoria pretendida
-			PrintWriter file1 = new PrintWriter("data/" + "LinkListDelete" + "_" + Item + ".csv");
+			// Cria novo ficheiro exel com o nome ResizingArrayDelete e o nº do item que vamos apagar, na directoria pretendida
+			PrintWriter file1 = new PrintWriter("data/" + "ResizingArrayDelete" + "_" + Item + ".csv");	
 			
-			// Ciclo for vai realizar o nº de repetições que queremos
-			for (int a = 0; a != repetir; a++) {
+			//vai chamar o metodo (maximeTimes) que se encontra no pacote Main e passa a variavel tempo 
+			maximo_pop=MedMinMax.maximeTimes(timeTotalPop);
+			out.println("\nTempo maximo de remoção: " + maximo_pop + " ns");//imprime na consola
+			file1.println("Tempo maximo de remoção: " + maximo_pop + "ns");//imprime no exel
+			
+			//vai chamar o metodo (minimeTimes) que se encontra no pacote Main e passa a variavel tempo 
+			minimo_pop=MedMinMax.minimeTimes(timeTotalPop);
+			out.println("Tempo minimo de remoção: " + minimo_pop + " ns");//imprime na consola
+			file1.println("Tempo minimo de remoção: " + minimo_pop + "ns");//imprime no exel
+			
+			//vai chamar o metodo (medianTimes) que se encontra no pacote Main e passa a variavel tempo 
+			media_pop=MedMinMax.meanTimes(timeTotalPop);
+			out.println("Tempo medio de remoção: " + media_pop + " ns");//imprime na consola
+			file1.println("Tempo medio de remoção: " + media_pop + "ns");//imprime no exel
+			
+			//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo
+			mediana_pop=MedMinMax.medianTimes(timeTotalPop);
+			out.println("Mediana de remoção: " + mediana_pop + " ns");//imprime na consola
+			file1.println("Mediana de remoção: " + mediana_pop + "ns");//imprime no exel
+			
+			//vai chamar o metodo (standardDeviation) que se encontra no pacote Main e passa a variavel tempo 
+			desvio_pop=MedMinMax.standardDeviation(timeTotalPop);
+			out.println("Desvio padrão: " + desvio_pop + " ns");//imprime na consola
+			file1.println("Desvio padrão: " + desvio_pop + "ns");//imprime no exel
 				
-				LinkedStack<String> numbers = new LinkedStack<String>();
-				
-				for (int count = 0; count != Item; count++) {
-					numbers.push("LinkedStack");// inserir na pilha numbers o valor "LinkStack" as
-				}
-				
-				starTime = System.nanoTime();// Iniciar a medição em nanosegundos
-				for (int exponent = 0; exponent != Item; exponent++) {
-					numbers.pop();// Apagar os items que estão na pilha numbers
-				}
-				estimatedTime = System.nanoTime() - starTime;// Tempo final guardado em variavel
-				// guarda o tempo de cada execução, para cada repetição
-				tempo[a] = (double) (estimatedTime);
-			}
-
-			// vai chamar o metodo (maximeTimes) que se encontra no pacote Main
-			// e passa a variavel tempo
-			maximo_pop = MedMinMax.maximeTimes(tempo);
-			out.println("\nTempo maximo de remoção: " + maximo_pop + " ns");// imprime na consola
-			file1.println("Tempo maximo de remoção: " + maximo_pop + "ns");// imprime no exel
-
-			// vai chamar o metodo (minimeTimes) que se encontra no pacote Main
-			// e passa a variavel tempo
-			minimo_pop = MedMinMax.minimeTimes(tempo);
-			out.println("Tempo minimo de remoção: " + minimo_pop + " ns");// imprime na consola
-			file1.println("Tempo minimo de remoção: " + minimo_pop + "ns");// imprime no exel
-
-			// vai chamar o metodo (medianTimes) que se encontra no pacote Main
-			// e passa a variavel tempo
-			mediana_pop = MedMinMax.medianTimes(tempo);
-			out.println("Mediana de remoção: " + mediana_pop + " ns");
-			file1.println("Mediana de remoção: " + mediana_pop + "ns");// imprime no exel
-
-			// vai chamar o metodo (meanTimes) que se encontra no pacote Main e
-			// passa a variavel tempo
-			media_pop = MedMinMax.meanTimes(tempo);
-			out.println("Tempo medio de remoção: " + media_pop + " ns");
-			file1.println("Tempo medio de remoção: " + media_pop + "ns");// imprime no exel
-
-			// vai chamar o metodo (standardDeviation) que se encontra no pacote
-			// Main e passa a variavel tempo
-			desvio_pop = MedMinMax.standardDeviation(tempo);
-			out.println("Desvio padrão: " + desvio_pop + " ns\n");
-			file1.println("Desvio padrão: " + desvio_pop + "ns");// imprime no exel
-
 			file1.close();
 		}
 	
