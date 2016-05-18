@@ -24,6 +24,7 @@ public class InsertionSortFile {
 			262144, 524288, 1048576 };
 	static int[] FileSizeWarm = { 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096};
 	static String[] OrderType = { "sorted", "partially_sorted", "shuffled" };
+	static String[] OrderTypeTest = { "sorted_test", "partially_sorted_test", "shuffled_test" };
 	
 	public static void main(String[] args) throws IOException {
 		
@@ -36,7 +37,7 @@ public class InsertionSortFile {
         Double[] tempo = new Double[repetir]; //cria array tempo com o numero de posições indicadas no input
         
       //Antes que a experiencia seja realizada, o WarmUp vai faxer o "aquecimento" do compilador JIT, para que seja evitado os "picos" dos tempo iniciais   
-        for (String Type : OrderType) {	
+        for (String Type : OrderTypeTest) {	
         	for (int Item : FileSizeWarm){
         		String FilePath = "data/" + Type + "_" + Item + ".txt";
 				boolean FileExists = new File(FilePath).isFile();

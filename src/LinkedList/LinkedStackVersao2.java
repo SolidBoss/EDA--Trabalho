@@ -29,9 +29,12 @@ public class LinkedStackVersao2 {
 		//Antes que a experiencia seja realizada, o WarmUp vai faxer o "aquecimento" do compilador JIT, para que seja evitado os "picos" dos tempo iniciais   
 		for (@SuppressWarnings("unused") 
 		int Item : FileSize){
+			
 			LinkedStack<String> numbers = new LinkedStack<String>();
+			for (int exponent = 0; exponent != Item; exponent++) {
 			numbers.push("LinkedStack");
 			numbers.pop();
+			}
 			//Apenas para conferir se a pilha esta vazia
 			//out.println(numbers.isEmpty());
     	}
@@ -63,7 +66,7 @@ public class LinkedStackVersao2 {
 			// Ciclo para Inserção(push) na pilha
 			for (int a = 0; a != repetir; a++) {
 				starTime = System.nanoTime();// Iniciar a medição em nanosegundos
-				for (int exponent = 0; exponent != Item; exponent++) {
+				for (int count = 0; count != Item; count++) {
 					numbers.push("LinkedStack");// inserir na pilha numbers o valor "LinkStack" as
 					estimatedTime = System.nanoTime() - starTime;// Tempo final guardado em variavel
 				}
