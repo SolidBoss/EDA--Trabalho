@@ -10,8 +10,7 @@ public class ResizingArrayFileVersao2 {
 	public static void main(String[] args) throws FileNotFoundException {
 		
 		// Contém o número dos ficheiros que vão ser analizados
-		final int[] FileSize = { 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536,
-				131072, 262144, 524288, 1048576 };
+		final int[] FileSize = { 2, 4 };
 		
 		// Variaveis para a média, mediana, maximo, minimo e desvio padrao
 		double media_push;
@@ -39,9 +38,6 @@ public class ResizingArrayFileVersao2 {
 			// Cria novo ficheiro exel com o nome ResizingArrayInsert e o nº do item, na directoria pretendida
 			PrintWriter file = new PrintWriter("data/" + "ResizingArrayInsert" + "_" + Item + ".csv");
 			
-			// criação de uma nova pilha, numbers
-			ResizingArrayStack<String> numbers = new ResizingArrayStack<String>();
-
 			// variavel com o nº de repetições, onde assegura que os resultados sejam testados varias vezes para verificar a sua veracidade
 			int repetir = 2;
 			Double[] tempo = new Double[repetir];
@@ -52,6 +48,8 @@ public class ResizingArrayFileVersao2 {
 			// Verificar o tempo
 			long starTime, estimatedTime = 0;
 			
+			// criação de uma nova pilha, numbers
+			ResizingArrayStack<String> numbers = new ResizingArrayStack<String>();
 			// Ciclo for vai realizar o nº de repetições que queremos
 			// Ciclo para Inserção(push) na pilha
 			for (int a = 0; a != repetir; a++) {
@@ -60,6 +58,7 @@ public class ResizingArrayFileVersao2 {
 					numbers.push("ResizingArray");//inserir na pilha numbers o valor "ResizingArray"
 					estimatedTime = System.nanoTime() - starTime;// Tempo final guardado em variavel
 				}
+				
 			//guarda o tempo de cada execução, para cada repetição
 			tempo[a] = (double) (estimatedTime);						
 			}
@@ -69,22 +68,22 @@ public class ResizingArrayFileVersao2 {
 			out.println("\nTempo maximo de inserção: " + maximo_push + " ns");//imprime na consola
 			file.println("Tempo maximo de inserção: " + maximo_push + "ns");//imprime no exel
 			
-			//vai chamar o metodo (minimeTimes) que se encontra no pacote Main e passa a variavel tempo
+			//vai chamar o metodo (minimeTimes) que se encontra no pacote Main e passa a variavel tempo 
 			minimo_push=MedMinMax.minimeTimes(tempo);
 			out.println("Tempo minimo de inserção: " + minimo_push + " ns");//imprime na consola
 			file.println("Tempo minimo de inserção: " + minimo_push + "ns");//imprime no exel
-				
-			//vai chamar o metodo (medianTimes) que se encontra no pacote Main e passa a variavel tempo
+			
+			//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo
 			media_push=MedMinMax.meanTimes(tempo);
 			out.println("Tempo medio de inserção: " + media_push + " ns");//imprime na consola
 			file.println("Tempo medio de inserção: " + media_push + "ns");//imprime no exel
-				
-			//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo 
+			
+			//vai chamar o metodo (medianTimes) que se encontra no pacote Main e passa a variavel tempo 
 			mediana_push=MedMinMax.medianTimes(tempo);
 			out.println("Mediana de inserção: " + mediana_push + " ns");//imprime na consola
 			file.println("Mediana de inserção: " + mediana_push + "ns");//imprime no exel
 			
-			//vai chamar o metodo (standartDeviation) que se encontra no pacote Main e passa a variavel tempo
+			//vai chamar o metodo (standartDeviation) que se encontra no pacote Main e passa a variavel tempo 
 			desvio_push=MedMinMax.standardDeviation(tempo);
 			out.println("Desvio padrão: " + desvio_push + " ns\n");//imprime na consola
 			file.println("Desvio padrão: " + desvio_push + "ns");//imprime no exel

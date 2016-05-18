@@ -160,7 +160,7 @@ public class ResizingArrayFile {
 	out.println("--------------------------------------");
 	
 	//Variavel com o número de vezes que o ciclo vai repetir
-	final int[] ResizingNumbers = { 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072,
+	final int[] ResizingNumbers = {  2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072,
 			262144, 524288, 1048576 };
 	
 	

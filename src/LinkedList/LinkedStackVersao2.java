@@ -29,12 +29,9 @@ public class LinkedStackVersao2 {
 		//Antes que a experiencia seja realizada, o WarmUp vai faxer o "aquecimento" do compilador JIT, para que seja evitado os "picos" dos tempo iniciais   
 		for (@SuppressWarnings("unused") 
 		int Item : FileSize){
-			
 			LinkedStack<String> numbers = new LinkedStack<String>();
-			for (int exponent = 0; exponent != Item; exponent++) {
 			numbers.push("LinkedStack");
 			numbers.pop();
-			}
 			//Apenas para conferir se a pilha esta vazia
 			//out.println(numbers.isEmpty());
     	}
@@ -59,17 +56,17 @@ public class LinkedStackVersao2 {
 			// Verificar o tempo
 			long starTime, estimatedTime = 0;
 			
-			// criação de uma nova cadeia ligada, numbers
-			LinkedStack<String> numbers = new LinkedStack<String>();
-
 			// Ciclo for vai realizar o nº de repetições que queremos
 			// Ciclo para Inserção(push) na pilha
 			for (int a = 0; a != repetir; a++) {
+				// criação de uma nova cadeia ligada, numbers
+				LinkedStack<String> numbers = new LinkedStack<String>();
 				starTime = System.nanoTime();// Iniciar a medição em nanosegundos
 				for (int count = 0; count != Item; count++) {
 					numbers.push("LinkedStack");// inserir na pilha numbers o valor "LinkStack" as
 					estimatedTime = System.nanoTime() - starTime;// Tempo final guardado em variavel
 				}
+				//out.println("Demora a inserir: " + estimatedTime + " ns");
 				// guarda o tempo de cada execução, para cada repetição
 				tempo[a] = (double) (estimatedTime);
 			}
@@ -106,12 +103,19 @@ public class LinkedStackVersao2 {
 
 			file.close();
 
+			
 			// Cria novo ficheiro exel com o nome LinkedList e o nº do item que
 			// vamos apagar, na directoria pretendida
 			PrintWriter file1 = new PrintWriter("data/" + "LinkListDelete" + "_" + Item + ".csv");
-
+			
 			// Ciclo for vai realizar o nº de repetições que queremos
 			for (int a = 0; a != repetir; a++) {
+				LinkedStack<String> numbers = new LinkedStack<String>();
+				
+				for (int count = 0; count != Item; count++) {
+					numbers.push("LinkedStack");// inserir na pilha numbers o valor "LinkStack" as
+				}
+				
 				starTime = System.nanoTime();// Iniciar a medição em nanosegundos
 				for (int exponent = 0; exponent != Item; exponent++) {
 					numbers.pop();// Apagar os items que estão na pilha numbers
@@ -155,4 +159,6 @@ public class LinkedStackVersao2 {
 			
 		}
 	}
+	
+	
 }
