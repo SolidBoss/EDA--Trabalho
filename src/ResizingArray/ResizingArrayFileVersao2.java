@@ -10,7 +10,8 @@ public class ResizingArrayFileVersao2 {
 	public static void main(String[] args) throws FileNotFoundException {
 		
 		// Contém o número dos ficheiros que vão ser analizados
-		final int[] FileSize = { 2, 4 };
+		final int[] FileSize = { 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072,
+				262144, 524288, 1048576 };
 		
 		// Variaveis para a média, mediana, maximo, minimo e desvio padrao
 		double media_push;
@@ -48,11 +49,12 @@ public class ResizingArrayFileVersao2 {
 			// Verificar o tempo
 			long starTime, estimatedTime = 0;
 			
-			// criação de uma nova pilha, numbers
-			ResizingArrayStack<String> numbers = new ResizingArrayStack<String>();
+			
 			// Ciclo for vai realizar o nº de repetições que queremos
 			// Ciclo para Inserção(push) na pilha
 			for (int a = 0; a != repetir; a++) {
+				// criação de uma nova pilha, numbers
+				ResizingArrayStack<String> numbers = new ResizingArrayStack<String>();
 				starTime = System.nanoTime();// Iniciar a medição em nanosegundos
 				for (int i = 0; i != Item; i++) {
 					numbers.push("ResizingArray");//inserir na pilha numbers o valor "ResizingArray"
@@ -95,13 +97,20 @@ public class ResizingArrayFileVersao2 {
 				
 			// Ciclo for vai realizar o nº de repetições que queremos
 			for (int a = 0; a != repetir; a++) {
+				
+				ResizingArrayStack<String> numbers = new ResizingArrayStack<String>();
+				
+				for (int count = 0; count != Item; count++) {
+					numbers.push("LinkedStack");// inserir na pilha numbers o valor "LinkStack" as
+				}
+				
 				starTime = System.nanoTime();// Iniciar a medição em nanosegundos
-				for (int i = 0; i != Item; i++) {
-					numbers.pop();//Apagar os items que estão na pilha numbers
+				for (int exponent = 0; exponent != Item; exponent++) {
+					numbers.pop();// Apagar os items que estão na pilha numbers
 					estimatedTime = System.nanoTime() - starTime;// Tempo final guardado em variavel
 				}
-			//guarda o tempo de cada execução, para cada repetição
-			tempo[a] = (double) (estimatedTime);						
+				// guarda o tempo de cada execução, para cada repetição
+				tempo[a] = (double) (estimatedTime);					
 			}				
 			
 			//vai chamar o metodo (maximeTimes) que se encontra no pacote Main e passa a variavel tempo 

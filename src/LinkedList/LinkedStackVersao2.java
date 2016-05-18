@@ -11,8 +11,8 @@ public class LinkedStackVersao2 {
 	public static void main(String[] args) throws IOException {
 
 		// Contém o número dos ficheiros que vão ser analizados
-		final int[] FileSize = { 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536,
-				131072, 262144, 524288, 1048576 };
+		final int[] FileSize = { 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072,
+				262144, 524288, 1048576 };
 
 		// Variaveis para a média, mediana, maximo, minimo e desvio padrao
 		double media_push;
@@ -61,16 +61,18 @@ public class LinkedStackVersao2 {
 			for (int a = 0; a != repetir; a++) {
 				// criação de uma nova cadeia ligada, numbers
 				LinkedStack<String> numbers = new LinkedStack<String>();
+				
 				starTime = System.nanoTime();// Iniciar a medição em nanosegundos
 				for (int count = 0; count != Item; count++) {
 					numbers.push("LinkedStack");// inserir na pilha numbers o valor "LinkStack" as
-					estimatedTime = System.nanoTime() - starTime;// Tempo final guardado em variavel
 				}
+				estimatedTime = System.nanoTime() - starTime;// Tempo final guardado em variavel
 				//out.println("Demora a inserir: " + estimatedTime + " ns");
 				// guarda o tempo de cada execução, para cada repetição
 				tempo[a] = (double) (estimatedTime);
 			}
 
+			
 			// vai chamar o metodo (maximeTimes) que se encontra no pacote Main
 			// e passa a variavel tempo
 			maximo_push = MedMinMax.maximeTimes(tempo);
@@ -110,6 +112,7 @@ public class LinkedStackVersao2 {
 			
 			// Ciclo for vai realizar o nº de repetições que queremos
 			for (int a = 0; a != repetir; a++) {
+				
 				LinkedStack<String> numbers = new LinkedStack<String>();
 				
 				for (int count = 0; count != Item; count++) {
@@ -119,8 +122,8 @@ public class LinkedStackVersao2 {
 				starTime = System.nanoTime();// Iniciar a medição em nanosegundos
 				for (int exponent = 0; exponent != Item; exponent++) {
 					numbers.pop();// Apagar os items que estão na pilha numbers
-					estimatedTime = System.nanoTime() - starTime;// Tempo final guardado em variavel
 				}
+				estimatedTime = System.nanoTime() - starTime;// Tempo final guardado em variavel
 				// guarda o tempo de cada execução, para cada repetição
 				tempo[a] = (double) (estimatedTime);
 			}
@@ -156,9 +159,8 @@ public class LinkedStackVersao2 {
 			file1.println("Desvio padrão: " + desvio_pop + "ns");// imprime no exel
 
 			file1.close();
-			
 		}
-	}
 	
+	}
 	
 }
