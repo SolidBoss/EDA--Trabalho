@@ -54,6 +54,7 @@ public class InstrumentedMergeFile {
 				//Tivemos que utilizar a classe InstrumentedMerge para ordenar cada ficheiro, porque só nessa classe é que conseguimos saber as interações que estão acontecer no Array
 				InstrumentedMerge.sort(textFiles);
 
+				int a = InstrumentedMerge.getNumberOfComparisons();
 				//vai aceder ao metodo getNumberOfComparisons() da classe InstrumentedMerge e retorna o nº de comparações feitos no merge, do textFiles em causa  
 				out.println("Número de comparações: " + InstrumentedMerge.getNumberOfComparisons());
 				//vai aceder ao metodo getNumberOfArrayReads() da classe InstrumentedMerge e retorna o nº de leituras feitas no merge, do textFiles em causa  

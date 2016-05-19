@@ -5,8 +5,16 @@ import static java.lang.System.in;
 import static java.lang.System.out;
 //import MergeSort.BottomUpMergeFile;
 import ResizingArray.ResizingArrayFile;
+import edu.princeton.cs.introcs.In;
 import InsertionSort.InsertionSortFile;
-//import LinkedList.LinkedStack;
+import LinkedList.LinkedStackFile;
+import MergeSort.BottomUpMerge;
+import MergeSort.BottomUpMergeFile;
+import MergeSort.InstrumentedMerge;
+import MergeSort.MergeSortFile;
+import MergeSort.Merge;
+
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
@@ -26,9 +34,10 @@ public class Menu {
 	// Contém o número dos ficheiros que vão ser analizados
 	static int[] FileSize = { 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288, 1048576 };
 	static int[] FileSizeImpar = { 3, 5, 9, 17, 33, 65, 129, 257, 513, 1025, 2049, 4097, 8193, 16385, 32769, 65537, 131073, 262145, 524289, 1048577 };
-	
+	static int[] FileSizeWarm = { 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096};
 	// Contém o tipo de ficheiros que vão ser analizados
 	static String[] OrderType = { "sorted", "partially_sorted", "shuffled" };
+	static String[] OrderTypeTest = { "sorted_test", "partially_sorted_test", "shuffled_test" };
 	
 	// Variaveis para a média, mediana, maximo, minimo e desvio padrao
 	static double media_push;
@@ -77,15 +86,109 @@ public class Menu {
 
 		do {
 			opcao = runMenu();
+			//Linked List: Medir tempo de inserção e remoção dados na pilha
 			if(opcao==1){
+				@SuppressWarnings("resource")
+				final Scanner input = new Scanner(in);
+		        out.print("Quantas experiências?(numero inteiro): ");
+		        int repeticions = input.nextInt(); //guarda input do numero de experiencias		
+		        
+		        //aquecimento da experiencia
+		        for (@SuppressWarnings("unused") 
+				int numberOfItem : FileSize){
+		        	LinkedStackFile.LinkedStackTest(numberOfItem);
+		    	}
+		        
+		        for (int numberOfItem : FileSize) {
+		        	PrintWriter file = new PrintWriter("data/" + "LinkListInsert" + "_" + numberOfItem + ".csv");
+		        	PrintWriter file1 = new PrintWriter("data/" + "LinkListDelete" + "_" + numberOfItem + ".csv");	
+		        	
+		        	Double[] timeTotalPush = new Double[repeticions];
+		    		Double[] timeTotalPop = new Double[repeticions];
+		    		long estimatedTimePush = 0;
+		    		long estimatedTimePop = 0;
+		    			
+		    		out.println("-----------------------------------");
+		    		out.println("Numero de Itens " + numberOfItem);
+		    		out.println("-----------------------------------");
+		    			
+		    		for (int a = 0; a != repeticions; a++) {
+		    			estimatedTimePush = LinkedStackFile.runPushStack(numberOfItem);
+	        			timeTotalPush[a] = (double) (estimatedTimePush);
+	        				
+	        			estimatedTimePop = LinkedStackFile.runPopStack(numberOfItem);
+	        			timeTotalPop[a] = (double) (estimatedTimePop);
+		    		}
+				
+		    		//vai chamar o metodo (maximeTimes) que se encontra no pacote Main e passa a variavel tempo 
+		    		maximo_push=MedMinMax.maximeTimes(timeTotalPush);
+		    		out.println("\nTempo maximo de inserção: " + maximo_push + " ns");//imprime na consola
+		    		file.println("Tempo maximo de inserção: " + maximo_push + "ns");//imprime no exel
+		    			
+		    		//vai chamar o metodo (minimeTimes) que se encontra no pacote Main e passa a variavel tempo 
+		    		minimo_push=MedMinMax.minimeTimes(timeTotalPush);
+		    		out.println("Tempo minimo de inserção: " + minimo_push + " ns");//imprime na consola
+		    		file.println("Tempo minimo de inserção: " + minimo_push + "ns");//imprime no exel
+		    			
+		    		//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo
+		    		media_push=MedMinMax.meanTimes(timeTotalPush);
+		    		out.println("Tempo medio de inserção: " + media_push + " ns");//imprime na consola
+		    		file.println("Tempo medio de inserção: " + media_push + "ns");//imprime no exel
+		    			
+		    		//vai chamar o metodo (medianTimes) que se encontra no pacote Main e passa a variavel tempo 
+		    		mediana_push=MedMinMax.medianTimes(timeTotalPush);
+		    		out.println("Mediana de inserção: " + mediana_push + " ns");//imprime na consola
+		    		file.println("Mediana de inserção: " + mediana_push + "ns");//imprime no exel
+		    			
+		    		//vai chamar o metodo (standartDeviation) que se encontra no pacote Main e passa a variavel tempo 
+		    		desvio_push=MedMinMax.standardDeviation(timeTotalPush);
+		    		out.println("Desvio padrão: " + desvio_push + " ns");//imprime na consola
+		    		file.println("Desvio padrão: " + desvio_push + "ns");//imprime no exel
+		    			
+		    		file.close();
+		    			
+		    		//vai chamar o metodo (maximeTimes) que se encontra no pacote Main e passa a variavel tempo 
+		    		maximo_pop=MedMinMax.maximeTimes(timeTotalPop);
+		    		out.println("\nTempo maximo de remoção: " + maximo_pop + " ns");//imprime na consola
+		    		file1.println("Tempo maximo de remoção: " + maximo_pop + "ns");//imprime no exel
+		    			
+		    		//vai chamar o metodo (minimeTimes) que se encontra no pacote Main e passa a variavel tempo 
+		    		minimo_pop=MedMinMax.minimeTimes(timeTotalPop);
+		    		out.println("Tempo minimo de remoção: " + minimo_pop + " ns");//imprime na consola
+		    		file1.println("Tempo minimo de remoção: " + minimo_pop + "ns");//imprime no exel
+		    			
+		    		//vai chamar o metodo (medianTimes) que se encontra no pacote Main e passa a variavel tempo 
+		    		media_pop=MedMinMax.meanTimes(timeTotalPop);
+		    		out.println("Tempo medio de remoção: " + media_pop + " ns");//imprime na consola
+		    		file1.println("Tempo medio de remoção: " + media_pop + "ns");//imprime no exel
+		    			
+		    		//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo
+		    		mediana_pop=MedMinMax.medianTimes(timeTotalPop);
+		    		out.println("Mediana de remoção: " + mediana_pop + " ns");//imprime na consola
+		    		file1.println("Mediana de remoção: " + mediana_pop + "ns");//imprime no exel
+		    			
+		    		//vai chamar o metodo (standardDeviation) que se encontra no pacote Main e passa a variavel tempo 
+		    		desvio_pop=MedMinMax.standardDeviation(timeTotalPop);
+		    		out.println("Desvio padrão: " + desvio_pop + " ns");//imprime na consola
+		    		file1.println("Desvio padrão: " + desvio_pop + "ns");//imprime no exel
+		    				
+		    		file1.close();
+		        }
 				   
 			}
+			//Resizing Array: Medir tempo de inserção e remoção dados na pilha
 			else if(opcao==2){
 				
 				@SuppressWarnings("resource")
 				final Scanner input = new Scanner(in);
 		        out.print("Quantas experiências?(numero inteiro): ");
 		        int repeticions = input.nextInt(); //guarda input do numero de experiencias		
+		        
+		        //aquecimento da experiencia
+		        for (@SuppressWarnings("unused") 
+				int numberOfItem : FileSize){
+		        	ResizingArrayFile.ResizingTest(numberOfItem);
+		    	}
 		        
 		        for (int numberOfItem : FileSize) {
 		        	PrintWriter file = new PrintWriter("data/" + "ResizingArrayInsert" + "_" + numberOfItem + ".csv");
@@ -167,6 +270,7 @@ public class Menu {
 		    		file1.close();
 		        }
 		    }
+			//ResizingArray verificar acrescimos e decrementos na pilha com potencias de 2
 			else if(opcao==3){
 				
 				@SuppressWarnings("resource")
@@ -178,13 +282,20 @@ public class Menu {
 				out.println("Resizing Array");
 				out.println("--------------------------------------");
 			
+				 //aquecimento da experiencia
+		        for (@SuppressWarnings("unused") 
+				int numberOfItem : FileSize){
+		        	ResizingArrayFile.ResizingTest(numberOfItem);
+		    	}
+		        
 				for (int numberOfItem : FileSize) {
 					for (int a = 0; a != repeticions; a++) {
 					out.println("Experiência: " + (a + 1));
-					ResizingArray.ResizingArrayFile.Resizing(numberOfItem);
+					ResizingArrayFile.Resizing(numberOfItem);
 					}
 				}	
 			}
+			//ResizingArray Verificar acrescimos e decrementos na pilha com potencias de 2+1
 			else if(opcao==4){
 				
 				@SuppressWarnings("resource")
@@ -196,18 +307,171 @@ public class Menu {
 				out.println("Resizing Array");
 				out.println("--------------------------------------");
 			
+				//aquecimento da experiencia
+		        for (@SuppressWarnings("unused") 
+				int numberOfItem : FileSize){
+		        	ResizingArrayFile.ResizingTest(numberOfItem);
+		    	}
+		        
 				for (int numberOfItem : FileSizeImpar) {
 					for (int a = 0; a != repeticions; a++) {
 					ResizingArray.ResizingArrayFile.Resizing(numberOfItem);
 					}
 				}		
 			}
+			// Merge Sort Medir tempo de ordenação para ficheiros sorted, partially sorted e shuffled
 			else if(opcao==5){
+				@SuppressWarnings("resource")
+				final Scanner input = new Scanner(in);
 				
+		        out.print("Quantas experiênçias?(numero inteiro): ");
+		        int repeticions = input.nextInt(); //guarda input do numero de experiencias
+		       
+		        for (String orderType : OrderType) {
+		        	for (int numberOfItem : FileSizeWarm) {
+		        		MergeSortFile.runAlgorithmTest(orderType, numberOfItem);
+		          	}
+		        }
+		        
+		        for (String orderType : OrderType) {
+		        	for (int numberOfItem : FileSize) {
+		        		PrintWriter file = new PrintWriter("data/" + "MergeSort" + "_" + orderType + "_" + numberOfItem + ".csv");
+		    
+		        		Double[] timeTotal = new Double[repeticions];
+		        		long estimatedTime = 0;
+		        		
+		        		
+		        			if (orderType == "sorted") {
+		        				out.println("-----------------------------------");
+		        				out.println("Sorted");
+		        				out.println("Numero de Itens " + numberOfItem);
+		        				out.println("-----------------------------------");
+		        			} else if (orderType == "partially_sorted") {
+		        				out.println("-----------------------------------");
+		        				out.println("Partially Sorted ");
+		        				out.println("Numero de Itens " + numberOfItem);
+		        				out.println("-----------------------------------");
+		        			} else {
+		        				out.println("-----------------------------------");
+		        				out.println("Shuffled");
+		        				out.println("Numero de Itens " + numberOfItem);
+		        				out.println("-----------------------------------");
+		        			}	
+					
+		        			for (int a = 0; a != repeticions; a++) {
+		        				estimatedTime = MergeSortFile.runAlgorithm(orderType, numberOfItem);
+		        				timeTotal[a] = (double) (estimatedTime);
+		        			}
+					
+		        			//vai chamar o metodo (maximeTimes) que se encontra no pacote Main e passa a variavel tempo 
+		        			maximo = MedMinMax.maximeTimes(timeTotal);
+		        			out.println("Tempo maximo de ordenação: " + maximo + " ns");//imprime na consola
+		        			file.println("Tempo maximo de ordenação: " + maximo + " ns");//imprime no exel
+	    			
+		        			//vai chamar o metodo (minimeTimes) que se encontra no pacote Main e passa a variavel tempo 
+		        			minimo = MedMinMax.minimeTimes(timeTotal);
+		        			out.println("Tempo minimo de ordenação: " + minimo + " ns");//imprime na consola
+		        			file.println("Tempo minimo de ordenação: " + minimo + " ns");//imprime no exel
+	    			
+		        			//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo
+		        			media = MedMinMax.meanTimes(timeTotal);
+		        			out.println("Tempo medio de ordenação: " + media + " ns");//imprime na consola
+		        			file.println("Tempo medio de ordenação: " + media + " ns");//imprime no exel
+	    			
+		        			//vai chamar o metodo (medianTimes) que se encontra no pacote Main e passa a variavel tempo 
+		        			mediana = MedMinMax.medianTimes(timeTotal);
+		        			out.println("Mediana de ordenação: " + mediana + " ns");//imprime na consola
+		        			file.println("Mediana de ordenação: " + mediana + " ns");//imprime no exel
+	    			
+		        			//vai chamar o metodo (standartDeviation) que se encontra no pacote Main e passa a variavel tempo 
+		        			desvio = MedMinMax.standardDeviation(timeTotal);
+		        			out.println("Desvio médio de ordenação: " + desvio + " ns");//imprime na consola
+		        			file.println("Desvio médio de ordenação: " + desvio + " ns");//imprime no exel
+	    			
+		        			file.close();
+		        		}
+		    		}
 			}
+			//Merge Sort Verificar comparações e acessos ao array
 			else if(opcao==6){
 				
+				
 			}
+			//BottomUpMerge
+			else if(opcao==7){
+				@SuppressWarnings("resource")
+				final Scanner input = new Scanner(in);
+				
+		        out.print("Quantas experiênçias?(numero inteiro): ");
+		        int repeticions = input.nextInt(); //guarda input do numero de experiencias
+		       
+		        //warmup
+		        for (String orderType : OrderType) {
+		        	for (int numberOfItem : FileSizeWarm) {
+		        		BottomUpMergeFile.runAlgorithmTest(orderType, numberOfItem);
+		          	}
+		        }
+		        
+		        for (String orderType : OrderType) {
+		        	for (int numberOfItem : FileSize) {
+		        		PrintWriter file = new PrintWriter("data/" + "BottomUpMergeFile" + "_" + orderType + "_" + numberOfItem + ".csv");
+		    
+		        		Double[] timeTotal = new Double[repeticions];
+		        		long estimatedTime = 0;
+		        		
+		        		
+		        			if (orderType == "sorted") {
+		        				out.println("-----------------------------------");
+		        				out.println("Sorted");
+		        				out.println("Numero de Itens " + numberOfItem);
+		        				out.println("-----------------------------------");
+		        			} else if (orderType == "partially_sorted") {
+		        				out.println("-----------------------------------");
+		        				out.println("Partially Sorted ");
+		        				out.println("Numero de Itens " + numberOfItem);
+		        				out.println("-----------------------------------");
+		        			} else {
+		        				out.println("-----------------------------------");
+		        				out.println("Shuffled");
+		        				out.println("Numero de Itens " + numberOfItem);
+		        				out.println("-----------------------------------");
+		        			}	
+					
+		        			for (int a = 0; a != repeticions; a++) {
+		        				estimatedTime = BottomUpMergeFile.runAlgorithm(orderType, numberOfItem);
+		        				timeTotal[a] = (double) (estimatedTime);
+		        			}
+					
+		        			//vai chamar o metodo (maximeTimes) que se encontra no pacote Main e passa a variavel tempo 
+		        			maximo = MedMinMax.maximeTimes(timeTotal);
+		        			out.println("Tempo maximo de ordenação: " + maximo + " ns");//imprime na consola
+		        			file.println("Tempo maximo de ordenação: " + maximo + " ns");//imprime no exel
+	    			
+		        			//vai chamar o metodo (minimeTimes) que se encontra no pacote Main e passa a variavel tempo 
+		        			minimo = MedMinMax.minimeTimes(timeTotal);
+		        			out.println("Tempo minimo de ordenação: " + minimo + " ns");//imprime na consola
+		        			file.println("Tempo minimo de ordenação: " + minimo + " ns");//imprime no exel
+	    			
+		        			//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo
+		        			media = MedMinMax.meanTimes(timeTotal);
+		        			out.println("Tempo medio de ordenação: " + media + " ns");//imprime na consola
+		        			file.println("Tempo medio de ordenação: " + media + " ns");//imprime no exel
+	    			
+		        			//vai chamar o metodo (medianTimes) que se encontra no pacote Main e passa a variavel tempo 
+		        			mediana = MedMinMax.medianTimes(timeTotal);
+		        			out.println("Mediana de ordenação: " + mediana + " ns");//imprime na consola
+		        			file.println("Mediana de ordenação: " + mediana + " ns");//imprime no exel
+	    			
+		        			//vai chamar o metodo (standartDeviation) que se encontra no pacote Main e passa a variavel tempo 
+		        			desvio = MedMinMax.standardDeviation(timeTotal);
+		        			out.println("Desvio médio de ordenação: " + desvio + " ns");//imprime na consola
+		        			file.println("Desvio médio de ordenação: " + desvio + " ns");//imprime no exel
+	    			
+		        			file.close();
+		        		}
+		    		}
+			}
+			//Insertion Sort Medir tempo de ordenação para ficheiros sorted, partially sorted e shuffled
 			else if(opcao==8){
 				
 				@SuppressWarnings("resource")
@@ -215,7 +479,14 @@ public class Menu {
 		        out.print("Quantas experiênçias?(numero inteiro): ");
 		        int repeticions = input.nextInt(); //guarda input do numero de experiencias
 		        //Double[] tempo = new Double[repetir]; //cria array tempo com o numero de posições indicadas no input			
-				
+		        
+		        //warmup
+		        for (String orderType : OrderType) {
+		        	for (int numberOfItem : FileSizeWarm) {
+		        		InsertionSortFile.runAlgorithmTest(orderType, numberOfItem);
+		          	}
+		        }
+		        
 		        for (String orderType : OrderType) {
 		        	for (int numberOfItem : FileSize) {
 		        		PrintWriter file = new PrintWriter("data/" + "InsertionSort" + "_" + orderType + "_" + numberOfItem + ".csv");
@@ -279,6 +550,7 @@ public class Menu {
 		    		}
 		     	}             
 			}
+			//Insertion Sort Verificar comparações e acessos ao array
 			else if(opcao==9){
 				for (String orderType : OrderType) {
 					for (int numberOfItem : FileSize) {

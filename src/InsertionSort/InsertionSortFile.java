@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import MergeSort.Merge;
 import edu.princeton.cs.introcs.In;
 
 public class InsertionSortFile {
@@ -17,7 +18,7 @@ public class InsertionSortFile {
 		String FilePath = "data/" + orderType + "_" + Item + ".txt";
 		boolean FileExists = new File(FilePath).isFile();
 		long estimatedTime = 0;
-			
+		
 		if (FileExists == true) {
 				@SuppressWarnings("deprecation")
 				String[] textFiles = In.readStrings(FilePath); //vai ler todo o conteúdo dos ficheiro 
@@ -28,6 +29,17 @@ public class InsertionSortFile {
 				return estimatedTime;
 		} else {
 			return 0;
+		}
+	}
+	
+public static void runAlgorithmTest(String orderType, int Item) throws FileNotFoundException {
+		
+		String FilePath = "data/" + orderType + "_" + Item + ".txt";
+		boolean FileExists = new File(FilePath).isFile();
+		
+		if (FileExists == true) {
+			String[] textFiles = In.readStrings(FilePath);
+			Insertion.sort(textFiles);
 		}
 	}
 	

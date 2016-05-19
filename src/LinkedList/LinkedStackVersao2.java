@@ -102,7 +102,7 @@ public class LinkedStackVersao2 {
 			file.close();
 			
 			// Cria novo ficheiro exel com o nome ResizingArrayDelete e o nº do item que vamos apagar, na directoria pretendida
-			PrintWriter file1 = new PrintWriter("data/" + "ResizingArrayDelete" + "_" + Item + ".csv");	
+			PrintWriter file1 = new PrintWriter("data/" + "LinkListDelete" + "_" + Item + ".csv");	
 			
 			//vai chamar o metodo (maximeTimes) que se encontra no pacote Main e passa a variavel tempo 
 			maximo_pop=MedMinMax.maximeTimes(timeTotalPop);
