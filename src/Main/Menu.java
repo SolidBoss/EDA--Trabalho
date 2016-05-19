@@ -112,6 +112,7 @@ public class Menu {
 		    		out.println("Numero de Itens " + numberOfItem);
 		    		out.println("-----------------------------------");
 		    			
+		    		
 		    		for (int a = 0; a != repeticions; a++) {
 		    			estimatedTimePush = LinkedStackFile.runPushStack(numberOfItem);
 	        			timeTotalPush[a] = (double) (estimatedTimePush);
