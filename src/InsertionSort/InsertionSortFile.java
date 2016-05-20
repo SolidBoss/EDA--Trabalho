@@ -3,41 +3,38 @@ package InsertionSort;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
-import MergeSort.Merge;
 import edu.princeton.cs.introcs.In;
 
 public class InsertionSortFile {
 	
-	public static void main(String[] args) throws IOException {
-      
-	}
-		
 	public static long runAlgorithm(String orderType, int Item) throws FileNotFoundException {
 			
+		// Variavel que diz localizacao do ficheiro txt,o orderType é referente a cada tipo de ordem e o numberOfItem é referente a cada nº do FileSize
 		String FilePath = "data/" + orderType + "_" + Item + ".txt";
 		boolean FileExists = new File(FilePath).isFile();
 		long estimatedTime = 0;
 		
+		// Caso o ficheiro exista, é feita a operação de ordenação
 		if (FileExists == true) {
 				@SuppressWarnings("deprecation")
 				String[] textFiles = In.readStrings(FilePath); //vai ler todo o conteúdo dos ficheiro 
 				long startTime = System.nanoTime();// Iniciar a medição em nanosegundos
-				Insertion.sort(textFiles);// Iniciar a ordenação de inserção com os valores do textFiles
+				Insertion.sort(textFiles);//Ordena cada ficheiro
 				estimatedTime = System.nanoTime() - startTime;// Tempo Final guardado em variavel
 				
 				return estimatedTime;
 		} else {
 			return 0;
 		}
-	}
-	
-public static void runAlgorithmTest(String orderType, int Item) throws FileNotFoundException {
-		
+}
+	//Metodo para o WarmUp
+	public static void runAlgorithmTest(String orderType, int Item) throws FileNotFoundException {
+
 		String FilePath = "data/" + orderType + "_" + Item + ".txt";
 		boolean FileExists = new File(FilePath).isFile();
-		
+
 		if (FileExists == true) {
+			@SuppressWarnings("deprecation")
 			String[] textFiles = In.readStrings(FilePath);
 			Insertion.sort(textFiles);
 		}

@@ -5,41 +5,32 @@ import static java.lang.System.in;
 import static java.lang.System.out;
 //import MergeSort.BottomUpMergeFile;
 import ResizingArray.ResizingArrayFile;
-import edu.princeton.cs.introcs.In;
+//import edu.princeton.cs.introcs.In;
 import InsertionSort.InsertionSortFile;
 import LinkedList.LinkedStackFile;
-import MergeSort.BottomUpMerge;
 import MergeSort.BottomUpMergeFile;
-import MergeSort.InstrumentedMerge;
+import MergeSort.InstrumentedMergeFile;
 import MergeSort.MergeSortFile;
-import MergeSort.Merge;
-
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
 
 public class Menu {
+	
 	// le input do teclado
 	static Scanner inputData; 
-	
-	//public static final double timeBudgetPerExperiment = 2.0;
-	
-	//public static final double minimumTimePerContiguousRepetitions = 2e-5;
-	
-	//Guarda o resultado das somas para que o compilador do java não tenha que optimizar nenhuma das chamadas do sumFrom1To()
-	//private static long sum;
 	
 	// Contém o número dos ficheiros que vão ser analizados
 	static int[] FileSize = { 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288, 1048576 };
 	static int[] FileSizeImpar = { 3, 5, 9, 17, 33, 65, 129, 257, 513, 1025, 2049, 4097, 8193, 16385, 32769, 65537, 131073, 262145, 524289, 1048577 };
 	static int[] FileSizeWarm = { 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096};
+	
 	// Contém o tipo de ficheiros que vão ser analizados
 	static String[] OrderType = { "sorted", "partially_sorted", "shuffled" };
 	static String[] OrderTypeTest = { "sorted_test", "partially_sorted_test", "shuffled_test" };
 	
-	// Variaveis para a média, mediana, maximo, minimo e desvio padrao
+	// Variaveis para a média, mediana, maximo, minimo e desvio padrao para o LinkedStack e Resizing Array
 	static double media_push;
 	static double media_pop;
 	static double maximo_push;
@@ -51,6 +42,7 @@ public class Menu {
 	static double desvio_pop;
 	static double desvio_push;
 	
+	// Variaveis para a média, mediana, maximo, minimo e desvio padrao para o Insertion e Merge
 	static double media;
 	static double maximo;
 	static double minimo;
@@ -64,14 +56,15 @@ public class Menu {
 		out.println("Resizing Array " );
 		out.println("2 - Medir tempo de inserção e remoção dados na pilha");
 		out.println("3 - Verificar acrescimos e decrementos na pilha com potencias de 2");
-		out.println("4 - Verificar acrescimos e decrementos na pilha com potencias de 2+1");
+		out.println("4 - Medir tempo de inserção e remoção dados na pilha com potencias de 2+1");
+		out.println("5 - Verificar acrescimos e decrementos na pilha com potencias de 2+1");
 		out.println("Merge Sort");
-		out.println("5 - Medir tempo de ordenação para ficheiros sorted, partially sorted e shuffled");
-		out.println("6 - Verificar comparações e acessos ao array");
-		out.println("7 - BottomUpMerge");
+		out.println("6 - Medir tempo de ordenação para ficheiros sorted, partially sorted e shuffled");
+		out.println("7 - Verificar comparações e acessos ao array");
+		out.println("8 - BottomUpMerge");
 		out.println("Insertion Sort");
-		out.println("8 - Medir tempo de ordenação para ficheiros sorted, partially sorted e shuffled");
-		out.println("9 - Verificar comparações e acessos ao array");
+		out.println("9 - Medir tempo de ordenação para ficheiros sorted, partially sorted e shuffled");
+		out.println("10 - Verificar comparações e acessos ao array");
 		out.println("Quick Sort");
 		out.println("10 - Medir tempo de ordenação para ficheiros sorted, partially sorted e shuffled");
 		out.println("11 - Verificar comparações e acessos ao array");
@@ -93,18 +86,25 @@ public class Menu {
 		        out.print("Quantas experiências?(numero inteiro): ");
 		        int repeticions = input.nextInt(); //guarda input do numero de experiencias		
 		        
-		        //aquecimento da experiencia
-		        for (@SuppressWarnings("unused") 
-				int numberOfItem : FileSize){
+		        //WarmUp
+		        for (int numberOfItem : FileSize){
 		        	LinkedStackFile.LinkedStackTest(numberOfItem);
 		    	}
 		        
+		        // Ciclo que analisa cada posicao do array ou seja cada Item do
+				// FileSize, dentro de cada tipo de ficheiro
 		        for (int numberOfItem : FileSize) {
+		        	
+		        	// Cria novo ficheiro exel com o nome LinkedList e o nº do item, na
+					// directoria pretendida (data/)
 		        	PrintWriter file = new PrintWriter("data/" + "LinkListInsert" + "_" + numberOfItem + ".csv");
 		        	PrintWriter file1 = new PrintWriter("data/" + "LinkListDelete" + "_" + numberOfItem + ".csv");	
 		        	
+		        	// variavel com o nº de repetições, onde assegura que os resultados
+					// sejam testados varias vezes para verificar a sua veracidade
 		        	Double[] timeTotalPush = new Double[repeticions];
 		    		Double[] timeTotalPop = new Double[repeticions];
+		    		
 		    		long estimatedTimePush = 0;
 		    		long estimatedTimePop = 0;
 		    			
@@ -112,12 +112,11 @@ public class Menu {
 		    		out.println("Numero de Itens " + numberOfItem);
 		    		out.println("-----------------------------------");
 		    			
-		    		
 		    		for (int a = 0; a != repeticions; a++) {
-		    			estimatedTimePush = LinkedStackFile.runPushStack(numberOfItem);
+		    			estimatedTimePush = LinkedStackFile.runPushLinked(numberOfItem);
 	        			timeTotalPush[a] = (double) (estimatedTimePush);
 	        				
-	        			estimatedTimePop = LinkedStackFile.runPopStack(numberOfItem);
+	        			estimatedTimePop = LinkedStackFile.runPopLinked(numberOfItem);
 	        			timeTotalPop[a] = (double) (estimatedTimePop);
 		    		}
 				
@@ -186,8 +185,7 @@ public class Menu {
 		        int repeticions = input.nextInt(); //guarda input do numero de experiencias		
 		        
 		        //aquecimento da experiencia
-		        for (@SuppressWarnings("unused") 
-				int numberOfItem : FileSize){
+		        for (int numberOfItem : FileSize){
 		        	ResizingArrayFile.ResizingTest(numberOfItem);
 		    	}
 		        
@@ -206,13 +204,15 @@ public class Menu {
 		    			
 		    		for (int a = 0; a != repeticions; a++) {
 		    			estimatedTimePush = ResizingArrayFile.runPushStack(numberOfItem);
-	        			out.println("Tempo de inserção (experiência: " + (a + 1) + "): " + estimatedTimePush + " ns");// Mostra o tempo
-	        			out.println("-----------------------------------");
+		    			//ver tempo de cada inserção
+	        			//out.println("Tempo de inserção (experiência: " + (a + 1) + "): " + estimatedTimePush + " ns");// Mostra o tempo
+	        			//out.println("-----------------------------------");
 	        			timeTotalPush[a] = (double) (estimatedTimePush);
 	        				
 	        			estimatedTimePop = ResizingArrayFile.runPopStack(numberOfItem);
-	        			out.println("Tempo de remoção (experiência: " + (a + 1) + "): " + estimatedTimePop + " ns");// Mostra o tempo
-	        			out.println("-----------------------------------");
+	        			//ver tempo de cada remoção
+	        			//out.println("Tempo de remoção (experiência: " + (a + 1) + "): " + estimatedTimePop + " ns");// Mostra o tempo
+	        			//out.println("-----------------------------------");
 	        			timeTotalPop[a] = (double) (estimatedTimePop);
 		    		}
 				
@@ -283,9 +283,8 @@ public class Menu {
 				out.println("Resizing Array");
 				out.println("--------------------------------------");
 			
-				 //aquecimento da experiencia
-		        for (@SuppressWarnings("unused") 
-				int numberOfItem : FileSize){
+				//aquecimento da experiencia
+		        for (int numberOfItem : FileSize){
 		        	ResizingArrayFile.ResizingTest(numberOfItem);
 		    	}
 		        
@@ -296,8 +295,103 @@ public class Menu {
 					}
 				}	
 			}
-			//ResizingArray Verificar acrescimos e decrementos na pilha com potencias de 2+1
+			//Medir tempo de inserção e remoção dados na pilha com potencias de 2+1
 			else if(opcao==4){
+				@SuppressWarnings("resource")
+				final Scanner input = new Scanner(in);
+		        out.print("Quantas experiências?(numero inteiro): ");
+		        int repeticions = input.nextInt(); //guarda input do numero de experiencias		
+		        
+		        //aquecimento da experiencia
+		        for (int numberOfItem : FileSizeImpar){
+		        	ResizingArrayFile.ResizingTest(numberOfItem);
+		    	}
+		        
+		        for (int numberOfItem : FileSizeImpar) {
+		        	PrintWriter file = new PrintWriter("data/" + "ResizingArray2+1Insert" + "_" + numberOfItem + ".csv");
+		        	PrintWriter file1 = new PrintWriter("data/" + "ResizingArray2+1Delete" + "_" + numberOfItem + ".csv");	
+		        		
+		        	Double[] timeTotalPush = new Double[repeticions];
+		    		Double[] timeTotalPop = new Double[repeticions];
+		    		long estimatedTimePush = 0;
+		    		long estimatedTimePop = 0;
+		    			
+		    		out.println("-----------------------------------");
+		    		out.println("Numero de Itens " + numberOfItem);
+		    		out.println("-----------------------------------");
+		    			
+		    		for (int a = 0; a != repeticions; a++) {
+		    			estimatedTimePush = ResizingArrayFile.runPushStack(numberOfItem);
+		    			//ver tempo de cada inserção
+	        			//out.println("Tempo de inserção (experiência: " + (a + 1) + "): " + estimatedTimePush + " ns");// Mostra o tempo
+	        			//out.println("-----------------------------------");
+	        			timeTotalPush[a] = (double) (estimatedTimePush);
+	        				
+	        			estimatedTimePop = ResizingArrayFile.runPopStack(numberOfItem);
+	        			//ver tempo de cada remoção
+	        			//out.println("Tempo de remoção (experiência: " + (a + 1) + "): " + estimatedTimePop + " ns");// Mostra o tempo
+	        			//out.println("-----------------------------------");
+	        			timeTotalPop[a] = (double) (estimatedTimePop);
+		    		}
+				
+		    		//vai chamar o metodo (maximeTimes) que se encontra no pacote Main e passa a variavel tempo 
+		    		maximo_push=MedMinMax.maximeTimes(timeTotalPush);
+		    		out.println("\nTempo maximo de inserção: " + maximo_push + " ns");//imprime na consola
+		    		file.println("Tempo maximo de inserção: " + maximo_push + "ns");//imprime no exel
+		    			
+		    		//vai chamar o metodo (minimeTimes) que se encontra no pacote Main e passa a variavel tempo 
+		    		minimo_push=MedMinMax.minimeTimes(timeTotalPush);
+		    		out.println("Tempo minimo de inserção: " + minimo_push + " ns");//imprime na consola
+		    		file.println("Tempo minimo de inserção: " + minimo_push + "ns");//imprime no exel
+		    			
+		    		//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo
+		    		media_push=MedMinMax.meanTimes(timeTotalPush);
+		    		out.println("Tempo medio de inserção: " + media_push + " ns");//imprime na consola
+		    		file.println("Tempo medio de inserção: " + media_push + "ns");//imprime no exel
+		    			
+		    		//vai chamar o metodo (medianTimes) que se encontra no pacote Main e passa a variavel tempo 
+		    		mediana_push=MedMinMax.medianTimes(timeTotalPush);
+		    		out.println("Mediana de inserção: " + mediana_push + " ns");//imprime na consola
+		    		file.println("Mediana de inserção: " + mediana_push + "ns");//imprime no exel
+		    			
+		    		//vai chamar o metodo (standartDeviation) que se encontra no pacote Main e passa a variavel tempo 
+		    		desvio_push=MedMinMax.standardDeviation(timeTotalPush);
+		    		out.println("Desvio padrão: " + desvio_push + " ns");//imprime na consola
+		    		file.println("Desvio padrão: " + desvio_push + "ns");//imprime no exel
+		    			
+		    		file.close();
+		    			
+		    		//vai chamar o metodo (maximeTimes) que se encontra no pacote Main e passa a variavel tempo 
+		    		maximo_pop=MedMinMax.maximeTimes(timeTotalPop);
+		    		out.println("\nTempo maximo de remoção: " + maximo_pop + " ns");//imprime na consola
+		    		file1.println("Tempo maximo de remoção: " + maximo_pop + "ns");//imprime no exel
+		    			
+		    		//vai chamar o metodo (minimeTimes) que se encontra no pacote Main e passa a variavel tempo 
+		    		minimo_pop=MedMinMax.minimeTimes(timeTotalPop);
+		    		out.println("Tempo minimo de remoção: " + minimo_pop + " ns");//imprime na consola
+		    		file1.println("Tempo minimo de remoção: " + minimo_pop + "ns");//imprime no exel
+		    			
+		    		//vai chamar o metodo (medianTimes) que se encontra no pacote Main e passa a variavel tempo 
+		    		media_pop=MedMinMax.meanTimes(timeTotalPop);
+		    		out.println("Tempo medio de remoção: " + media_pop + " ns");//imprime na consola
+		    		file1.println("Tempo medio de remoção: " + media_pop + "ns");//imprime no exel
+		    			
+		    		//vai chamar o metodo (meanTimes) que se encontra no pacote Main e passa a variavel tempo
+		    		mediana_pop=MedMinMax.medianTimes(timeTotalPop);
+		    		out.println("Mediana de remoção: " + mediana_pop + " ns");//imprime na consola
+		    		file1.println("Mediana de remoção: " + mediana_pop + "ns");//imprime no exel
+		    			
+		    		//vai chamar o metodo (standardDeviation) que se encontra no pacote Main e passa a variavel tempo 
+		    		desvio_pop=MedMinMax.standardDeviation(timeTotalPop);
+		    		out.println("Desvio padrão: " + desvio_pop + " ns");//imprime na consola
+		    		file1.println("Desvio padrão: " + desvio_pop + "ns");//imprime no exel
+		    				
+		    		file1.close();
+		        }
+			
+			}
+			//ResizingArray Verificar acrescimos e decrementos na pilha com potencias de 2+1
+			else if(opcao==5){
 				
 				@SuppressWarnings("resource")
 				final Scanner input = new Scanner(in);
@@ -305,12 +399,11 @@ public class Menu {
 		        int repeticions = input.nextInt(); //guarda input do numero de experiencias		
 		        
 				out.println("--------------------------------------");
-				out.println("Resizing Array");
+				out.println("Resizing Array Potencia 2+1");
 				out.println("--------------------------------------");
 			
 				//aquecimento da experiencia
-		        for (@SuppressWarnings("unused") 
-				int numberOfItem : FileSize){
+		        for (int numberOfItem : FileSizeImpar){
 		        	ResizingArrayFile.ResizingTest(numberOfItem);
 		    	}
 		        
@@ -321,7 +414,7 @@ public class Menu {
 				}		
 			}
 			// Merge Sort Medir tempo de ordenação para ficheiros sorted, partially sorted e shuffled
-			else if(opcao==5){
+			else if(opcao==6){
 				@SuppressWarnings("resource")
 				final Scanner input = new Scanner(in);
 				
@@ -340,7 +433,6 @@ public class Menu {
 		    
 		        		Double[] timeTotal = new Double[repeticions];
 		        		long estimatedTime = 0;
-		        		
 		        		
 		        			if (orderType == "sorted") {
 		        				out.println("-----------------------------------");
@@ -394,12 +486,17 @@ public class Menu {
 		    		}
 			}
 			//Merge Sort Verificar comparações e acessos ao array
-			else if(opcao==6){
+			else if(opcao==7){
 				
+				for (String orderType : OrderType) {
+		        	for (int numberOfItem : FileSize) {
+		        			InstrumentedMergeFile.runCountData(orderType, numberOfItem);
+		        	}
+				}
 				
 			}
 			//BottomUpMerge
-			else if(opcao==7){
+			else if(opcao==8){
 				@SuppressWarnings("resource")
 				final Scanner input = new Scanner(in);
 				
@@ -473,7 +570,7 @@ public class Menu {
 		    		}
 			}
 			//Insertion Sort Medir tempo de ordenação para ficheiros sorted, partially sorted e shuffled
-			else if(opcao==8){
+			else if(opcao==9){
 				
 				@SuppressWarnings("resource")
 				final Scanner input = new Scanner(in);
@@ -516,8 +613,8 @@ public class Menu {
 					
 		        			for (int a = 0; a != repeticions; a++) {
 		        				estimatedTime = InsertionSortFile.runAlgorithm(orderType, numberOfItem);
-		        				out.println("Tempo de ordenação (experiência: " + (a + 1) + "): " + estimatedTime + " ns");// Mostra o tempo
-		        				out.println("-----------------------------------");
+		        				//out.println("Tempo de ordenação (experiência: " + (a + 1) + "): " + estimatedTime + " ns");// Mostra o tempo
+		        				//out.println("-----------------------------------");
 		        				timeTotal[a] = (double) (estimatedTime);
 		        			}
 					
@@ -551,8 +648,8 @@ public class Menu {
 		    		}
 		     	}             
 			}
-			//Insertion Sort Verificar comparações e acessos ao array
-			else if(opcao==9){
+			//Insertion Sort: verificar comparações e acessos ao array
+			else if(opcao==10){
 				for (String orderType : OrderType) {
 					for (int numberOfItem : FileSize) {
 						
