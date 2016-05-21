@@ -95,13 +95,11 @@ public class Menu {
 				// FileSize, dentro de cada tipo de ficheiro
 		        for (int numberOfItem : FileSize) {
 		        	
-		        	// Cria novo ficheiro exel com o nome LinkedList e o nº do item, na
-					// directoria pretendida (data/)
+		        	// Cria novo ficheiro exel na directoria pretendida (data/)
 		        	PrintWriter file = new PrintWriter("data/" + "LinkListInsert" + "_" + numberOfItem + ".csv");
 		        	PrintWriter file1 = new PrintWriter("data/" + "LinkListDelete" + "_" + numberOfItem + ".csv");	
 		        	
-		        	// variavel com o nº de repetições, onde assegura que os resultados
-					// sejam testados varias vezes para verificar a sua veracidade
+		        	// variavel com o nº de repetições
 		        	Double[] timeTotalPush = new Double[repeticions];
 		    		Double[] timeTotalPop = new Double[repeticions];
 		    		
@@ -113,9 +111,11 @@ public class Menu {
 		    		out.println("-----------------------------------");
 		    			
 		    		for (int a = 0; a != repeticions; a++) {
+		    			//Chama metodo runPushLinked da classe LinkedStackFile, do  pacote LinkedList para realizar o push
 		    			estimatedTimePush = LinkedStackFile.runPushLinked(numberOfItem);
 	        			timeTotalPush[a] = (double) (estimatedTimePush);
 	        				
+	        			//Chama metodo runPopLinked da classe LinkedStackFile, do  pacote LinkedList para realizar o pop
 	        			estimatedTimePop = LinkedStackFile.runPopLinked(numberOfItem);
 	        			timeTotalPop[a] = (double) (estimatedTimePop);
 		    		}
@@ -307,28 +307,36 @@ public class Menu {
 		        	ResizingArrayFile.ResizingTest(numberOfItem);
 		    	}
 		        
+		        // Ciclo que analisa cada posicao do array ou seja cada Item do
+				// FileSizeImpar, dentro de cada tipo de ficheiro
 		        for (int numberOfItem : FileSizeImpar) {
+		        	
+		        	// Cria novo ficheiro exel na directoria pretendida (data/)
 		        	PrintWriter file = new PrintWriter("data/" + "ResizingArray2+1Insert" + "_" + numberOfItem + ".csv");
 		        	PrintWriter file1 = new PrintWriter("data/" + "ResizingArray2+1Delete" + "_" + numberOfItem + ".csv");	
 		        		
-		        	Double[] timeTotalPush = new Double[repeticions];
+		        	// variavel com o nº de repetições
+					Double[] timeTotalPush = new Double[repeticions];
 		    		Double[] timeTotalPop = new Double[repeticions];
+		    		
+		    		//variaveis para o tempo de inserção e remoção
 		    		long estimatedTimePush = 0;
 		    		long estimatedTimePop = 0;
 		    			
 		    		out.println("-----------------------------------");
 		    		out.println("Numero de Itens " + numberOfItem);
 		    		out.println("-----------------------------------");
-		    			
+		    		
+		    		//Ciclo for vai realizar o nº de repetições que queremos
 		    		for (int a = 0; a != repeticions; a++) {
 		    			estimatedTimePush = ResizingArrayFile.runPushStack(numberOfItem);
-		    			//ver tempo de cada inserção
+		    			//Ver tempo de cada inserção
 	        			//out.println("Tempo de inserção (experiência: " + (a + 1) + "): " + estimatedTimePush + " ns");// Mostra o tempo
 	        			//out.println("-----------------------------------");
 	        			timeTotalPush[a] = (double) (estimatedTimePush);
 	        				
 	        			estimatedTimePop = ResizingArrayFile.runPopStack(numberOfItem);
-	        			//ver tempo de cada remoção
+	        			//Ver tempo de cada remoção
 	        			//out.println("Tempo de remoção (experiência: " + (a + 1) + "): " + estimatedTimePop + " ns");// Mostra o tempo
 	        			//out.println("-----------------------------------");
 	        			timeTotalPop[a] = (double) (estimatedTimePop);
@@ -402,11 +410,13 @@ public class Menu {
 				out.println("Resizing Array Potencia 2+1");
 				out.println("--------------------------------------");
 			
-				//aquecimento da experiencia
+				//WarmUp
 		        for (int numberOfItem : FileSizeImpar){
 		        	ResizingArrayFile.ResizingTest(numberOfItem);
 		    	}
 		        
+		        // Ciclo que analisa cada posicao do array ou seja cada Item do
+				// FileSizeImpar, dentro de cada tipo de ficheiro
 				for (int numberOfItem : FileSizeImpar) {
 					for (int a = 0; a != repeticions; a++) {
 					ResizingArray.ResizingArrayFile.Resizing(numberOfItem);
@@ -421,17 +431,24 @@ public class Menu {
 		        out.print("Quantas experiênçias?(numero inteiro): ");
 		        int repeticions = input.nextInt(); //guarda input do numero de experiencias
 		       
+		        //WarmUp
 		        for (String orderType : OrderType) {
 		        	for (int numberOfItem : FileSizeWarm) {
 		        		MergeSortFile.runAlgorithmTest(orderType, numberOfItem);
 		          	}
 		        }
 		        
+		        //Ciclo para percorrer cada tipo de ficheiro
 		        for (String orderType : OrderType) {
+		        	//Ciclo que analisa cada posicao do array, ou seja, cada Item do FileSize
 		        	for (int numberOfItem : FileSize) {
+		        		
+		        		// Cria novo ficheiro exel
 		        		PrintWriter file = new PrintWriter("data/" + "MergeSort" + "_" + orderType + "_" + numberOfItem + ".csv");
 		    
+		        		//cria array de repetições que foram digitadas 
 		        		Double[] timeTotal = new Double[repeticions];
+		        		
 		        		long estimatedTime = 0;
 		        		
 		        			if (orderType == "sorted") {
@@ -451,6 +468,7 @@ public class Menu {
 		        				out.println("-----------------------------------");
 		        			}	
 					
+		        			//Chama metodo runPushLinked da classe MergeSortFile, do  pacote MergeSort para realizar a ordenação
 		        			for (int a = 0; a != repeticions; a++) {
 		        				estimatedTime = MergeSortFile.runAlgorithm(orderType, numberOfItem);
 		        				timeTotal[a] = (double) (estimatedTime);
@@ -488,8 +506,10 @@ public class Menu {
 			//Merge Sort Verificar comparações e acessos ao array
 			else if(opcao==7){
 				
+				//Ciclo para percorrer cada tipo de ficheiro
 				for (String orderType : OrderType) {
-		        	for (int numberOfItem : FileSize) {
+					//Ciclo que analisa cada posicao do array, ou seja, cada Item do FileSize
+					for (int numberOfItem : FileSize) {
 		        			InstrumentedMergeFile.runCountData(orderType, numberOfItem);
 		        	}
 				}
@@ -510,7 +530,9 @@ public class Menu {
 		          	}
 		        }
 		        
+		        //Ciclo para percorrer cada tipo de ficheiro
 		        for (String orderType : OrderType) {
+		        	//Ciclo que analisa cada posicao do array, ou seja, cada Item do FileSize
 		        	for (int numberOfItem : FileSize) {
 		        		PrintWriter file = new PrintWriter("data/" + "BottomUpMergeFile" + "_" + orderType + "_" + numberOfItem + ".csv");
 		    

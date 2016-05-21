@@ -6,6 +6,7 @@ public class LinkedStackFile {
 		
 		LinkedStack<String> numbers = new LinkedStack<String>();// criação de uma nova pilha numbers
 		long estimatedTime = 0;
+		
 		long starTimePush = System.nanoTime();// Iniciar a medição em nanosegundos
 		for (int i = 0; i != Item; i++) {
 			numbers.push("LinkedStack");// inserir na pilha numbers o valor "LinkedStack"
@@ -28,6 +29,7 @@ public class LinkedStackFile {
 			numbers.push("LinkedStack");// inserir na pilha numbers o valor "LinkedStack"
 		}
 		long estimatedTime = 0;
+		
 		long startTimePop = System.nanoTime(); // Iniciar a medição em nanosegundos
 		while (!numbers.isEmpty()) //Enquanto houver itens na pilha
 			numbers.pop();//Remove o item

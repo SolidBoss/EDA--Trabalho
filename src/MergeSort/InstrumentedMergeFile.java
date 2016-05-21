@@ -8,8 +8,10 @@ import edu.princeton.cs.introcs.In;
 //classe para ver o nº de comparações, nº de acessos ao array, nº de leituras e o nº de escritas
 public class InstrumentedMergeFile {
 		
+		//Metodo para averiguar Número de comparações, Número de leitura dos Array, Número de escritas no Array, Número de acesso ao Array
 		public static void runCountData(String orderType, int numberOfItem) throws FileNotFoundException {
 			
+		
 		String FilePath = "data/" + orderType + "_" + numberOfItem + ".txt";
 		boolean FileExists = new File(FilePath).isFile();
 		
@@ -36,7 +38,7 @@ public class InstrumentedMergeFile {
 			@SuppressWarnings("deprecation")
 			String[] textFiles = In.readStrings(FilePath);
 
-			//Tivemos que utilizar a classe InstrumentedMerge para ordenar cada ficheiro, porque só nessa classe é que conseguimos saber as interações que estão acontecer no Array
+			//Tivemos que utilizar a classe InstrumentedMerge para ordenar os itens de cada ficheiro
 			InstrumentedMerge.sort(textFiles);
 
 			//vai aceder ao metodo getNumberOfComparisons() da classe InstrumentedMerge e retorna o nº de comparações feitos no merge, do textFiles em causa  
