@@ -8,6 +8,7 @@ public class BottomUpMergeFile {
 		
 	public static long runAlgorithm(String orderType, int Item) throws FileNotFoundException {
 
+		// Variavel que diz localizacao do ficheiro txt,o orderType é referente a cada tipo de ordem e o numberOfItem é referente a cada nº do FileSize
 		String FilePath = "data/" + orderType + "_" + Item + ".txt";
 		boolean FileExists = new File(FilePath).isFile();
 		long estimatedTime = 0;
@@ -16,7 +17,7 @@ public class BottomUpMergeFile {
 			@SuppressWarnings("deprecation")
 			String[] textFiles = In.readStrings(FilePath); // vai ler todo o conteúdo dos ficheiro
 			long startTime = System.nanoTime();// Iniciar a medição em nanosegundos
-			BottomUpMerge.sort(textFiles);
+			BottomUpMerge.sort(textFiles);//Ordena cada item do ficheiro
 			estimatedTime = System.nanoTime() - startTime;// Tempo Final guardado em variavel
 
 			return estimatedTime;

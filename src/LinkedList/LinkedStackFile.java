@@ -23,7 +23,6 @@ public class LinkedStackFile {
 	}
 
 	public static long runPopLinked(int Item) {
-		// criação de uma nova pilha, numbers
 		LinkedStack<String> numbers = new LinkedStack<String>();
 		for (int i = 0; i != Item; i++) {
 			numbers.push("LinkedStack");// inserir na pilha numbers o valor "LinkedStack"

@@ -11,7 +11,7 @@ public class InstrumentedMergeFile {
 		//Metodo para averiguar Número de comparações, Número de leitura dos Array, Número de escritas no Array, Número de acesso ao Array
 		public static void runCountData(String orderType, int numberOfItem) throws FileNotFoundException {
 			
-		
+		// Variavel que diz localizacao do ficheiro txt,o orderType é referente a cada tipo de ordem e o numberOfItem é referente a cada nº do FileSize	
 		String FilePath = "data/" + orderType + "_" + numberOfItem + ".txt";
 		boolean FileExists = new File(FilePath).isFile();
 		

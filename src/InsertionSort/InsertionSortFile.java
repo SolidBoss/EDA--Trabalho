@@ -2,7 +2,6 @@ package InsertionSort;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import edu.princeton.cs.introcs.In;
 
 public class InsertionSortFile {

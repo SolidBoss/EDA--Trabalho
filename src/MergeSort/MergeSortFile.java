@@ -31,7 +31,6 @@ public class MergeSortFile {
 	
 	public static void runAlgorithmTest(String orderType, int Item) throws FileNotFoundException {
 		
-		//variavel que diz localizacao do ficheiro txt,o orderType é referente a cada tipo de ordem e o numberOfItem é referente a cada nº do FileSize
 		String FilePath = "data/" + orderType + "_" + Item + ".txt";
 		boolean FileExists = new File(FilePath).isFile();
 		

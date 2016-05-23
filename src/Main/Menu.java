@@ -3,9 +3,7 @@ package Main;
 
 import static java.lang.System.in;
 import static java.lang.System.out;
-//import MergeSort.BottomUpMergeFile;
 import ResizingArray.ResizingArrayFile;
-//import edu.princeton.cs.introcs.In;
 import InsertionSort.InsertionSortFile;
 import LinkedList.LinkedStackFile;
 import MergeSort.BottomUpMergeFile;
