@@ -386,7 +386,7 @@ public class Menu {
 		        
 		        for (int numberOfItem : FileSizeImpar) {
 					for (int a = 0; a != repeticions; a++) {
-					ResizingArray.ResizingArrayFile.Resizing(numberOfItem);
+					ResizingArrayFile.Resizing(numberOfItem);
 					}
 				}		
 			}
