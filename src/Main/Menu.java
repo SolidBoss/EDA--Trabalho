@@ -690,7 +690,7 @@ public class Menu {
 						}
 						
 						int[] data = {0, 0, 0};
-						data = InsertionSortFile.runCountData(orderType, numberOfItem);
+						data = InsertionSortFile.runCountData(orderType, numberOfItem); //o array data vai guardar o numero de comparações, acessos e trocas 
 						out.println("Número de comparações: "+data[0]);
 						out.println("Número de Acessos a array: "+data[1]);
 						out.println("Número de Trocas: "+data[2]);
