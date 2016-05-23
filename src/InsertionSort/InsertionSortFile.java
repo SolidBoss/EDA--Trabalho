@@ -40,6 +40,7 @@ public class InsertionSortFile {
 		}
 	}
 	
+	//Metodo para ler ler strings do txt, ordernar com o Insertion e passar para o metodo getCountData
 	public static int[] runCountData(String orderType, int Item) throws FileNotFoundException {
 		
 		String FilePath = "data/" + orderType + "_" + Item + ".txt";
@@ -48,9 +49,9 @@ public class InsertionSortFile {
 			
 		if (FileExists==true) {	
 			@SuppressWarnings("deprecation")
-			String[] textFiles = In.readStrings(FilePath);
-			Insertion.sort(textFiles);
-			countData = Insertion.getCountData();	
+			String[] textFiles = In.readStrings(FilePath);//vai ler todo o conteúdo dos ficheiro 
+			Insertion.sort(textFiles);//Ordena cada ficheiro
+			countData = Insertion.getCountData();//invoca o metodo getCountData e guarda os valores na variavel
 			
 			return countData;
 			
