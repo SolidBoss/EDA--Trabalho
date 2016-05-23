@@ -6,6 +6,5 @@
 	<classpathentry kind="lib" path="algs4-package.jar"/>
 	<classpathentry kind="lib" path="stdlib-package.jar"/>
 	<classpathentry kind="lib" path="jcommon-1.0.22.jar"/>
-	<classpathentry kind="lib" path="jfreechart-1.0.17.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
