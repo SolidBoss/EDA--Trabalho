@@ -1,6 +1,5 @@
 package MergeSort;
 
-//import static java.lang.System.out;
 import java.io.File;
 import java.io.FileNotFoundException;
 import edu.princeton.cs.introcs.In;

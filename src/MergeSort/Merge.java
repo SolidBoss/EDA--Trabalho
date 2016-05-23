@@ -20,6 +20,7 @@ public final class Merge {
                 values) : "Array should be increasing after sorting.";
     }
 
+    // mergesort values[first..last] utilizando array auxiliary[first..last]
     public static <Item extends Comparable<? super Item>> void sort(
             final Item[] values, final Item[] auxiliary, final int first,
             final int last) {
@@ -34,6 +35,7 @@ public final class Merge {
         merge(values, auxiliary, first, middle, last);
     }
 
+    // Index merge values[first .. middle] com values[middle+1 .. last] utilizando auxiliary[first .. last]
     private static <Item extends Comparable<? super Item>> void merge(
             final Item[] values, final Item[] auxiliary, final int first,
             final int middle, final int last) {
@@ -67,6 +69,7 @@ public final class Merge {
                 last) : "Merged segment should be increasing.";
     }
 
+    // o first < second ?
     private static <Value extends Comparable<? super Value>> boolean isLess(
             final Value first, final Value second) {
         return first.compareTo(second) < 0;

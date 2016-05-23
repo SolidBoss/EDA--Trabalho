@@ -65,10 +65,7 @@ public class Menu {
 		out.println("Insertion Sort");
 		out.println("9 - Medir tempo de ordenação para ficheiros sorted, partially sorted e shuffled");
 		out.println("10 - Verificar comparações e acessos ao array");
-		out.println("Quick Sort");
-		out.println("10 - Medir tempo de ordenação para ficheiros sorted, partially sorted e shuffled");
-		out.println("11 - Verificar comparações e acessos ao array");
-		out.println("12 - Sair");
+		out.println("11 - Sair");
 		out.println("Opção: ");
 		return inputData.nextInt(); // Retorna o input do teclado
 	}
@@ -701,7 +698,7 @@ public class Menu {
 				}
 			}
 			
-		}while (opcao != 12);{System.exit(0);}
+		}while (opcao != 11);{System.exit(0);}
 	}
 }
 
