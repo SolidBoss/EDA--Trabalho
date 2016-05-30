@@ -1,19 +1,15 @@
 package SymbolTables;
 
-import static java.lang.System.in;
 import static java.lang.System.out;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Scanner;
 
 import Main.MedMinMax;
 import edu.princeton.cs.introcs.In;
 
 public class Sequential2 {
 
-	static int[] FileSize = { 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096 };
+	static int[] FileSize = { 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288, 1048576 };;
 	static int[] FileSizeWarm = { 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096 };
 
 	// Contém o tipo de ficheiros que vão ser analizados
@@ -44,7 +40,7 @@ public class Sequential2 {
 						String key = textFiles[count];
 						sequential.put(key, count);
 						sequential.delete(key);
-						sequential.get(key);
+						//sequential.get(key);
 					}
 				}
 			}
@@ -74,43 +70,45 @@ public class Sequential2 {
 				String FilePath = "data/" + orderType + "_" + numberOfItem + ".txt";
 				boolean FileExists = new File(FilePath).isFile();
 
-				int repeticions=2;
+				int repeticions=5;
 				Double[] timePut = new Double[repeticions];
-				Double[] timeDelete = new Double[repeticions];
+				//Double[] timeDelete = new Double[repeticions];
 				
 				if (FileExists == true) {
 
 					String[] textFiles = In.readStrings(FilePath);
 					long estimatedTimePut, starTimePut = 0;
-					long estimatedTimeDelte, starTimeDelete = 0;
+					//long estimatedTimeDelte, starTimeDelete = 0;
 					
+					
+					if (!(orderType == "sorted") || !(orderType == "partially_sorted") ){
 					// Binary
 					for (int i = 0; i != repeticions; i++) {
-						BinarySearchST<String, Integer> binary = new BinarySearchST<String, Integer>();
-
+						SequentialSearchST<String, Integer> sequential = new SequentialSearchST<String, Integer>();
 						starTimePut = System.nanoTime();
 						for (int count = 0; count != numberOfItem; count++) {
 							String key = textFiles[count];
 							// insere chave
-							binary.put(key, count);	
+							sequential.put(key, count);	
 						}
-						
 						estimatedTimePut = System.nanoTime() - starTimePut;
 						timePut[i] = (double) (estimatedTimePut);
+					}
+					
 						
 						//out.println(estimatedTimePut);
 						
-						starTimeDelete = System.nanoTime();
+						/*starTimeDelete = System.nanoTime();
 						for (int count = 0; count != numberOfItem; count++) {
 							String key = textFiles[count];
 							// insere chave
-							binary.delete(key);
+							sequential.delete(key);
 						}
 						estimatedTimeDelte = System.nanoTime() - starTimeDelete;
 						timeDelete[i] = (double) (estimatedTimeDelte);
 						//out.println(estimatedTimeDelte);*/
 						
-					}
+					
 					
 						maximoput=MedMinMax.maximeTimes(timePut);
 			    		out.println("\nTempo maximo de inserção: " + maximoput + " ns");//imprime na consola
@@ -127,9 +125,9 @@ public class Sequential2 {
 			    		desvioput=MedMinMax.standardDeviation(timePut);
 			    		out.println("Desvio padrão: " + desvioput + " ns");//imprime na consola
 			    		
+					}
 			    		
-			    		
-			    		maximodelete=MedMinMax.maximeTimes(timeDelete);
+			    		/*maximodelete=MedMinMax.maximeTimes(timeDelete);
 			    		out.println("\nTempo maximo de Remoção: " + maximodelete + " ns");//imprime na consola
 			    			
 			    		minimodelete=MedMinMax.minimeTimes(timeDelete);
@@ -143,9 +141,11 @@ public class Sequential2 {
 			    			
 			    		desviodelete=MedMinMax.standardDeviation(timeDelete);
 			    		out.println("Desvio padrão: " + desviodelete + " ns");//imprime na consola
-				
+				*/
 					}
 				}
 			}
+		
+		
 	}
 }

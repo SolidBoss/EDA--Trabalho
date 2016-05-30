@@ -4,13 +4,17 @@ package Main;
 import static java.lang.System.in;
 import static java.lang.System.out;
 import ResizingArray.ResizingArrayFile;
+import SymbolTables.BinarySearchST;
+import edu.princeton.cs.introcs.In;
 import InsertionSort.InsertionSortFile;
+import SymbolTables.Binary2;
 import LinkedList.LinkedStackFile;
 import MergeSort.BottomUpMergeFile;
 import MergeSort.InstrumentedMergeFile;
 import MergeSort.MergeSortFile;
 import QuickSort.QuickSortFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
@@ -41,6 +45,16 @@ public class Menu {
 	static double mediana_pop;
 	static double desvio_pop;
 	static double desvio_push;
+	static double mediaput;
+	static double maximoput;
+	static double minimoput;
+	static double medianaput;
+	static double desvioput;
+	static double mediadelete;
+	static double maximodelete;
+	static double minimodelete;
+	static double medianadelete;
+	static double desviodelete;
 	
 	// Variaveis para a média, mediana, maximo, minimo e desvio padrao para o Insertion e Merge
 	static double media;
@@ -68,7 +82,13 @@ public class Menu {
 		out.println("Quick Sort");
 		out.println("11 - Medir tempo de ordenação para ficheiros sorted, partially sorted e shuffled");
 		out.println("12 - Verificar comparações e acessos ao array");
-		out.println("13 - Sair");
+		out.println("Tabela de Simbolos Binária");
+		out.println("13 - Inserir e Apagar");
+		out.println("14 - Apagar");
+		out.println("15 - Pesquisar");
+		out.println("Tabela de Simbolos Sequencial");
+		out.println("16 - Inserir e Apagar ");
+		out.println("17 - Pesquisar");
 		out.println("Opção: ");
 		return inputData.nextInt(); // Retorna o input do teclado
 	}
@@ -713,8 +733,13 @@ public class Menu {
 		        			file.close();
 		        		}
 		    		}
-			}	
-		}while (opcao != 13);{System.exit(0);}
+			}
+			else if(opcao==13){
+				
+		        
+		        
+			}
+		}while (opcao != 17);{System.exit(0);}
 	}
 }
 
