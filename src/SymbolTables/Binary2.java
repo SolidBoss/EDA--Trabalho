@@ -32,8 +32,6 @@ public class Binary2 {
 		
 		long estimatedTimePut, starTimePut = 0;
 		
-		int value = 0;
-		
 		BinarySearchST<String, Integer> binary = new BinarySearchST<String, Integer>();
 		
 		starTimePut = System.nanoTime();
