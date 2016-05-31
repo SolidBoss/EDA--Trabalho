@@ -25,74 +25,64 @@ public class Binary2 {
 	static double desviodelete;
 
 	public static long runAlgorithmPut(String orderType, int numberOfItem) throws FileNotFoundException {
-		// variavel que diz localizacao do ficheiro txt
+		
 		String FilePath = "data/" + orderType + "_" + numberOfItem + ".txt";
-		boolean FileExists = new File(FilePath).isFile();
 
-		// variavel do tempo
-		long estimatedTimePut = 0, starTimePut = 0;
-
-		// Caso o ficheiro exista vai fazer as operações em baixo
-		if (FileExists == true) {
-			String[] textFiles = In.readStrings(FilePath);
-			BinarySearchST<String, Integer> binary = new BinarySearchST<String, Integer>();
-
-			starTimePut = System.nanoTime();
-			for (int count = 0; count != numberOfItem; count++) {
-				String key = textFiles[count];
-				binary.put(key, count);
-			}
-			estimatedTimePut = System.nanoTime() - starTimePut;
-			
-			//Delete??
+		String[] textFiles = In.readStrings(FilePath);
+		
+		long estimatedTimePut, starTimePut = 0;
+		
+		int value = 0;
+		
+		BinarySearchST<String, Integer> binary = new BinarySearchST<String, Integer>();
+		
+		starTimePut = System.nanoTime();
+		for (int count = 0; count != numberOfItem; count++) {
+			String key = textFiles[count];
+			binary.put(key, count);
 		}
+		estimatedTimePut = System.nanoTime() - starTimePut;
+		
 		return estimatedTimePut;
 	}
 	
 	public static void TSBinaryWarm(String orderType, int numberOfItem) throws FileNotFoundException {
-		
-	String FilePath = "data/" + orderType + "_" + numberOfItem + ".txt";
-	boolean FileExists = new File(FilePath).isFile();
-	
-	if (FileExists == true) {
-		String[] textFiles = In.readStrings(FilePath);
-		BinarySearchST<String, Integer> binary = new BinarySearchST<String, Integer>();
-		for (int count = 0; count != numberOfItem; count++) {
-			String key = textFiles[count];
-			binary.put(key, count);
-			binary.delete(key);
-			//binary.get(key);
-		}
-	}
-	}
-	
-	public static long runAlgorithmDelete(String orderType, int numberOfItem) throws FileNotFoundException {
-		// variavel que diz localizacao do ficheiro txt
+
 		String FilePath = "data/" + orderType + "_" + numberOfItem + ".txt";
 		boolean FileExists = new File(FilePath).isFile();
-
-		// variavel do tempo
-		long estimatedTimeDelete = 0, starTimeDelete = 0;
-
-		// Caso o ficheiro exista vai fazer as operações em baixo
 		if (FileExists == true) {
 			String[] textFiles = In.readStrings(FilePath);
 			BinarySearchST<String, Integer> binary = new BinarySearchST<String, Integer>();
-
 			for (int count = 0; count != numberOfItem; count++) {
 				String key = textFiles[count];
 				binary.put(key, count);
-			}
-			
-			starTimeDelete = System.nanoTime();
-			for (int count = 0; count != numberOfItem; count++) {
-				String key = textFiles[count];
 				binary.delete(key);
 			}
-			estimatedTimeDelete = System.nanoTime() - starTimeDelete;
 		}
-		return estimatedTimeDelete;
+	}
+	
+	public static long runAlgorithmDelete(String orderType, int numberOfItem) throws FileNotFoundException {
+		long estimatedTimeDelete, starTimeDelete = 0;
 
+		
+		String FilePath = "data/" + orderType + "_" + numberOfItem + ".txt";
+		String[] textFiles = In.readStrings(FilePath);
+
+		BinarySearchST<String, Integer> binary = new BinarySearchST<String, Integer>();
+		
+		for (int count = 0; count != numberOfItem; count++) {
+			String key = textFiles[count];
+			binary.put(key, count);
+		}
+		starTimeDelete = System.nanoTime();
+		for (int count = 0; count != numberOfItem; count++) {
+			String key = textFiles[count];
+			binary.delete(key);
+		}
+		
+		estimatedTimeDelete = System.nanoTime() - starTimeDelete;
+		
+		return estimatedTimeDelete;
 	}
 	
 	//Pesquisar

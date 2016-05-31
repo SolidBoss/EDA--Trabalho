@@ -4,9 +4,8 @@ package Main;
 import static java.lang.System.in;
 import static java.lang.System.out;
 import ResizingArray.ResizingArrayFile;
-import SymbolTables.BinarySearchST;
-import edu.princeton.cs.introcs.In;
 import InsertionSort.InsertionSortFile;
+import SymbolTables.Binary;
 import SymbolTables.Binary2;
 import LinkedList.LinkedStackFile;
 import MergeSort.BottomUpMergeFile;
@@ -32,7 +31,6 @@ public class Menu {
 	
 	// Contém o tipo de ficheiros que vão ser analizados
 	static String[] OrderType = { "sorted", "partially_sorted", "shuffled" };
-	static String[] OrderTypeTest = { "sorted_test", "partially_sorted_test", "shuffled_test" };
 	
 	// Variaveis para a média, mediana, maximo, minimo e desvio padrao para o LinkedStack e Resizing Array
 	static double media_push;
@@ -83,12 +81,11 @@ public class Menu {
 		out.println("11 - Medir tempo de ordenação para ficheiros sorted, partially sorted e shuffled");
 		out.println("12 - Verificar comparações e acessos ao array");
 		out.println("Tabela de Simbolos Binária");
-		out.println("13 - Inserir e Apagar");
+		out.println("13 - Inserir");
 		out.println("14 - Apagar");
-		out.println("15 - Pesquisar");
 		out.println("Tabela de Simbolos Sequencial");
-		out.println("16 - Inserir e Apagar ");
-		out.println("17 - Pesquisar");
+		out.println("15 - Inserir e Apagar ");
+		out.println("16 - Pesquisar");
 		out.println("Opção: ");
 		return inputData.nextInt(); // Retorna o input do teclado
 	}
@@ -734,11 +731,157 @@ public class Menu {
 		        		}
 		    		}
 			}
-			else if(opcao==13){
+			//
+			else if (opcao == 13) {
+				@SuppressWarnings("resource")
+				final Scanner input = new Scanner(in);
+
+				out.print("Quantas experiênçias?(numero inteiro): ");
+				int repeticions = input.nextInt();
+
+				Double[] timePut = new Double[repeticions];
+				Double[] timeDelete = new Double[repeticions];
 				
-		        
-		        
+				for (String orderType : OrderType) {
+					for (int numberOfItem : FileSizeWarm) {
+						Binary2.TSBinaryWarm(orderType, numberOfItem);
+					}
+				}
+				
+				for (String orderType : OrderType) {
+					for (int numberOfItem : FileSize) {
+						if (!(orderType == "shuffled") || (numberOfItem <= 65536)){
+						if (orderType == "sorted") {
+							out.println("-----------------------------------");
+							out.println("Sorted");
+							out.println("Numero de Itens " + numberOfItem);
+							out.println("-----------------------------------");
+						} else if (orderType == "partially_sorted") {
+							out.println("-----------------------------------");
+							out.println("Partially Sorted ");
+							out.println("Numero de Itens " + numberOfItem);
+							out.println("-----------------------------------");
+						} else {
+							out.println("-----------------------------------");
+							out.println("Shuffled");
+							out.println("Numero de Itens " + numberOfItem);
+							out.println("-----------------------------------");
+						}
+
+						String FilePath = "data/" + orderType + "_" + numberOfItem + ".txt";
+						boolean FileExists = new File(FilePath).isFile();
+						
+						PrintWriter file = new PrintWriter("data/" + "TSBinaryPut" + "_" + orderType + "_" + numberOfItem + ".csv");
+						   
+						if (FileExists == true) {
+							
+							for (int i = 0; i != repeticions; i++) {
+								long estimatedTimePut = Binary2.runAlgorithmPut(orderType, numberOfItem);
+								timePut[i] = (double) (estimatedTimePut);
+							}
+							
+							maximoput=MedMinMax.maximeTimes(timePut);
+							out.println("Tempo maximo de inserção: " + maximoput + " ns");//imprime na consola
+							file.println("Tempo maximo de inserção: " + maximoput + " ns");//imprime no exel
+			    		
+				    		minimoput=MedMinMax.minimeTimes(timePut);
+				    		out.println("Tempo minimo de inserção: " + minimoput + " ns");//imprime na consola
+				    		file.println("Tempo minimo de inserção: " + minimoput + " ns");//imprime no exel
+				    		
+				    		mediaput=MedMinMax.meanTimes(timePut);
+				    		out.println("Tempo medio de inserção: " + mediaput + " ns");//imprime na consola
+				    		file.println("Tempo medio de inserção: " + mediaput + " ns");//imprime no exel
+				    	
+				    		medianaput=MedMinMax.medianTimes(timePut);
+			    			out.println("Mediana de inserção: " + medianaput + " ns");//imprime na consola
+			    			file.println("Mediana de inserção: " + medianaput + " ns");//imprime no exel
+				    		
+				    		desvioput=MedMinMax.standardDeviation(timePut);
+				    		out.println("Desvio padrão: " + desvioput + " ns");//imprime na consola
+				    		file.println("Desvio padrão: " + desvioput + " ns");//imprime no exel
+			    			
+		        			file.close();
+							}
+						
+						}
+					}
+				}
 			}
+			else if(opcao==14){
+				@SuppressWarnings("resource")
+				final Scanner input = new Scanner(in);
+
+				out.print("Quantas experiênçias?(numero inteiro): ");
+				int repeticions = input.nextInt();
+
+				Double[] timeDelete = new Double[repeticions];
+				
+				for (String orderType : OrderType) {
+					for (int numberOfItem : FileSizeWarm) {
+						Binary2.TSBinaryWarm(orderType, numberOfItem);
+					}
+				}
+				
+				for (String orderType : OrderType) {
+					for (int numberOfItem : FileSize) {
+						
+						if (!(orderType == "sorted") || !(orderType == "partially_sorted") || !(orderType == "shuffled") || (numberOfItem <= 16384)){
+						if (orderType == "sorted") {
+							out.println("-----------------------------------");
+							out.println("Sorted");
+							out.println("Numero de Itens " + numberOfItem);
+							out.println("-----------------------------------");
+						} else if (orderType == "partially_sorted") {
+							out.println("-----------------------------------");
+							out.println("Partially Sorted ");
+							out.println("Numero de Itens " + numberOfItem);
+							out.println("-----------------------------------");
+						} else {
+							out.println("-----------------------------------");
+							out.println("Shuffled");
+							out.println("Numero de Itens " + numberOfItem);
+							out.println("-----------------------------------");
+						}
+
+						String FilePath = "data/" + orderType + "_" + numberOfItem + ".txt";
+						boolean FileExists = new File(FilePath).isFile();
+						
+						PrintWriter file1 = new PrintWriter("data/" + "TSBinaryDelete" + "_" + orderType + "_" + numberOfItem + ".csv");
+						   
+						if (FileExists == true) {
+							
+							for (int i = 0; i != repeticions; i++) {
+								long estimatedTimeDelete = Binary2.runAlgorithmDelete(orderType, numberOfItem);
+								timeDelete[i] = (double) (estimatedTimeDelete); 
+							}
+		        			
+		        			maximodelete=MedMinMax.maximeTimes(timeDelete);
+				    		out.println("\nTempo maximo de Remoção: " + maximodelete + " ns");//imprime na consola
+				    		file1.println("Tempo maximo de Remoção: " + maximodelete + " ns");//imprime no exel	
+				    			
+				    		minimodelete=MedMinMax.minimeTimes(timeDelete);
+				    		out.println("Tempo minimo de Remoção: " + minimodelete + " ns");//imprime na consola
+				    		file1.println("Tempo medio de Remoção: " + minimodelete + " ns");//imprime no exel	
+				    		
+				    		mediadelete=MedMinMax.meanTimes(timeDelete);
+				    		out.println("Tempo medio de Remoção: " + mediadelete + " ns");//imprime na consola
+				    		file1.println("Tempo medio de Remoção: " + mediadelete + " ns");//imprime no exel
+				    			
+				    		medianadelete=MedMinMax.medianTimes(timeDelete);
+				    		out.println("Mediana de Remoção: " + medianadelete + " ns");//imprime na consola
+				    		file1.println("Mediana de Remoção: " + medianadelete + " ns");//imprime no exel
+				    			
+				    		desviodelete=MedMinMax.standardDeviation(timeDelete);
+				    		out.println("Desvio padrão: " + desviodelete + " ns");//imprime na consola
+				    		file1.println("Desvio padrão: " + desviodelete + " ns");//imprime no exel
+			    			
+		        			file1.close();
+						}
+						}
+					}
+				}
+			}
+			
 		}while (opcao != 17);{System.exit(0);}
 	}
 }
