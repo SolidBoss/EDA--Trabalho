@@ -86,9 +86,12 @@ public class Menu {
 		out.println("Tabela de Simbolos Binária");
 		out.println("13 - Inserir");
 		out.println("14 - Apagar");
+		out.println("15 - Pesquisa sem sucesso");
+		out.println("16 - Pesquisa com sucesso");
 		out.println("Tabela de Simbolos Sequencial");
-		out.println("15 - Inserir");
-		out.println("16 - Apagar");
+		out.println("17 - Inserir");
+		out.println("18 - Apagar");
+		out.println("19 - Pesquisa sem sucesso");
 		out.println("Opção: ");
 		return inputData.nextInt(); // Retorna o input do teclado
 	}
@@ -980,7 +983,8 @@ public class Menu {
 					}
 				}
 			}
-			//
+			
+			//Binary Inserção
 			else if (opcao == 13) {
 				@SuppressWarnings("resource")
 				final Scanner input = new Scanner(in);
@@ -1071,10 +1075,11 @@ public class Menu {
 
 								file.close();
 							}
-
-						//}
 					}
+				//}
 				}
+				
+			//Binary Apagar
 			} else if (opcao == 14) {
 				@SuppressWarnings("resource")
 				final Scanner input = new Scanner(in);
@@ -1174,8 +1179,86 @@ public class Menu {
 					}
 				}
 			}
-			//Sequential
+			//Binary Pesquisa sem sucesso
 			else if (opcao == 15) {
+				
+				@SuppressWarnings("resource")
+				final Scanner input = new Scanner(in);
+
+				out.print("Quantas experiênçias?(numero inteiro): ");
+				int repeticions = input.nextInt();
+
+				Double[] timeSearch = new Double[repeticions];
+
+				for (String orderType : OrderType) {
+					for (int numberOfItem : FileSizeWarm) {
+						Binary2.TSBinaryWarm(orderType, numberOfItem);
+					}
+				}
+
+				for (String orderType : OrderType) {
+					for (int numberOfItem : FileSize) {
+						//if (!(orderType == "shuffled") || (numberOfItem <= 262144)) {
+							if (orderType == "sorted") {
+								out.println("-----------------------------------");
+								out.println("Sorted");
+								out.println("Numero de Itens " + numberOfItem);
+								out.println("-----------------------------------");
+							} else if (orderType == "partially_sorted") {
+								out.println("-----------------------------------");
+								out.println("Partially Sorted ");
+								out.println("Numero de Itens " + numberOfItem);
+								out.println("-----------------------------------");
+							} else {
+								out.println("-----------------------------------");
+								out.println("Shuffled");
+								out.println("Numero de Itens " + numberOfItem);
+								out.println("-----------------------------------");
+							}
+
+							String FilePath = "data/" + orderType + "_" + numberOfItem + ".txt";
+							boolean FileExists = new File(FilePath).isFile();
+
+							PrintWriter file = new PrintWriter(
+									"data/" + "TSBinarySearch" + "_" + orderType + "_" + numberOfItem + ".csv");
+
+							if (FileExists == true) {
+
+								for (int i = 0; i != repeticions; i++) {
+									long estimatedTimePut = Binary2.searchBinaryFail(orderType, numberOfItem);
+									timeSearch[i] = (double) (estimatedTimePut);
+								}
+								
+								media = MedMinMax.meanTimes(timeSearch);
+								out.println("Tempo medio de pesquisa: " + media + " ns");// imprime
+																							// na
+																							// consola
+								file.println("Tempo medio de pesquisa: " + media + " ns");// imprime
+																								// no
+																								// exel
+
+								mediana = MedMinMax.medianTimes(timeSearch);
+								out.println("Mediana de pesquisa: " + mediana + " ns");// imprime
+																							// na
+																							// consola
+								file.println("Mediana de pesquisa: " + mediana + " ns");// imprime
+																							// no
+																							// exel
+
+								
+								file.close();
+							}
+					}
+					//}
+				}
+			}
+			//Binary Pesquisa com sucesso
+			else if (opcao == 16) {
+				
+			}
+			
+			//Sequential
+			else if (opcao == 17) {
 				@SuppressWarnings("resource")
 				final Scanner input = new Scanner(in);
 
@@ -1275,8 +1358,8 @@ public class Menu {
 					}
 				}
 			}
-
-			else if (opcao == 16) {
+			//Sequencial Remoção
+			else if (opcao == 18) {
 				@SuppressWarnings("resource")
 				final Scanner input = new Scanner(in);
 
@@ -1375,7 +1458,83 @@ public class Menu {
 					}
 				}
 			}
-		} while (opcao != 17);
+			//Sequencial Pesquisa sem sucesso
+			else if (opcao == 19){
+				@SuppressWarnings("resource")
+				final Scanner input = new Scanner(in);
+
+				out.print("Quantas experiênçias?(numero inteiro): ");
+				int repeticions = input.nextInt();
+
+				Double[] timeSearch = new Double[repeticions];
+
+				for (String orderType : OrderType) {
+					for (int numberOfItem : FileSizeWarm) {
+						Sequential2.TSSequentialWarm(orderType, numberOfItem);
+					}
+				}
+
+				for (String orderType : OrderType) {
+					for (int numberOfItem : FileSize) {
+						if (!(orderType == "sorted") || (numberOfItem <= 65536)) {
+							if (!(orderType == "partially_sorted") || (numberOfItem <= 65536)) {
+								if (!(orderType == "shuffled") || (numberOfItem <= 65536)) {
+									if (orderType == "sorted") {
+								
+								out.println("-----------------------------------");
+								out.println("Sorted");
+								out.println("Numero de Itens " + numberOfItem);
+								out.println("-----------------------------------");
+							} else if (orderType == "partially_sorted") {
+								out.println("-----------------------------------");
+								out.println("Partially Sorted ");
+								out.println("Numero de Itens " + numberOfItem);
+								out.println("-----------------------------------");
+							} else {
+								out.println("-----------------------------------");
+								out.println("Shuffled");
+								out.println("Numero de Itens " + numberOfItem);
+								out.println("-----------------------------------");
+							}
+
+							String FilePath = "data/" + orderType + "_" + numberOfItem + ".txt";
+							boolean FileExists = new File(FilePath).isFile();
+
+							PrintWriter file = new PrintWriter(
+									"data/" + "TSSequentialSearch" + "_" + orderType + "_" + numberOfItem + ".csv");
+
+							if (FileExists == true) {
+
+								for (int i = 0; i != repeticions; i++) {
+									long estimatedTimePut = Sequential2.searchSequential(orderType, numberOfItem);
+									timeSearch[i] = (double) (estimatedTimePut);
+								}
+								
+								media = MedMinMax.meanTimes(timeSearch);
+								out.println("Tempo medio de pesquisa: " + media + " ns");// imprime
+																							// na
+																							// consola
+								file.println("Tempo medio de pesquisa: " + media + " ns");// imprime
+																								// no
+																								// exel
+
+								mediana = MedMinMax.medianTimes(timeSearch);
+								out.println("Mediana de pesquisa: " + mediana + " ns");// imprime
+																							// na
+																							// consola
+								file.println("Mediana de pesquisa: " + mediana + " ns");// imprime
+																							// no
+																							// exel
+
+								
+								file.close();
+							}}
+					}}
+					}
+				
+			}
+			}
+		} while (opcao != 20);
 		{
 			System.exit(0);
 		}

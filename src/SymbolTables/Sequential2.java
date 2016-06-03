@@ -42,11 +42,42 @@ public static long runAlgorithmPut(String orderType, int numberOfItem) throws Fi
 			for (int count = 0; count != numberOfItem; count++) {
 				String key = textFiles[count];
 				sequential.put(key, count);
+				sequential.get(key);
 				sequential.delete(key);
 			}
 		}
 	} 
 	
+public static long searchSequential(String orderType, int numberOfItem) throws FileNotFoundException {
+		
+		String searchingText = "0.489779991366667";
+		
+		String FilePath = "data/" + orderType + "_" + numberOfItem + ".txt";
+
+		@SuppressWarnings("deprecation")
+		String[] textFiles = In.readStrings(FilePath);
+		
+		long estimatedTime, starTime = 0;
+		
+		SequentialSearchST<String, Integer> sequential = new SequentialSearchST<String, Integer>();
+		
+		for (int count = 0; count != numberOfItem; count++) {
+			String key = textFiles[count];
+			sequential.put(key, count);
+		}
+		
+		
+		starTime = System.nanoTime();
+		for (int count = 0; count != numberOfItem; count++) {
+			sequential.get(searchingText);
+		}
+		//out.println("Encontrado o texto na posicao "+sequential.get(searchingText));
+		estimatedTime = System.nanoTime() - starTime;
+	
+		return estimatedTime;
+		
+	}
+
 	public static long runAlgorithmDelete(String orderType, int numberOfItem) throws FileNotFoundException {
 		long estimatedTimeDelete, starTimeDelete = 0;
 

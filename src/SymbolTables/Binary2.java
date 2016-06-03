@@ -31,6 +31,71 @@ public class Binary2 {
 		//out.println(binary.size());
 	}
 	
+	public static long searchBinaryFail(String orderType, int numberOfItem) throws FileNotFoundException {
+		
+		String searchingText = "0.489779991366667";
+		
+		String FilePath = "data/" + orderType + "_" + numberOfItem + ".txt";
+
+		@SuppressWarnings("deprecation")
+		String[] textFiles = In.readStrings(FilePath);
+		
+		long estimatedTime, starTime = 0;
+		
+		BinarySearchST<String, Integer> binary = new BinarySearchST<String, Integer>();
+		
+		for (int count = 0; count != numberOfItem; count++) {
+			String key = textFiles[count];
+			binary.put(key, count);
+		}
+		
+		//out.println(binary.max());
+		//out.println(binary.min());
+		
+		starTime = System.nanoTime();
+		for (int count = 0; count != numberOfItem; count++) {
+		binary.get(searchingText);
+		}
+		//out.println("Encontrado o texto na posicao "+binary.get(searchingText));
+		estimatedTime = System.nanoTime() - starTime;
+	
+		return estimatedTime;
+		
+		//out.println(binary.keys());
+		//out.println(binary.size());
+	}
+	
+	public static long searchBinarySucess(String orderType, int numberOfItem) throws FileNotFoundException {
+		
+		String searchingText = "0.489779991366667";
+		
+		String FilePath = "data/" + orderType + "_" + numberOfItem + ".txt";
+
+		@SuppressWarnings("deprecation")
+		String[] textFiles = In.readStrings(FilePath);
+		
+		long estimatedTime, starTime = 0;
+		
+		BinarySearchST<String, Integer> binary = new BinarySearchST<String, Integer>();
+		
+		for (int count = 0; count != numberOfItem; count++) {
+			String key = textFiles[count];
+			binary.put(key, count);
+		}
+		
+		starTime = System.nanoTime();
+		for (int count = 0; count != numberOfItem; count++) {
+		binary.get(searchingText);
+		}
+		//out.println("Encontrado o texto na posicao "+binary.get(searchingText));
+		estimatedTime = System.nanoTime() - starTime;
+	
+		return estimatedTime;
+		
+		//out.println(binary.keys());
+		//out.println(binary.size());
+	}
+
 	public static void TSBinaryWarm(String orderType, int numberOfItem) throws FileNotFoundException {
 
 		String FilePath = "data/" + orderType + "_" + numberOfItem + ".txt";
@@ -43,10 +108,12 @@ public class Binary2 {
 			for (int count = 0; count != numberOfItem; count++) {
 				String key = textFiles[count];
 				binary.put(key, count);
+				binary.get(key);
 				binary.delete(key);
 			}
 		}
 	}
+	
 	
 	public static long runAlgorithmDelete(String orderType, int numberOfItem) throws FileNotFoundException {
 		long estimatedTimeDelete, starTimeDelete = 0;
@@ -55,7 +122,6 @@ public class Binary2 {
 		String FilePath = "data/" + orderType + "_" + numberOfItem + ".txt";
 		@SuppressWarnings("deprecation")
 		String[] textFiles = In.readStrings(FilePath);
-		int value=1;
 		BinarySearchST<String, Integer> binary = new BinarySearchST<String, Integer>();
 		
 		for (int count = 0; count != numberOfItem; count++) {
