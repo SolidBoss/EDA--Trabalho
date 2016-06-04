@@ -29,7 +29,9 @@ public class Menu {
 	static int[] FileSizeImpar = { 3, 5, 9, 17, 33, 65, 129, 257, 513, 1025, 2049, 4097, 8193, 16385, 32769, 65537,
 			131073, 262145, 524289, 1048577 };
 	static int[] FileSizeWarm = { 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096 };
+	static int[] FileSizeSearch = {65536};
 
+	
 	// Contém o tipo de ficheiros que vão ser analizados
 	static String[] OrderType = { "sorted", "partially_sorted", "shuffled" };
 
@@ -92,6 +94,7 @@ public class Menu {
 		out.println("17 - Inserir");
 		out.println("18 - Apagar");
 		out.println("19 - Pesquisa sem sucesso");
+		out.println("20 - Pesquisa com sucesso");
 		out.println("Opção: ");
 		return inputData.nextInt(); // Retorna o input do teclado
 	}
@@ -1002,7 +1005,7 @@ public class Menu {
 
 				for (String orderType : OrderType) {
 					for (int numberOfItem : FileSize) {
-						//if (!(orderType == "shuffled") || (numberOfItem <= 65536)) {
+						if (!(orderType == "shuffled") || (numberOfItem <= 65536)) {
 							if (orderType == "sorted") {
 								out.println("-----------------------------------");
 								out.println("Sorted");
@@ -1076,8 +1079,8 @@ public class Menu {
 								file.close();
 							}
 					}
-				//}
 				}
+			}
 				
 			//Binary Apagar
 			} else if (opcao == 14) {
@@ -1198,7 +1201,7 @@ public class Menu {
 
 				for (String orderType : OrderType) {
 					for (int numberOfItem : FileSize) {
-						//if (!(orderType == "shuffled") || (numberOfItem <= 262144)) {
+						if (!(orderType == "shuffled") || (numberOfItem <= 131072)) {
 							if (orderType == "sorted") {
 								out.println("-----------------------------------");
 								out.println("Sorted");
@@ -1249,14 +1252,73 @@ public class Menu {
 								file.close();
 							}
 					}
-					//}
+					}
 				}
 			}
+			
 			//Binary Pesquisa com sucesso
 			else if (opcao == 16) {
-				
+				@SuppressWarnings("resource")
+				final Scanner input = new Scanner(in);
+
+				out.print("Quantas experiênçias?(numero inteiro): ");
+				int repeticions = input.nextInt();
+
+				Double[] timeSearch = new Double[repeticions];
+
+				for (String orderType : OrderType) {
+					for (int numberOfItem : FileSizeWarm) {
+						Binary2.TSBinaryWarm(orderType, numberOfItem);
+					}
+				}
+
+				for (String orderType : OrderType) {
+					for (int numberOfItem : FileSizeSearch) {
+						//if (!(orderType == "shuffled") || (numberOfItem <= 262144)) {
+							if (orderType == "sorted") {
+								out.println("-----------------------------------");
+								out.println("Sorted");
+								out.println("Numero de Itens " + numberOfItem);
+								out.println("-----------------------------------");
+							} else if (orderType == "partially_sorted") {
+								out.println("-----------------------------------");
+								out.println("Partially Sorted ");
+								out.println("Numero de Itens " + numberOfItem);
+								out.println("-----------------------------------");
+							} else {
+								out.println("-----------------------------------");
+								out.println("Shuffled");
+								out.println("Numero de Itens " + numberOfItem);
+								out.println("-----------------------------------");
+							}
+
+							String FilePath = "data/" + orderType + "_" + numberOfItem + ".txt";
+							boolean FileExists = new File(FilePath).isFile();
+
+							PrintWriter file = new PrintWriter(
+									"data/" + "TSBinarySearchSuccess" + "_" + orderType + "_" + numberOfItem + ".csv");
+
+							if (FileExists == true) {
+
+								for (int i = 0; i != repeticions; i++) {
+									long estimatedTimePut = Binary2.searchBinarySuccess(orderType, numberOfItem);
+									timeSearch[i] = (double) (estimatedTimePut);
+								}
+								
+								media = MedMinMax.meanTimes(timeSearch);
+								out.println("Tempo medio de pesquisa com sucesso: " + media + " ns");
+								file.println("Tempo medio de pesquisa com sucesso: " + media + " ns");
+
+								mediana = MedMinMax.medianTimes(timeSearch);
+								out.println("Mediana de pesquisa com sucesso: " + mediana + " ns");
+								file.println("Mediana de pesquisa com sucesso: " + mediana + " ns");
+
+							file.close();
+						}
+					}
+				}
 			}
-			
+
 			//Sequential
 			else if (opcao == 17) {
 				@SuppressWarnings("resource")
@@ -1506,7 +1568,7 @@ public class Menu {
 							if (FileExists == true) {
 
 								for (int i = 0; i != repeticions; i++) {
-									long estimatedTimePut = Sequential2.searchSequential(orderType, numberOfItem);
+									long estimatedTimePut = Sequential2.searchSequentialFail(orderType, numberOfItem);
 									timeSearch[i] = (double) (estimatedTimePut);
 								}
 								
@@ -1524,17 +1586,80 @@ public class Menu {
 																							// consola
 								file.println("Mediana de pesquisa: " + mediana + " ns");// imprime
 																							// no
-																							// exel
+																								// exel
 
-								
-								file.close();
-							}}
-					}}
+										file.close();
+									}
+								}
+							}
+						}
 					}
-				
+
+				}
 			}
+		
+			//Sequencial pesquisa com sucesso
+			else if(opcao == 20){
+				@SuppressWarnings("resource")
+				final Scanner input = new Scanner(in);
+
+				out.print("Quantas experiênçias?(numero inteiro): ");
+				int repeticions = input.nextInt();
+
+				Double[] timeSearch = new Double[repeticions];
+
+				for (String orderType : OrderType) {
+					for (int numberOfItem : FileSizeWarm) {
+						Sequential2.TSSequentialWarm(orderType, numberOfItem);
+					}
+				}
+
+				for (String orderType : OrderType) {
+					for (int numberOfItem : FileSizeSearch) {
+							if (orderType == "sorted") {
+								out.println("-----------------------------------");
+								out.println("Sorted");
+								out.println("Numero de Itens " + numberOfItem);
+								out.println("-----------------------------------");
+							} else if (orderType == "partially_sorted") {
+								out.println("-----------------------------------");
+								out.println("Partially Sorted ");
+								out.println("Numero de Itens " + numberOfItem);
+								out.println("-----------------------------------");
+							} else {
+								out.println("-----------------------------------");
+								out.println("Shuffled");
+								out.println("Numero de Itens " + numberOfItem);
+								out.println("-----------------------------------");
+							}
+
+							String FilePath = "data/" + orderType + "_" + numberOfItem + ".txt";
+							boolean FileExists = new File(FilePath).isFile();
+
+							PrintWriter file = new PrintWriter(
+									"data/" + "TSSequentialSearchSuccess" + "_" + orderType + "_" + numberOfItem + ".csv");
+
+							if (FileExists == true) {
+
+								for (int i = 0; i != repeticions; i++) {
+									long estimatedTimePut = Sequential2.searchSequentialSuccess(orderType, numberOfItem);
+									timeSearch[i] = (double) (estimatedTimePut);
+								}
+								
+								media = MedMinMax.meanTimes(timeSearch);
+								out.println("Tempo medio de pesquisa com sucesso: " + media + " ns");
+								file.println("Tempo medio de pesquisa com sucesso: " + media + " ns");
+
+								mediana = MedMinMax.medianTimes(timeSearch);
+								out.println("Mediana de pesquisa com sucesso: " + mediana + " ns");
+								file.println("Mediana de pesquisa com sucesso: " + mediana + " ns");
+
+							file.close();
+						}
+					}
+				}
 			}
-		} while (opcao != 20);
+		} while (opcao != 21);
 		{
 			System.exit(0);
 		}

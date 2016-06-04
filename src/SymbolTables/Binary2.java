@@ -33,7 +33,7 @@ public class Binary2 {
 	
 	public static long searchBinaryFail(String orderType, int numberOfItem) throws FileNotFoundException {
 		
-		String searchingText = "0.489779991366667";
+		String searchNumber = "0.489779991366667";
 		
 		String FilePath = "data/" + orderType + "_" + numberOfItem + ".txt";
 
@@ -54,20 +54,20 @@ public class Binary2 {
 		
 		starTime = System.nanoTime();
 		for (int count = 0; count != numberOfItem; count++) {
-		binary.get(searchingText);
+		binary.get(searchNumber);
 		}
-		//out.println("Encontrado o texto na posicao "+binary.get(searchingText));
 		estimatedTime = System.nanoTime() - starTime;
 	
-		return estimatedTime;
-		
+		//out.println(binary.contains(searchNumber));
 		//out.println(binary.keys());
 		//out.println(binary.size());
+		
+		return estimatedTime;
 	}
 	
-	public static long searchBinarySucess(String orderType, int numberOfItem) throws FileNotFoundException {
+	public static long searchBinarySuccess(String orderType, int numberOfItem) throws FileNotFoundException {
 		
-		String searchingText = "0.489779991366667";
+		String searchNumber = "0.5023764462686966";
 		
 		String FilePath = "data/" + orderType + "_" + numberOfItem + ".txt";
 
@@ -85,15 +85,16 @@ public class Binary2 {
 		
 		starTime = System.nanoTime();
 		for (int count = 0; count != numberOfItem; count++) {
-		binary.get(searchingText);
+		binary.get(searchNumber);
 		}
-		//out.println("Encontrado o texto na posicao "+binary.get(searchingText));
 		estimatedTime = System.nanoTime() - starTime;
-	
-		return estimatedTime;
 		
+		//out.println(binary.contains(searchNumber));
 		//out.println(binary.keys());
 		//out.println(binary.size());
+		
+		return estimatedTime;
+		
 	}
 
 	public static void TSBinaryWarm(String orderType, int numberOfItem) throws FileNotFoundException {
