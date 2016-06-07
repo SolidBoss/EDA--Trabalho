@@ -7,6 +7,7 @@ public class SequentialSearchST<Key, Value> {
     private int size;
     private Node<Key, Value> first;
 
+   
     private static class Node<Key, Value> {
 
         private final Key key;
@@ -22,6 +23,9 @@ public class SequentialSearchST<Key, Value> {
 
     }
 
+    /**
+     * Initializes an empty symbol table.
+     */
     public SequentialSearchST() {
         size = 0;
         first = null;
@@ -29,24 +33,45 @@ public class SequentialSearchST<Key, Value> {
         checkInvariant();
     }
 
+    /**
+     * Returns the number of key-value pairs in this symbol table.
+     * @return the number of key-value pairs in this symbol table
+     */
     public int size() {
         checkInvariant();
 
         return size;
     }
 
+    /**
+     * Is this symbol table empty?
+     * @return <tt>true</tt> if this symbol table is empty and <tt>false</tt> otherwise
+     */
     public boolean isEmpty() {
         checkInvariant();
 
         return size() == 0;
     }
 
+
+    /**
+     * Does this symbol table contain the given key?
+     * @param key the key
+     * @return <tt>true</tt> if this symbol table contains <tt>key</tt> and
+     *     <tt>false</tt> otherwise
+     */
     public boolean contains(final Key key) {
         checkInvariant();
 
         return valueFor(key) != null;
     }
 
+    /**
+     * Returns the value associated with the given key.
+     * @param key the key
+     * @return the value associated with the given key if the key is in the symbol table
+     *     and <tt>null</tt> if the key is not in the symbol table
+     */
     public Value valueFor(final Key key) {
         checkInvariant();
 
@@ -57,6 +82,12 @@ public class SequentialSearchST<Key, Value> {
         return null;
     }
 
+    /**
+     * Returns all keys in the symbol table as an <tt>Iterable</tt>.
+     * To iterate over all of the keys in the symbol table named <tt>st</tt>,
+     * use the foreach notation: <tt>for (Key key : st.keys())</tt>.
+     * @return all keys in the sybol table as an <tt>Iterable</tt>
+     */
     public Iterable<Key> keys() {
         checkInvariant();
 
@@ -68,6 +99,13 @@ public class SequentialSearchST<Key, Value> {
         return queue;
     }
 
+    /**
+     * Inserts the key-value pair into the symbol table, overwriting the old value
+     * with the new value if the key is already in the symbol table.
+     * If the value is <tt>null</tt>, this effectively deletes the key from the symbol table.
+     * @param key the key
+     * @param val the value
+     */
     public void put(final Key key, final Value value) {
         checkInvariant();
 

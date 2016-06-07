@@ -5,8 +5,8 @@ import static java.lang.System.in;
 import static java.lang.System.out;
 import ResizingArray.ResizingArrayFile;
 import InsertionSort.InsertionSortFile;
-import SymbolTables.Binary2;
-import SymbolTables.Sequential2;
+import SymbolTables.Binary;
+import SymbolTables.Sequential;
 import LinkedList.LinkedStackFile;
 import MergeSort.BottomUpMergeFile;
 import MergeSort.InstrumentedMergeFile;
@@ -813,45 +813,25 @@ public class Menu {
 							}
 
 							maximo = MedMinMax.maximeTimes(timeTotal);
-							out.println("Tempo maximo de ordenação: " + maximo + " ns");// imprime
-																						// na
-																						// consola
-							file.println("Tempo maximo de ordenação: " + maximo + " ns");// imprime
-																							// no
-																							// exel
+							out.println("Tempo maximo de ordenação: " + maximo + " ns");
+							file.println("Tempo maximo de ordenação: " + maximo + " ns");
 
 							minimo = MedMinMax.minimeTimes(timeTotal);
-							out.println("Tempo minimo de ordenação: " + minimo + " ns");// imprime
-																						// na
-																						// consola
-							file.println("Tempo minimo de ordenação: " + minimo + " ns");// imprime
-																							// no
-																							// exel
+							out.println("Tempo minimo de ordenação: " + minimo + " ns");
+							file.println("Tempo minimo de ordenação: " + minimo + " ns");
 
 							media = MedMinMax.meanTimes(timeTotal);
-							out.println("Tempo medio de ordenação: " + media + " ns");// imprime
-																						// na
-																						// consola
-							file.println("Tempo medio de ordenação: " + media + " ns");// imprime
-																						// no
-																						// exel
+							out.println("Tempo medio de ordenação: " + media + " ns");
+							file.println("Tempo medio de ordenação: " + media + " ns");
 
 							mediana = MedMinMax.medianTimes(timeTotal);
-							out.println("Mediana de ordenação: " + mediana + " ns");// imprime
-																					// na
-																					// consola
-							file.println("Mediana de ordenação: " + mediana + " ns");// imprime
-																						// no
-																						// exel
-
+							out.println("Mediana de ordenação: " + mediana + " ns");
+							file.println("Mediana de ordenação: " + mediana + " ns");
+							
 							desvio = MedMinMax.standardDeviation(timeTotal);
-							out.println("Desvio médio de ordenação: " + desvio + " ns");// imprime
-																						// na
-																						// consola
-							file.println("Desvio médio de ordenação: " + desvio + " ns");// imprime
-																							// no
-																							// exel
-
+							out.println("Desvio médio de ordenação: " + desvio + " ns");
+							file.println("Desvio médio de ordenação: " + desvio + " ns");
+							
 							file.close();
 						}
 					}
@@ -999,7 +979,7 @@ public class Menu {
 
 				for (String orderType : OrderType) {
 					for (int numberOfItem : FileSizeWarm) {
-						Binary2.TSBinaryWarm(orderType, numberOfItem);
+						Binary.TSBinaryWarm(orderType, numberOfItem);
 					}
 				}
 
@@ -1032,49 +1012,29 @@ public class Menu {
 							if (FileExists == true) {
 
 								for (int i = 0; i != repeticions; i++) {
-									long estimatedTimePut = Binary2.runAlgorithmPut(orderType, numberOfItem);
+									long estimatedTimePut = Binary.runAlgorithmPut(orderType, numberOfItem);
 									timePut[i] = (double) (estimatedTimePut);
 								}
 
 								maximoput = MedMinMax.maximeTimes(timePut);
-								out.println("Tempo maximo de inserção: " + maximoput + " ns");// imprime
-																								// na
-																								// consola
-								file.println("Tempo maximo de inserção: " + maximoput + " ns");// imprime
-																								// no
-																								// exel
+								out.println("Tempo maximo de inserção: " + maximoput + " ns");
+								file.println("Tempo maximo de inserção: " + maximoput + " ns");
 
 								minimoput = MedMinMax.minimeTimes(timePut);
-								out.println("Tempo minimo de inserção: " + minimoput + " ns");// imprime
-																								// na
-																								// consola
-								file.println("Tempo minimo de inserção: " + minimoput + " ns");// imprime
-																								// no
-																								// exel
+								out.println("Tempo minimo de inserção: " + minimoput + " ns");
+								file.println("Tempo minimo de inserção: " + minimoput + " ns");
 
 								mediaput = MedMinMax.meanTimes(timePut);
-								out.println("Tempo medio de inserção: " + mediaput + " ns");// imprime
-																							// na
-																							// consola
-								file.println("Tempo medio de inserção: " + mediaput + " ns");// imprime
-																								// no
-																								// exel
+								out.println("Tempo medio de inserção: " + mediaput + " ns");
+								file.println("Tempo medio de inserção: " + mediaput + " ns");
 
 								medianaput = MedMinMax.medianTimes(timePut);
-								out.println("Mediana de inserção: " + medianaput + " ns");// imprime
-																							// na
-																							// consola
-								file.println("Mediana de inserção: " + medianaput + " ns");// imprime
-																							// no
-																							// exel
+								out.println("Mediana de inserção: " + medianaput + " ns");
+								file.println("Mediana de inserção: " + medianaput + " ns");
 
 								desvioput = MedMinMax.standardDeviation(timePut);
-								out.println("Desvio padrão: " + desvioput + " ns");// imprime
-																					// na
-																					// consola
-								file.println("Desvio padrão: " + desvioput + " ns");// imprime
-																					// no
-																					// exel
+								out.println("Desvio padrão: " + desvioput + " ns");
+								file.println("Desvio padrão: " + desvioput + " ns");
 
 								file.close();
 							}
@@ -1094,7 +1054,7 @@ public class Menu {
 
 				for (String orderType : OrderType) {
 					for (int numberOfItem : FileSizeWarm) {
-						Binary2.TSBinaryWarm(orderType, numberOfItem);
+						Binary.TSBinaryWarm(orderType, numberOfItem);
 					}
 				}
 
@@ -1129,7 +1089,7 @@ public class Menu {
 									if (FileExists == true) {
 
 										for (int i = 0; i != repeticions; i++) {
-											long estimatedTimeDelete = Binary2.runAlgorithmDelete(orderType,
+											long estimatedTimeDelete = Binary.runAlgorithmDelete(orderType,
 													numberOfItem);
 											timeDelete[i] = (double) (estimatedTimeDelete);
 										}
@@ -1195,7 +1155,7 @@ public class Menu {
 
 				for (String orderType : OrderType) {
 					for (int numberOfItem : FileSizeWarm) {
-						Binary2.TSBinaryWarm(orderType, numberOfItem);
+						Binary.TSBinaryWarm(orderType, numberOfItem);
 					}
 				}
 
@@ -1228,7 +1188,7 @@ public class Menu {
 							if (FileExists == true) {
 
 								for (int i = 0; i != repeticions; i++) {
-									long estimatedTimePut = Binary2.searchBinaryFail(orderType, numberOfItem);
+									long estimatedTimePut = Binary.searchBinaryFail(orderType, numberOfItem);
 									timeSearch[i] = (double) (estimatedTimePut);
 								}
 								
@@ -1268,13 +1228,12 @@ public class Menu {
 
 				for (String orderType : OrderType) {
 					for (int numberOfItem : FileSizeWarm) {
-						Binary2.TSBinaryWarm(orderType, numberOfItem);
+						Binary.TSBinaryWarm(orderType, numberOfItem);
 					}
 				}
 
 				for (String orderType : OrderType) {
 					for (int numberOfItem : FileSizeSearch) {
-						//if (!(orderType == "shuffled") || (numberOfItem <= 262144)) {
 							if (orderType == "sorted") {
 								out.println("-----------------------------------");
 								out.println("Sorted");
@@ -1301,7 +1260,7 @@ public class Menu {
 							if (FileExists == true) {
 
 								for (int i = 0; i != repeticions; i++) {
-									long estimatedTimePut = Binary2.searchBinarySuccess(orderType, numberOfItem);
+									long estimatedTimePut = Binary.searchBinarySuccess(orderType, numberOfItem);
 									timeSearch[i] = (double) (estimatedTimePut);
 								}
 								
@@ -1331,7 +1290,7 @@ public class Menu {
 				
 				for (String orderType : OrderType) {
 					for (int numberOfItem : FileSizeWarm) {
-						Sequential2.TSSequentialWarm(orderType, numberOfItem);
+						Sequential.TSSequentialWarm(orderType, numberOfItem);
 					}
 				}
 
@@ -1366,7 +1325,7 @@ public class Menu {
 									if (FileExists == true) {
 
 										for (int i = 0; i != repeticions; i++) {
-											long estimatedTimeDelete = Sequential2.runAlgorithmPut(orderType,
+											long estimatedTimeDelete = Sequential.runAlgorithmPut(orderType,
 													numberOfItem);
 											timePut[i] = (double) (estimatedTimeDelete);
 										}
@@ -1430,12 +1389,14 @@ public class Menu {
 
 				Double[] timeDelete = new Double[repeticions];
 
+				//WarmUp
 				for (String orderType : OrderType) {
 					for (int numberOfItem : FileSizeWarm) {
-						Sequential2.TSSequentialWarm(orderType, numberOfItem);
+						Sequential.TSSequentialWarm(orderType, numberOfItem);
 					}
 				}
 
+				//como as operações estavam a demorar bastante tempo tivemos que ir até aos 65536 itens
 				for (String orderType : OrderType) {
 					for (int numberOfItem : FileSize) {
 						if (!(orderType == "sorted") || (numberOfItem <= 65536)) {
@@ -1467,50 +1428,31 @@ public class Menu {
 									if (FileExists == true) {
 
 										for (int i = 0; i != repeticions; i++) {
-											long estimatedTimeDelete = Sequential2.runAlgorithmDelete(orderType,
+											long estimatedTimeDelete = Sequential.runAlgorithmDelete(orderType,
 													numberOfItem);
 											timeDelete[i] = (double) (estimatedTimeDelete);
 										}
 
+										
 										maximodelete = MedMinMax.maximeTimes(timeDelete);
-										out.println("\nTempo maximo de Remoção: " + maximodelete + " ns");// imprime
-																											// na
-																											// consola
-										file1.println("Tempo maximo de Remoção: " + maximodelete + " ns");// imprime
-																											// no
-																											// exel
+										out.println("\nTempo maximo de Remoção: " + maximodelete + " ns");
+										file1.println("Tempo maximo de Remoção: " + maximodelete + " ns");
 
 										minimodelete = MedMinMax.minimeTimes(timeDelete);
-										out.println("Tempo minimo de Remoção: " + minimodelete + " ns");// imprime
-																										// na
-																										// consola
-										file1.println("Tempo medio de Remoção: " + minimodelete + " ns");// imprime
-																											// no
-																											// exel
-
+										out.println("Tempo minimo de Remoção: " + minimodelete + " ns");
+										file1.println("Tempo medio de Remoção: " + minimodelete + " ns");
+										
 										mediadelete = MedMinMax.meanTimes(timeDelete);
-										out.println("Tempo medio de Remoção: " + mediadelete + " ns");// imprime
-																										// na
-																										// consola
-										file1.println("Tempo medio de Remoção: " + mediadelete + " ns");// imprime
-																										// no
-																										// exel
+										out.println("Tempo medio de Remoção: " + mediadelete + " ns");
+										file1.println("Tempo medio de Remoção: " + mediadelete + " ns");
 
 										medianadelete = MedMinMax.medianTimes(timeDelete);
-										out.println("Mediana de Remoção: " + medianadelete + " ns");// imprime
-																									// na
-																									// consola
-										file1.println("Mediana de Remoção: " + medianadelete + " ns");// imprime
-																										// no
-																										// exel
+										out.println("Mediana de Remoção: " + medianadelete + " ns");
+										file1.println("Mediana de Remoção: " + medianadelete + " ns");
 
 										desviodelete = MedMinMax.standardDeviation(timeDelete);
-										out.println("Desvio padrão: " + desviodelete + " ns");// imprime
-																								// na
-																								// consola
-										file1.println("Desvio padrão: " + desviodelete + " ns");// imprime
-																								// no
-																								// exel
+										out.println("Desvio padrão: " + desviodelete + " ns");
+										file1.println("Desvio padrão: " + desviodelete + " ns");
 
 										file1.close();
 									}
@@ -1532,10 +1474,11 @@ public class Menu {
 
 				for (String orderType : OrderType) {
 					for (int numberOfItem : FileSizeWarm) {
-						Sequential2.TSSequentialWarm(orderType, numberOfItem);
+						Sequential.TSSequentialWarm(orderType, numberOfItem);
 					}
 				}
 
+				//como as operações estavam a demorar bastante tempo tivemos que ir até aos 65536 itens
 				for (String orderType : OrderType) {
 					for (int numberOfItem : FileSize) {
 						if (!(orderType == "sorted") || (numberOfItem <= 65536)) {
@@ -1568,7 +1511,7 @@ public class Menu {
 							if (FileExists == true) {
 
 								for (int i = 0; i != repeticions; i++) {
-									long estimatedTimePut = Sequential2.searchSequentialFail(orderType, numberOfItem);
+									long estimatedTimePut = Sequential.searchSequentialFail(orderType, numberOfItem);
 									timeSearch[i] = (double) (estimatedTimePut);
 								}
 								
@@ -1610,7 +1553,7 @@ public class Menu {
 
 				for (String orderType : OrderType) {
 					for (int numberOfItem : FileSizeWarm) {
-						Sequential2.TSSequentialWarm(orderType, numberOfItem);
+						Sequential.TSSequentialWarm(orderType, numberOfItem);
 					}
 				}
 
@@ -1642,10 +1585,11 @@ public class Menu {
 							if (FileExists == true) {
 
 								for (int i = 0; i != repeticions; i++) {
-									long estimatedTimePut = Sequential2.searchSequentialSuccess(orderType, numberOfItem);
+									long estimatedTimePut = Sequential.searchSequentialSuccess(orderType, numberOfItem);
 									timeSearch[i] = (double) (estimatedTimePut);
 								}
 								
+								//mostra os resultados da pesquisa com sucesso
 								media = MedMinMax.meanTimes(timeSearch);
 								out.println("Tempo medio de pesquisa com sucesso: " + media + " ns");
 								file.println("Tempo medio de pesquisa com sucesso: " + media + " ns");

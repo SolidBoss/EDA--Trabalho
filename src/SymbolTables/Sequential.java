@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException; 
 import edu.princeton.cs.introcs.In;
 
-public class Sequential2 {
+public class Sequential {
 
 public static long runAlgorithmPut(String orderType, int numberOfItem) throws FileNotFoundException {
 		
@@ -16,12 +16,14 @@ public static long runAlgorithmPut(String orderType, int numberOfItem) throws Fi
 		String[] textFiles = In.readStrings(FilePath);
 		
 		long estimatedTimePut, starTimePut = 0;
+		//criação de uma nova SequentialSearchST
 		SequentialSearchST<String, Integer> sequential = new SequentialSearchST<String, Integer>();
+		
+		//ciclo para inserção na tabela de simbolos
 		starTimePut = System.nanoTime();
 		for (int count = 0; count != numberOfItem; count++) {
 			String key = textFiles[count];
 			sequential.put(key, count);
-			
 			
 			//out.println(sequential.keys());
 		}
@@ -50,6 +52,7 @@ public static long runAlgorithmPut(String orderType, int numberOfItem) throws Fi
 	
 	public static long searchSequentialFail(String orderType, int numberOfItem) throws FileNotFoundException {
 		
+		//numero que vamos procurar
 		String searchNumber = "0.489779991366667";
 		
 		String FilePath = "data/" + orderType + "_" + numberOfItem + ".txt";
