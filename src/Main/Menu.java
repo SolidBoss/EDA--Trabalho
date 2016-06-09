@@ -655,8 +655,14 @@ public class Menu {
 				
 		        out.print("Quantas experiênçias?(numero inteiro): ");
 		        int repeticions = input.nextInt(); //guarda input do numero de experiencias
+		        
+		        //warmup
+		        for (String orderType : OrderType) {
+		        	for (int numberOfItem : FileSizeWarm) {
+		        		QuickSortFile.runAlgorithmTest(orderType, numberOfItem);
+		          	}
+		        }
 		       
-		    
 		        //Ciclo para percorrer cada tipo de ficheiro
 		        for (String orderType : OrderType) {
 		        	for (int numberOfItem : FileSize) {
@@ -713,7 +719,37 @@ public class Menu {
 		        			file.close();
 		        		}
 		    		}
-			}	
+			}
+			//Quick Sort: verificar comparações e acessos ao array
+			else if(opcao==12){
+				for (String orderType : OrderType) {
+					for (int numberOfItem : FileSize) {
+						
+						if (orderType == "sorted") {
+							out.println("-----------------------------------");
+							out.println("Sorted");
+							out.println("Numero de Itens " + numberOfItem);
+							out.println("-----------------------------------");
+						} else if (orderType == "partially_sorted") {
+							out.println("-----------------------------------");
+							out.println("Partially Sorted ");
+							out.println("Numero de Itens " + numberOfItem);
+							out.println("-----------------------------------");
+						} else {
+							out.println("-----------------------------------");
+							out.println("Shuffled");
+							out.println("Numero de Itens " + numberOfItem);
+							out.println("-----------------------------------");
+						}
+						
+						int[] data = {0, 0, 0};
+						data = QuickSortFile.runCountData(orderType, numberOfItem); //o array data vai guardar o numero de comparações, acessos e trocas 
+						out.println("Número de comparações: "+data[0]);
+						out.println("Número de Acessos a array: "+data[1]);
+						out.println("Número de Trocas: "+data[2]);
+					}
+				}
+			}
 		}while (opcao != 13);{System.exit(0);}
 	}
 }
