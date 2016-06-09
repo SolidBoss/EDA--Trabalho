@@ -52,7 +52,7 @@ public class QuickSortFile {
 		}
 	}
 	
-	//Metodo para ler ler strings do txt, ordernar com o Insertion e passar para o metodo getCountData
+	//Metodo para ler ler strings do txt, ordernar com o Quick e passar para o metodo getCountData
 	@SuppressWarnings({ "rawtypes", "resource", "unchecked" })
 	public static int[] runCountData(String orderType, int Item) throws FileNotFoundException {
 		
