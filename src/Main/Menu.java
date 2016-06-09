@@ -85,16 +85,19 @@ public class Menu {
 		out.println("Quick Sort");
 		out.println("11 - Medir tempo de ordenação para ficheiros sorted, partially sorted e shuffled");
 		out.println("12 - Verificar comparações e acessos ao array");
+		out.println("Quick3Ways Sort");
+		out.println("13 - Medir tempo de ordenação para ficheiros sorted, partially sorted e shuffled");
+		out.println("14 - Verificar comparações e acessos ao array");
 		out.println("Tabela de Simbolos Binária");
-		out.println("13 - Inserir");
-		out.println("14 - Apagar");
-		out.println("15 - Pesquisa sem sucesso");
-		out.println("16 - Pesquisa com sucesso");
+		out.println("15 - Inserir");
+		out.println("16 - Apagar");
+		out.println("17 - Pesquisa sem sucesso");
+		out.println("18 - Pesquisa com sucesso");
 		out.println("Tabela de Simbolos Sequencial");
-		out.println("17 - Inserir");
-		out.println("18 - Apagar");
-		out.println("19 - Pesquisa sem sucesso");
-		out.println("20 - Pesquisa com sucesso");
+		out.println("19 - Inserir");
+		out.println("20 - Apagar");
+		out.println("21 - Pesquisa sem sucesso");
+		out.println("22 - Pesquisa com sucesso");
 		out.println("Opção: ");
 		return inputData.nextInt(); // Retorna o input do teclado
 	}
@@ -1005,8 +1008,135 @@ public class Menu {
 				}
 			}
 			
+			// Quick3ways Sort: Medir tempo de ordenação para ficheiros sorted,
+			// partially sorted e shuffled
+			else if (opcao == 13){
+				@SuppressWarnings("resource")
+				final Scanner input = new Scanner(in);
+
+				out.print("Quantas experiênçias?(numero inteiro): ");
+				int repeticions = input.nextInt(); // guarda input do numero de
+													// experiencias
+				
+				//warmup
+		        for (String orderType : OrderType) {
+		        	for (int numberOfItem : FileSizeWarm) {
+		        		QuickSortFile.runAlgorithmQuick3wayTest(orderType, numberOfItem);
+		          	}
+		        }
+		        
+				// Ciclo para percorrer cada tipo de ficheiro
+				for (String orderType : OrderType) {
+					for (int numberOfItem : FileSize) {
+
+						// Cria novo ficheiro exel
+						PrintWriter file = new PrintWriter(
+								"data/" + "Quick3WaysSort" + "_" + orderType + "_" + numberOfItem + ".csv");
+
+						Double[] timeTotal = new Double[repeticions];
+
+						long estimatedTime = 0;
+
+						if (orderType == "sorted") {
+							out.println("-----------------------------------");
+							out.println("Sorted");
+							out.println("Numero de Itens " + numberOfItem);
+							out.println("-----------------------------------");
+						} else if (orderType == "partially_sorted") {
+							out.println("-----------------------------------");
+							out.println("Partially Sorted ");
+							out.println("Numero de Itens " + numberOfItem);
+							out.println("-----------------------------------");
+						} else {
+							out.println("-----------------------------------");
+							out.println("Shuffled");
+							out.println("Numero de Itens " + numberOfItem);
+							out.println("-----------------------------------");
+						}
+
+						for (int a = 0; a != repeticions; a++) {
+							estimatedTime = QuickSortFile.runAlgorithmQuick3way(orderType, numberOfItem);
+							timeTotal[a] = (double) (estimatedTime);
+						}
+
+						maximo = MedMinMax.maximeTimes(timeTotal);
+						out.println("Tempo maximo de ordenação: " + maximo + " ns");// imprime
+																					// na
+																					// consola
+						file.println("Tempo maximo de ordenação: " + maximo + " ns");// imprime
+																						// no
+																						// exel
+
+						minimo = MedMinMax.minimeTimes(timeTotal);
+						out.println("Tempo minimo de ordenação: " + minimo + " ns");// imprime
+																					// na
+																					// consola
+						file.println("Tempo minimo de ordenação: " + minimo + " ns");// imprime
+																						// no
+																						// exel
+
+						media = MedMinMax.meanTimes(timeTotal);
+						out.println("Tempo medio de ordenação: " + media + " ns");// imprime
+																					// na
+																					// consola
+						file.println("Tempo medio de ordenação: " + media + " ns");// imprime
+																					// no
+																					// exel
+
+						mediana = MedMinMax.medianTimes(timeTotal);
+						out.println("Mediana de ordenação: " + mediana + " ns");// imprime
+																				// na
+																				// consola
+						file.println("Mediana de ordenação: " + mediana + " ns");// imprime
+																					// no
+																					// exel
+
+						desvio = MedMinMax.standardDeviation(timeTotal);
+						out.println("Desvio médio de ordenação: " + desvio + " ns");// imprime
+																					// na
+																					// consola
+						file.println("Desvio médio de ordenação: " + desvio + " ns");// imprime
+																						// no
+																						// exel
+
+						file.close();
+					}
+				}
+			}
+			
+			//Quick3Ways Sort: verificar comparações e acessos ao array
+			else if(opcao==14){
+				for (String orderType : OrderType) {
+					for (int numberOfItem : FileSize) {
+						
+						if (orderType == "sorted") {
+							out.println("-----------------------------------");
+							out.println("Sorted");
+							out.println("Numero de Itens " + numberOfItem);
+							out.println("-----------------------------------");
+						} else if (orderType == "partially_sorted") {
+							out.println("-----------------------------------");
+							out.println("Partially Sorted ");
+							out.println("Numero de Itens " + numberOfItem);
+							out.println("-----------------------------------");
+						} else {
+							out.println("-----------------------------------");
+							out.println("Shuffled");
+							out.println("Numero de Itens " + numberOfItem);
+							out.println("-----------------------------------");
+						}
+						
+						int[] data = {0, 0, 0};
+						data = QuickSortFile.runCountDataQuick3way(orderType, numberOfItem); //o array data vai guardar o numero de comparações, acessos e trocas 
+						out.println("Numero de comparações: "+data[0]);
+						out.println("Numero de Acessos a array: "+data[1]);
+						out.println("Numero de Trocas: "+data[2]);
+					}
+				}
+			}
+			
 			//Binary Inserção
-			else if (opcao == 13) {
+			else if (opcao == 15) {
 				@SuppressWarnings("resource")
 				final Scanner input = new Scanner(in);
 
@@ -1081,7 +1211,7 @@ public class Menu {
 			}
 				
 			//Binary Apagar
-			} else if (opcao == 14) {
+			} else if (opcao == 16) {
 				@SuppressWarnings("resource")
 				final Scanner input = new Scanner(in);
 
@@ -1181,7 +1311,7 @@ public class Menu {
 				}
 			}
 			//Binary Pesquisa sem sucesso
-			else if (opcao == 15) {
+			else if (opcao == 17) {
 				
 				@SuppressWarnings("resource")
 				final Scanner input = new Scanner(in);
@@ -1255,7 +1385,7 @@ public class Menu {
 			}
 			
 			//Binary Pesquisa com sucesso
-			else if (opcao == 16) {
+			else if (opcao == 18) {
 				@SuppressWarnings("resource")
 				final Scanner input = new Scanner(in);
 
@@ -1317,7 +1447,7 @@ public class Menu {
 			}
 
 			//Sequential
-			else if (opcao == 17) {
+			else if (opcao == 19) {
 				@SuppressWarnings("resource")
 				final Scanner input = new Scanner(in);
 
@@ -1418,7 +1548,7 @@ public class Menu {
 				}
 			}
 			//Sequencial Remoção
-			else if (opcao == 18) {
+			else if (opcao == 20) {
 				@SuppressWarnings("resource")
 				final Scanner input = new Scanner(in);
 
@@ -1501,7 +1631,7 @@ public class Menu {
 				}
 			}
 			//Sequencial Pesquisa sem sucesso
-			else if (opcao == 19){
+			else if (opcao == 21){
 				@SuppressWarnings("resource")
 				final Scanner input = new Scanner(in);
 
@@ -1580,7 +1710,7 @@ public class Menu {
 			}
 		
 			//Sequencial pesquisa com sucesso
-			else if(opcao == 20){
+			else if(opcao == 22){
 				@SuppressWarnings("resource")
 				final Scanner input = new Scanner(in);
 
@@ -1641,7 +1771,7 @@ public class Menu {
 					}
 				}
 			}
-		} while (opcao != 21);
+		} while (opcao != 23);
 		{
 			System.exit(0);
 		}
