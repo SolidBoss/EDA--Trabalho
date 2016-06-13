@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import edu.princeton.cs.introcs.In;
 
-public class InsertionSortFile {
+public class InsertionSortTester {
 	
 	public static long runAlgorithm(String orderType, int Item) throws FileNotFoundException {
 			
@@ -27,7 +27,7 @@ public class InsertionSortFile {
 		}
 }
 	//Metodo para o WarmUp
-	public static void runAlgorithmTest(String orderType, int Item) throws FileNotFoundException {
+	public static void InsertionSortWarmUp(String orderType, int Item) throws FileNotFoundException {
 
 		String FilePath = "data/" + orderType + "_" + Item + ".txt";
 		boolean FileExists = new File(FilePath).isFile();

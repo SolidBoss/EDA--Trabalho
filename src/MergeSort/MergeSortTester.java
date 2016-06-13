@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import edu.princeton.cs.introcs.In;
 
-public class MergeSortFile {
+public class MergeSortTester {
 
 	public static long runAlgorithm(String orderType, int Item) throws FileNotFoundException {
 		
@@ -29,7 +29,7 @@ public class MergeSortFile {
 		}
 	}
 	
-	public static void runAlgorithmTest(String orderType, int Item) throws FileNotFoundException {
+	public static void MergeSortWarmUp(String orderType, int Item) throws FileNotFoundException {
 		
 		String FilePath = "data/" + orderType + "_" + Item + ".txt";
 		boolean FileExists = new File(FilePath).isFile();

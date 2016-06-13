@@ -2,7 +2,7 @@ package ResizingArray;
 
 import static java.lang.System.out;
 
-public class ResizingArrayFile {
+public class ResizingArrayTester {
 	
 	public static long runPushStack(int Item){
 		//criação de uma nova pilha ResizingArrayStack numbers
@@ -17,7 +17,7 @@ public class ResizingArrayFile {
 	}
 	
 	//WarmUp
-	public static void ResizingTest(int Item){
+	public static void ResizingWarmUp(int Item){
 		//criação de uma nova pilha ResizingArrayStack numbers
 		ResizingArrayStack<String> numbers = new ResizingArrayStack<String>();
 		numbers.push("Resizing");

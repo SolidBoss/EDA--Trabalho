@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import edu.princeton.cs.introcs.In;
 
 //classe para ver o nº de comparações, nº de acessos ao array, nº de leituras e o nº de escritas
-public class InstrumentedMergeFile {
+public class InstrumentedMergeTester {
 		
 		//Metodo para averiguar Número de comparações, Número de leitura dos Array, Número de escritas no Array, Número de acesso ao Array
 		public static void runCountData(String orderType, int numberOfItem) throws FileNotFoundException {

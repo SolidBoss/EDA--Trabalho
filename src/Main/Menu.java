@@ -3,15 +3,15 @@ package Main;
 
 import static java.lang.System.in;
 import static java.lang.System.out;
-import ResizingArray.ResizingArrayFile;
-import InsertionSort.InsertionSortFile;
-import SymbolTables.Binary;
-import SymbolTables.Sequential;
-import LinkedList.LinkedStackFile;
-import MergeSort.BottomUpMergeFile;
-import MergeSort.InstrumentedMergeFile;
-import MergeSort.MergeSortFile;
-import QuickSort.QuickSortFile;
+import ResizingArray.ResizingArrayTester;
+import InsertionSort.InsertionSortTester;
+import SymbolTables.BinaryTester;
+import SymbolTables.SequentialTester;
+import LinkedList.LinkedStackTester;
+import MergeSort.BottomUpMergeTester;
+import MergeSort.InstrumentedMergeTester;
+import MergeSort.MergeSortTester;
+import QuickSort.QuickSortTester;
 
 import java.io.File;
 import java.io.IOException;
@@ -110,15 +110,12 @@ public class Menu {
 			opcao = runMenu();
 			// Linked List: Medir tempo de inserção e remoção dados na pilha
 			if (opcao == 1) {
-				@SuppressWarnings("resource")
-				final Scanner input = new Scanner(in);
-				out.print("Quantas experiências?(numero inteiro): ");
-				int repeticions = input.nextInt(); // guarda input do numero de
-													// experiencias
 
+				int repeticions = 15;
+				
 				// WarmUp
 				for (int numberOfItem : FileSize) {
-					LinkedStackFile.LinkedStackTest(numberOfItem);
+					LinkedStackTester.LinkedStackWarmUp(numberOfItem);
 				}
 
 				// Ciclo que analisa cada posicao do array ou seja cada Item do
@@ -141,10 +138,10 @@ public class Menu {
 					out.println("-----------------------------------");
 
 					for (int a = 0; a != repeticions; a++) {
-						estimatedTimePush = LinkedStackFile.runPushLinked(numberOfItem);
+						estimatedTimePush = LinkedStackTester.runLinkedStackInsert(numberOfItem);
 						timeTotalPush[a] = (double) (estimatedTimePush);
 
-						estimatedTimePop = LinkedStackFile.runPopLinked(numberOfItem);
+						estimatedTimePop = LinkedStackTester.runLinkedStackDelete(numberOfItem);
 						timeTotalPop[a] = (double) (estimatedTimePop);
 					}
 
@@ -257,14 +254,11 @@ public class Menu {
 			// Resizing Array: Medir tempo de inserção e remoção dados na pilha
 			else if (opcao == 2) {
 
-				@SuppressWarnings("resource")
-				final Scanner input = new Scanner(in);
-				out.print("Quantas experiências?(numero inteiro): ");
-				int repeticions = input.nextInt();
+				int repeticions = 15;
 
 				// warmup
 				for (int numberOfItem : FileSize) {
-					ResizingArrayFile.ResizingTest(numberOfItem);
+					ResizingArrayTester.ResizingWarmUp(numberOfItem);
 				}
 
 				for (int numberOfItem : FileSize) {
@@ -282,7 +276,7 @@ public class Menu {
 					out.println("-----------------------------------");
 
 					for (int a = 0; a != repeticions; a++) {
-						estimatedTimePush = ResizingArrayFile.runPushStack(numberOfItem);
+						estimatedTimePush = ResizingArrayTester.runPushStack(numberOfItem);
 						// ver tempo de cada inserção
 						// out.println("Tempo de inserção (experiência: " + (a +
 						// 1) + "): " + estimatedTimePush + " ns");// Mostra o
@@ -290,7 +284,7 @@ public class Menu {
 						// out.println("-----------------------------------");
 						timeTotalPush[a] = (double) (estimatedTimePush);
 
-						estimatedTimePop = ResizingArrayFile.runPopStack(numberOfItem);
+						estimatedTimePop = ResizingArrayTester.runPopStack(numberOfItem);
 						// ver tempo de cada remoção
 						// out.println("Tempo de remoção (experiência: " + (a +
 						// 1) + "): " + estimatedTimePop + " ns");// Mostra o
@@ -388,10 +382,7 @@ public class Menu {
 			// potencias de 2
 			else if (opcao == 3) {
 
-				@SuppressWarnings("resource")
-				final Scanner input = new Scanner(in);
-				out.print("Quantas experiênçias?(numero inteiro): ");
-				int repeticions = input.nextInt();
+				int repeticions = 15;
 
 				out.println("--------------------------------------");
 				out.println("Resizing Array");
@@ -399,28 +390,24 @@ public class Menu {
 
 				// warmup
 				for (int numberOfItem : FileSize) {
-					ResizingArrayFile.ResizingTest(numberOfItem);
+					ResizingArrayTester.ResizingWarmUp(numberOfItem);
 				}
 
 				for (int numberOfItem : FileSize) {
 					for (int a = 0; a != repeticions; a++) {
 						// out.println("Experiência: " + (a + 1));
-						ResizingArrayFile.Resizing(numberOfItem);
+						ResizingArrayTester.Resizing(numberOfItem);
 					}
 				}
 			}
 			// Medir tempo de inserção e remoção dados na pilha com potencias de
 			// 2+1
 			else if (opcao == 4) {
-				@SuppressWarnings("resource")
-				final Scanner input = new Scanner(in);
-				out.print("Quantas experiências?(numero inteiro): ");
-				int repeticions = input.nextInt(); // guarda input do numero de
-													// experiencias
-
+				
+				int repeticions = 15;
 				// warmup
 				for (int numberOfItem : FileSizeImpar) {
-					ResizingArrayFile.ResizingTest(numberOfItem);
+					ResizingArrayTester.ResizingWarmUp(numberOfItem);
 				}
 
 				for (int numberOfItem : FileSizeImpar) {
@@ -442,7 +429,7 @@ public class Menu {
 
 					// Ciclo for vai realizar o nº de repetições que queremos
 					for (int a = 0; a != repeticions; a++) {
-						estimatedTimePush = ResizingArrayFile.runPushStack(numberOfItem);
+						estimatedTimePush = ResizingArrayTester.runPushStack(numberOfItem);
 						// Ver tempo de cada inserção
 						// out.println("Tempo de inserção (experiência: " + (a +
 						// 1) + "): " + estimatedTimePush + " ns");// Mostra o
@@ -450,7 +437,7 @@ public class Menu {
 						// out.println("-----------------------------------");
 						timeTotalPush[a] = (double) (estimatedTimePush);
 
-						estimatedTimePop = ResizingArrayFile.runPopStack(numberOfItem);
+						estimatedTimePop = ResizingArrayTester.runPopStack(numberOfItem);
 						// Ver tempo de cada remoção
 						// out.println("Tempo de remoção (experiência: " + (a +
 						// 1) + "): " + estimatedTimePop + " ns");// Mostra o
@@ -549,40 +536,33 @@ public class Menu {
 			// potencias de 2+1
 			else if (opcao == 5) {
 
-				@SuppressWarnings("resource")
-				final Scanner input = new Scanner(in);
-				out.print("Quantas experiênçias?(numero inteiro): ");
-				int repeticions = input.nextInt();
-
+				int repeticions = 15;
+				
 				out.println("--------------------------------------");
 				out.println("Resizing Array Potencia 2+1");
 				out.println("--------------------------------------");
 
 				// WarmUp
 				for (int numberOfItem : FileSizeImpar) {
-					ResizingArrayFile.ResizingTest(numberOfItem);
+					ResizingArrayTester.ResizingWarmUp(numberOfItem);
 				}
 
 				for (int numberOfItem : FileSizeImpar) {
 					for (int a = 0; a != repeticions; a++) {
-						ResizingArrayFile.Resizing(numberOfItem);
+						ResizingArrayTester.Resizing(numberOfItem);
 					}
 				}
 			}
 			// Merge Sort Medir tempo de ordenação para ficheiros sorted,
 			// partially sorted e shuffled
 			else if (opcao == 6) {
-				@SuppressWarnings("resource")
-				final Scanner input = new Scanner(in);
-
-				out.print("Quantas experiênçias?(numero inteiro): ");
-				int repeticions = input.nextInt(); // guarda input do numero de
-													// experiencias
-
+				
+				int repeticions = 15;
+				
 				// WarmUp
 				for (String orderType : OrderType) {
 					for (int numberOfItem : FileSizeWarm) {
-						MergeSortFile.runAlgorithmTest(orderType, numberOfItem);
+						MergeSortTester.MergeSortWarmUp(orderType, numberOfItem);
 					}
 				}
 
@@ -616,7 +596,7 @@ public class Menu {
 						}
 
 						for (int a = 0; a != repeticions; a++) {
-							estimatedTime = MergeSortFile.runAlgorithm(orderType, numberOfItem);
+							estimatedTime = MergeSortTester.runAlgorithm(orderType, numberOfItem);
 							timeTotal[a] = (double) (estimatedTime);
 						}
 
@@ -669,23 +649,20 @@ public class Menu {
 
 				for (String orderType : OrderType) {
 					for (int numberOfItem : FileSize) {
-						InstrumentedMergeFile.runCountData(orderType, numberOfItem);
+						InstrumentedMergeTester.runCountData(orderType, numberOfItem);
 					}
 				}
 
 			}
 			// BottomUpMerge
 			else if (opcao == 8) {
-				@SuppressWarnings("resource")
-				final Scanner input = new Scanner(in);
-
-				out.print("Quantas experiênçias?(numero inteiro): ");
-				int repeticions = input.nextInt();
-
+				
+				int repeticions = 15;
+				
 				// warmup
 				for (String orderType : OrderType) {
 					for (int numberOfItem : FileSizeWarm) {
-						BottomUpMergeFile.runAlgorithmTest(orderType, numberOfItem);
+						BottomUpMergeTester.BottomUpMergeWarm(orderType, numberOfItem);
 					}
 				}
 
@@ -715,7 +692,7 @@ public class Menu {
 						}
 
 						for (int a = 0; a != repeticions; a++) {
-							estimatedTime = BottomUpMergeFile.runAlgorithm(orderType, numberOfItem);
+							estimatedTime = BottomUpMergeTester.runBottomUpMergeSort(orderType, numberOfItem);
 							timeTotal[a] = (double) (estimatedTime);
 						}
 
@@ -767,15 +744,12 @@ public class Menu {
 			// partially sorted e shuffled
 			else if (opcao == 9) {
 
-				@SuppressWarnings("resource")
-				final Scanner input = new Scanner(in);
-				out.print("Quantas experiênçias?(numero inteiro): ");
-				int repeticions = input.nextInt();
+				int repeticions = 15;
 
 				// warmup
 				for (String orderType : OrderType) {
 					for (int numberOfItem : FileSizeWarm) {
-						InsertionSortFile.runAlgorithmTest(orderType, numberOfItem);
+						InsertionSortTester.InsertionSortWarmUp(orderType, numberOfItem);
 					}
 				}
 
@@ -807,7 +781,7 @@ public class Menu {
 							}
 
 							for (int a = 0; a != repeticions; a++) {
-								estimatedTime = InsertionSortFile.runAlgorithm(orderType, numberOfItem);
+								estimatedTime = InsertionSortTester.runAlgorithm(orderType, numberOfItem);
 								// out.println("Tempo de ordenação (experiência:
 								// " + (a + 1) + "): " + estimatedTime + "
 								// ns");// Mostra o tempo
@@ -863,7 +837,7 @@ public class Menu {
 						}
 
 						int[] data = { 0, 0, 0 };
-						data = InsertionSortFile.runCountData(orderType, numberOfItem); // o
+						data = InsertionSortTester.runCountData(orderType, numberOfItem); // o
 																						// array
 																						// data
 																						// vai
@@ -884,17 +858,13 @@ public class Menu {
 			// Quick Sort: Medir tempo de ordenação para ficheiros sorted,
 			// partially sorted e shuffled
 			else if (opcao == 11) {
-				@SuppressWarnings("resource")
-				final Scanner input = new Scanner(in);
-
-				out.print("Quantas experiênçias?(numero inteiro): ");
-				int repeticions = input.nextInt(); // guarda input do numero de
-													// experiencias
+				
+				int repeticions = 5;
 				
 				//warmup
 		        for (String orderType : OrderType) {
 		        	for (int numberOfItem : FileSizeWarm) {
-		        		QuickSortFile.runAlgorithmTest(orderType, numberOfItem);
+		        		QuickSortTester.QuickSortWarmUp(orderType, numberOfItem);
 		          	}
 		        }
 		        
@@ -928,7 +898,7 @@ public class Menu {
 						}
 
 						for (int a = 0; a != repeticions; a++) {
-							estimatedTime = QuickSortFile.runAlgorithm(orderType, numberOfItem);
+							estimatedTime = QuickSortTester.runAlgorithm(orderType, numberOfItem);
 							timeTotal[a] = (double) (estimatedTime);
 						}
 
@@ -1000,7 +970,7 @@ public class Menu {
 						}
 						
 						int[] data = {0, 0, 0};
-						data = QuickSortFile.runCountData(orderType, numberOfItem); //o array data vai guardar o numero de comparações, acessos e trocas 
+						data = QuickSortTester.runCountData(orderType, numberOfItem); //o array data vai guardar o numero de comparações, acessos e trocas 
 						out.println("Numero de comparações: "+data[0]);
 						out.println("Numero de Acessos a array: "+data[1]);
 						out.println("Numero de Trocas: "+data[2]);
@@ -1011,17 +981,13 @@ public class Menu {
 			// Quick3ways Sort: Medir tempo de ordenação para ficheiros sorted,
 			// partially sorted e shuffled
 			else if (opcao == 13){
-				@SuppressWarnings("resource")
-				final Scanner input = new Scanner(in);
-
-				out.print("Quantas experiênçias?(numero inteiro): ");
-				int repeticions = input.nextInt(); // guarda input do numero de
-													// experiencias
+				
+				int repeticions = 5;
 				
 				//warmup
 		        for (String orderType : OrderType) {
 		        	for (int numberOfItem : FileSizeWarm) {
-		        		QuickSortFile.runAlgorithmQuick3wayTest(orderType, numberOfItem);
+		        		QuickSortTester.Quick3wayWarmUp(orderType, numberOfItem);
 		          	}
 		        }
 		        
@@ -1055,7 +1021,7 @@ public class Menu {
 						}
 
 						for (int a = 0; a != repeticions; a++) {
-							estimatedTime = QuickSortFile.runAlgorithmQuick3way(orderType, numberOfItem);
+							estimatedTime = QuickSortTester.runAlgorithmQuick3way(orderType, numberOfItem);
 							timeTotal[a] = (double) (estimatedTime);
 						}
 
@@ -1127,7 +1093,7 @@ public class Menu {
 						}
 						
 						int[] data = {0, 0, 0};
-						data = QuickSortFile.runCountDataQuick3way(orderType, numberOfItem); //o array data vai guardar o numero de comparações, acessos e trocas 
+						data = QuickSortTester.runCountDataQuick3way(orderType, numberOfItem); //o array data vai guardar o numero de comparações, acessos e trocas 
 						out.println("Numero de comparações: "+data[0]);
 						out.println("Numero de Acessos a array: "+data[1]);
 						out.println("Numero de Trocas: "+data[2]);
@@ -1137,17 +1103,14 @@ public class Menu {
 			
 			//Binary Inserção
 			else if (opcao == 15) {
-				@SuppressWarnings("resource")
-				final Scanner input = new Scanner(in);
-
-				out.print("Quantas experiênçias?(numero inteiro): ");
-				int repeticions = input.nextInt();
+				
+				int repeticions = 5;
 
 				Double[] timePut = new Double[repeticions];
 
 				for (String orderType : OrderType) {
 					for (int numberOfItem : FileSizeWarm) {
-						Binary.TSBinaryWarm(orderType, numberOfItem);
+						BinaryTester.TSBinaryWarm(orderType, numberOfItem);
 					}
 				}
 
@@ -1180,7 +1143,7 @@ public class Menu {
 							if (FileExists == true) {
 
 								for (int i = 0; i != repeticions; i++) {
-									long estimatedTimePut = Binary.runAlgorithmPut(orderType, numberOfItem);
+									long estimatedTimePut = BinaryTester.runBinaryInsert(orderType, numberOfItem);
 									timePut[i] = (double) (estimatedTimePut);
 								}
 
@@ -1212,17 +1175,14 @@ public class Menu {
 				
 			//Binary Apagar
 			} else if (opcao == 16) {
-				@SuppressWarnings("resource")
-				final Scanner input = new Scanner(in);
-
-				out.print("Quantas experiênçias?(numero inteiro): ");
-				int repeticions = input.nextInt();
+				
+				int repeticions = 5;
 
 				Double[] timeDelete = new Double[repeticions];
 
 				for (String orderType : OrderType) {
 					for (int numberOfItem : FileSizeWarm) {
-						Binary.TSBinaryWarm(orderType, numberOfItem);
+						BinaryTester.TSBinaryWarm(orderType, numberOfItem);
 					}
 				}
 
@@ -1257,7 +1217,7 @@ public class Menu {
 									if (FileExists == true) {
 
 										for (int i = 0; i != repeticions; i++) {
-											long estimatedTimeDelete = Binary.runAlgorithmDelete(orderType,
+											long estimatedTimeDelete = BinaryTester.runBinaryDelete(orderType,
 													numberOfItem);
 											timeDelete[i] = (double) (estimatedTimeDelete);
 										}
@@ -1313,17 +1273,13 @@ public class Menu {
 			//Binary Pesquisa sem sucesso
 			else if (opcao == 17) {
 				
-				@SuppressWarnings("resource")
-				final Scanner input = new Scanner(in);
-
-				out.print("Quantas experiênçias?(numero inteiro): ");
-				int repeticions = input.nextInt();
+				int repeticions = 5;
 
 				Double[] timeSearch = new Double[repeticions];
 
 				for (String orderType : OrderType) {
 					for (int numberOfItem : FileSizeWarm) {
-						Binary.TSBinaryWarm(orderType, numberOfItem);
+						BinaryTester.TSBinaryWarm(orderType, numberOfItem);
 					}
 				}
 
@@ -1356,7 +1312,7 @@ public class Menu {
 							if (FileExists == true) {
 
 								for (int i = 0; i != repeticions; i++) {
-									long estimatedTimePut = Binary.searchBinaryFail(orderType, numberOfItem);
+									long estimatedTimePut = BinaryTester.BinarySearchFail(orderType, numberOfItem);
 									timeSearch[i] = (double) (estimatedTimePut);
 								}
 								
@@ -1386,17 +1342,13 @@ public class Menu {
 			
 			//Binary Pesquisa com sucesso
 			else if (opcao == 18) {
-				@SuppressWarnings("resource")
-				final Scanner input = new Scanner(in);
-
-				out.print("Quantas experiênçias?(numero inteiro): ");
-				int repeticions = input.nextInt();
+				int repeticions = 5;
 
 				Double[] timeSearch = new Double[repeticions];
 
 				for (String orderType : OrderType) {
 					for (int numberOfItem : FileSizeWarm) {
-						Binary.TSBinaryWarm(orderType, numberOfItem);
+						BinaryTester.TSBinaryWarm(orderType, numberOfItem);
 					}
 				}
 
@@ -1428,7 +1380,7 @@ public class Menu {
 							if (FileExists == true) {
 
 								for (int i = 0; i != repeticions; i++) {
-									long estimatedTimePut = Binary.searchBinarySuccess(orderType, numberOfItem);
+									long estimatedTimePut = BinaryTester.BinarySearchSuccess(orderType, numberOfItem);
 									timeSearch[i] = (double) (estimatedTimePut);
 								}
 								
@@ -1448,17 +1400,14 @@ public class Menu {
 
 			//Sequential
 			else if (opcao == 19) {
-				@SuppressWarnings("resource")
-				final Scanner input = new Scanner(in);
-
-				out.print("Quantas experiênçias?(numero inteiro): ");
-				int repeticions = input.nextInt();
+				
+				int repeticions = 5;
 
 				Double[] timePut = new Double[repeticions];
 				
 				for (String orderType : OrderType) {
 					for (int numberOfItem : FileSizeWarm) {
-						Sequential.TSSequentialWarm(orderType, numberOfItem);
+						SequentialTester.TSSequentialWarm(orderType, numberOfItem);
 					}
 				}
 
@@ -1493,7 +1442,7 @@ public class Menu {
 									if (FileExists == true) {
 
 										for (int i = 0; i != repeticions; i++) {
-											long estimatedTimeDelete = Sequential.runAlgorithmPut(orderType,
+											long estimatedTimeDelete = SequentialTester.runSequentialInsert(orderType,
 													numberOfItem);
 											timePut[i] = (double) (estimatedTimeDelete);
 										}
@@ -1549,18 +1498,14 @@ public class Menu {
 			}
 			//Sequencial Remoção
 			else if (opcao == 20) {
-				@SuppressWarnings("resource")
-				final Scanner input = new Scanner(in);
-
-				out.print("Quantas experiênçias?(numero inteiro): ");
-				int repeticions = input.nextInt();
+				int repeticions = 5;
 
 				Double[] timeDelete = new Double[repeticions];
 
 				//WarmUp
 				for (String orderType : OrderType) {
 					for (int numberOfItem : FileSizeWarm) {
-						Sequential.TSSequentialWarm(orderType, numberOfItem);
+						SequentialTester.TSSequentialWarm(orderType, numberOfItem);
 					}
 				}
 
@@ -1596,7 +1541,7 @@ public class Menu {
 									if (FileExists == true) {
 
 										for (int i = 0; i != repeticions; i++) {
-											long estimatedTimeDelete = Sequential.runAlgorithmDelete(orderType,
+											long estimatedTimeDelete = SequentialTester.runSequentialDelete(orderType,
 													numberOfItem);
 											timeDelete[i] = (double) (estimatedTimeDelete);
 										}
@@ -1632,17 +1577,13 @@ public class Menu {
 			}
 			//Sequencial Pesquisa sem sucesso
 			else if (opcao == 21){
-				@SuppressWarnings("resource")
-				final Scanner input = new Scanner(in);
-
-				out.print("Quantas experiênçias?(numero inteiro): ");
-				int repeticions = input.nextInt();
+				int repeticions = 5;
 
 				Double[] timeSearch = new Double[repeticions];
 
 				for (String orderType : OrderType) {
 					for (int numberOfItem : FileSizeWarm) {
-						Sequential.TSSequentialWarm(orderType, numberOfItem);
+						SequentialTester.TSSequentialWarm(orderType, numberOfItem);
 					}
 				}
 
@@ -1679,7 +1620,7 @@ public class Menu {
 							if (FileExists == true) {
 
 								for (int i = 0; i != repeticions; i++) {
-									long estimatedTimePut = Sequential.searchSequentialFail(orderType, numberOfItem);
+									long estimatedTimePut = SequentialTester.searchSequentialFail(orderType, numberOfItem);
 									timeSearch[i] = (double) (estimatedTimePut);
 								}
 								
@@ -1711,17 +1652,13 @@ public class Menu {
 		
 			//Sequencial pesquisa com sucesso
 			else if(opcao == 22){
-				@SuppressWarnings("resource")
-				final Scanner input = new Scanner(in);
-
-				out.print("Quantas experiênçias?(numero inteiro): ");
-				int repeticions = input.nextInt();
+				int repeticions = 5;
 
 				Double[] timeSearch = new Double[repeticions];
 
 				for (String orderType : OrderType) {
 					for (int numberOfItem : FileSizeWarm) {
-						Sequential.TSSequentialWarm(orderType, numberOfItem);
+						SequentialTester.TSSequentialWarm(orderType, numberOfItem);
 					}
 				}
 
@@ -1753,7 +1690,7 @@ public class Menu {
 							if (FileExists == true) {
 
 								for (int i = 0; i != repeticions; i++) {
-									long estimatedTimePut = Sequential.searchSequentialSuccess(orderType, numberOfItem);
+									long estimatedTimePut = SequentialTester.searchSequentialSuccess(orderType, numberOfItem);
 									timeSearch[i] = (double) (estimatedTimePut);
 								}
 								

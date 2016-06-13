@@ -1,8 +1,8 @@
 package LinkedList;
 
-public class LinkedStackFile {
+public class LinkedStackTester {
 
-	public static long runPushLinked(int Item) {
+	public static long runLinkedStackInsert(int Item) {
 		
 		LinkedStack<String> numbers = new LinkedStack<String>();// criação de uma nova pilha numbers
 		long estimatedTime = 0;
@@ -16,13 +16,13 @@ public class LinkedStackFile {
 	}
 
 	//WarmUp
-	public static void LinkedStackTest(int Item) {
+	public static void LinkedStackWarmUp(int Item) {
 		 LinkedStack<String> teste = new LinkedStack<String>();
 		 teste.push("LinkedStack");
 		 teste.pop();
 	}
 
-	public static long runPopLinked(int Item) {
+	public static long runLinkedStackDelete(int Item) {
 		LinkedStack<String> numbers = new LinkedStack<String>();
 		for (int i = 0; i != Item; i++) {
 			numbers.push("LinkedStack");// inserir na pilha numbers o valor "LinkedStack"
