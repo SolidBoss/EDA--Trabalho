@@ -1,10 +1,7 @@
 package SymbolTables;
 
 import java.util.NoSuchElementException;
-
 import edu.princeton.cs.algs4.Queue;
-import edu.princeton.cs.introcs.StdIn;
-import edu.princeton.cs.introcs.StdOut;
 
 /**
  *  The <tt>BST</tt> class represents an ordered symbol table of generic

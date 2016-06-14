@@ -1,7 +1,5 @@
 package Main;
 
-
-import static java.lang.System.in;
 import static java.lang.System.out;
 import ResizingArray.ResizingArrayTester;
 import InsertionSort.InsertionSortTester;
